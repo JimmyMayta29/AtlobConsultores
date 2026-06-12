@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Revista Académica ATLOB — Publicaciones, recursos técnicos y comunidad profesional especializada en contabilidad, tributación y auditoría.">
+    <title>Revista Académica — Consultoría ATLOB</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+
+    <script defer src="/js/layout-loader.js"></script>
+    <script defer src="/js/main.js"></script>
+    <script defer src="/js/revista.js"></script>
+</head>
+<body>
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div id="header-container"></div>
+
+    <main>
+        <section class="services-header" id="revista-inicio">
+            <div class="container">
+                <span class="section-label reveal from-bottom">BLOG & ACTUALIDAD</span>
+                <h1 class="reveal from-bottom">Revista ATLOB</h1>
+                <p class="reveal from-bottom">Análisis fiscal, asientos contables y novedades normativas para estar siempre un paso adelante.</p>
+            </div>
+        </section>
+
+        <section class="magazine-container" id="revista-grid">
+            <div class="container">
+                <div class="magazine-header-top reveal from-bottom">
+                    <h2>Últimas publicaciones</h2>
+                    <a href="#">Buscar artículos <i class="fas fa-search"></i></a>
+                </div>
+
+                <!-- Category Navigation -->
+                <nav class="magazine-nav reveal from-bottom" aria-label="Categorías del blog">
+                    <a href="#" class="magazine-nav-pill active">Todos</a>
+                    <a href="#" class="magazine-nav-pill">Normativa Tributaria</a>
+                    <a href="#" class="magazine-nav-pill">Casos Prácticos</a>
+                    <a href="#" class="magazine-nav-pill">Auditoría y NIIF</a>
+                    <a href="#" class="magazine-nav-pill">Laboral y Planillas</a>
+                    <a href="#" class="magazine-nav-pill">Noticiero Contable</a>
+                </nav>
+
+                <div class="magazine-grid">
+                    <!-- POSTS_HOOK_START -->
+
+                    <article class="magazine-post-card reveal from-bottom">
+                        <div class="post-card-img">
+                            <span class="post-category-badge">CASO PRÁCTICO</span>
+                            <img src="./img/tech_automation_1775951818804.png" alt="Asiento Contable por Compra de Computadora (Laptop)" loading="lazy">
+                        </div>
+                        <div class="post-card-content">
+                            <div class="post-meta">
+                                <i class="far fa-calendar"></i> 14 Abril, 2026
+                                <span style="margin: 0 5px">•</span>
+                                <i class="far fa-clock"></i> 6 min de lectura
+                            </div>
+                            <h3 class="post-title"><a href="asiento-contable-compra-computadora.html">Asiento Contable por Compra de Computadora (Laptop)</a></h3>
+                            <p class="post-excerpt">Descubre el procedimiento normativo para registrar la compra de equipos de cómputo, aplicando la NIIF 16 y el PCGE actualizado.</p>
+                            <a href="asiento-contable-compra-computadora.html" class="post-read-more">Leer caso práctico <i class="fas fa-long-arrow-alt-right"></i></a>
+                        </div>
+                    </article>
+                    <!-- POSTS_HOOK_END -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-container"></div>
+</body>
+</html>

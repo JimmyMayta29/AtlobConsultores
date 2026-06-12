@@ -1,0 +1,13 @@
+@use 'abstracts/variables';
+@use 'abstracts/mixins';
+
+@use 'base/reset';
+@use 'base/global';
+
+@use 'layout/header';
+@use 'layout/footer';
+
+@use 'pages/home';
+@use 'pages/servicios';
+@use 'pages/contacto';
+@use 'pages/revista';

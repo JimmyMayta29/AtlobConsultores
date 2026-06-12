@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{META_TITLE}}</title>
+    <meta name="description" content="{{META_DESCRIPTION}}">
+    <meta property="og:title" content="{{META_TITLE}}">
+    <meta property="og:description" content="{{META_DESCRIPTION}}">
+    <meta property="og:image" content="{{FEATURED_IMAGE}}">
+    <meta property="og:type" content="article">
+    <link rel="canonical" href="{{CANONICAL_URL}}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <main class="article-view">
+        <header class="article-header" style="background-image: linear-gradient(rgba(10, 42, 71, 0.8), rgba(10, 42, 71, 0.9)), url('{{FEATURED_IMAGE}}');">
+            <div class="container article-header-content">
+                <span class="article-badge">{{CATEGORY_NAME}}</span>
+                <h1>{{TITLE}}</h1>
+                <div class="article-meta">
+                    <span><i class="far fa-calendar"></i> {{DATE}}</span>
+                    <span class="divider">•</span>
+                    <span><i class="far fa-clock"></i> {{READ_TIME}} min de lectura</span>
+                    <span class="divider">•</span>
+                    <span><i class="far fa-user"></i> {{AUTHOR_NAME}}</span>
+                    <span class="divider">•</span>
+                    <span><i class="far fa-eye"></i> {{VIEWS}} vistas</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="container article-layout">
+            <article class="article-body">
+                {{CONTENT_HTML}}
+            </article>
+
+            <aside class="article-sidebar">
+                <div class="sidebar-widget widget-author">
+                    <h3>Sobre el Autor</h3>
+                    <p>{{AUTHOR_BIO}}</p>
+                </div>
+
+                <div class="sidebar-widget widget-tags">
+                    <h3>Etiquetas</h3>
+                    <div class="tag-cloud">{{TAGS_HTML}}</div>
+                </div>
+
+                <div class="sidebar-widget widget-recursos">
+                    <h3>Recursos Gratuitos</h3>
+                    <ul class="recursos-list">
+                        <li>
+                            <i class="fas fa-file-excel"></i>
+                            <a href="#">Calculadora Laboral MYPE y General (Excel)</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-file-pdf"></i>
+                            <a href="#">Guía Práctica: Cronograma SUNAT 2026</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-widget widget-cta">
+                    <h3>¿Problemas Contables?</h3>
+                    <p>Evite multas millonarias y recupere el control financiero de su negocio hoy mismo.</p>
+                    <a href="/contacto.html" class="btn-primary" style="width: 100%; text-align: center; margin-top: 15px;">Solicitar Asesoría</a>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script src="/js/layout-loader.js"></script>
+    <script>
+        const updateReadingProgress = () => {
+            const article = document.querySelector('.article-body');
+            if(!article) return;
+            const scrollTop = window.scrollY - article.offsetTop;
+            const docHeight = article.scrollHeight - window.innerHeight + 200;
+            let progress = Math.max(0, Math.min(100, (scrollTop / docHeight) * 100));
+            document.body.style.setProperty('--scroll-reading', progress + '%');
+        };
+        window.addEventListener("scroll", updateReadingProgress, { passive: true });
+
+        const progressBar = document.createElement('div');
+        progressBar.style.cssText = 'position:fixed;top:0;left:0;height:4px;background:var(--amarillo-acento);z-index:999999;width:var(--scroll-reading, 0%);transition:width .1s';
+        document.body.appendChild(progressBar);
+    </script>
+</body>
+</html>

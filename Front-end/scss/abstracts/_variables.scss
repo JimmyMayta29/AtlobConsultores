@@ -1,0 +1,48 @@
+/* VARIABLES — Design System */
+
+:root {
+  /* Colores Primarios */
+  --azul-principal: #0f3d66;
+  --azul-oscuro: #0a2a47;
+  --azul-profundo: #061c30;
+
+  /* Colores Secundarios */
+  --azul-medio: #1a5a8a;
+  --azul-claro: #2980b9;
+  --azul-suave: #5dade2;
+
+  /* Acentos */
+  --amarillo-acento: #f2b705;
+  --amarillo-hover: #e6a800;
+  --amarillo-suave: #ffd449;
+  --naranja-cta: #e67e22;
+
+  /* Neutros */
+  --fondo-claro: #f7f9fc;
+  --fondo-secciones: #eef2f8;
+  --gris-texto: #4a5568;
+  --gris-suave: #718096;
+  --gris-borde: #e2e8f0;
+  --blanco-puro: #ffffff;
+
+  /* Superficies */
+  --superficie-card: #ffffff;
+  --superficie-elevada: rgba(255, 255, 255, 0.85);
+  --sombra-suave: 0 4px 20px rgba(15, 61, 102, 0.08);
+  --sombra-media: 0 12px 35px rgba(15, 61, 102, 0.12);
+  --sombra-elevada: 0 20px 50px rgba(15, 61, 102, 0.16);
+
+  /* Tipografía */
+  --font-main: 'Outfit', sans-serif;
+
+  /* Transiciones */
+  --ease-premium: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --transition-normal: 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+  --transition-fast: 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* Bordes */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 50px;
+}

@@ -1,0 +1,193 @@
+/* ===================================== */
+/* UBICACION Y CONTACTO*/
+/* ===================================== */
+
+.location-section {
+    padding: 6rem 0;
+    background: linear-gradient(135deg, #ffffff, #ffffff);
+}
+
+.location-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+}
+
+.info-card {
+    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 3rem;
+    border-radius: 16px;
+    color: #0b467ec9;
+    transition: all 0.4s ease;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.info-card p {
+    line-height: 1.5;
+    margin-bottom: 0.2rem;
+}
+
+.card-icon {
+    font-size: 2rem;
+    margin-bottom: 0rem;
+    color: #0b467ec9;
+}
+
+.info-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.12);
+    border-color: #0b467ec9;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+}
+
+.info-card:hover h2 {
+    color: #f2b705;
+}
+
+@media (max-width: 768px) {
+    .location-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.contact-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+}
+
+.contact-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
+    font-size: 0.95rem;
+}
+
+.contact-list i {
+    font-size: 1.2rem;
+    color: #0d465c;
+    transition: 0.3s ease;
+}
+
+.contact-list a {
+    text-decoration: none;
+    color:  #0d465c;
+    transition: 0.3s ease;
+}
+
+.contact-list li:hover i {
+    transform: scale(1.2);
+    color:  #f2b705;
+}
+
+.contact-list li:hover a {
+    color:  #f2b705;
+}
+
+/* ================================
+SECCIÓN CONTACTO PREMIUM
+================================ */
+
+.contact-section {
+position: relative;
+background: url('/iconos/oficina.jpg') center/cover no-repeat;
+padding: 100px 10%;
+display: flex;
+align-items: center;
+min-height: 100vh;
+}
+
+.overlay {
+position: absolute;
+inset: 0;
+background: rgba(8, 39, 66, 0.85);
+}
+
+.contact-container {
+position: relative;
+display: flex;
+gap: 60px;
+width: 100%;
+z-index: 2;
+animation: fadeInUp 1s ease;
+}
+
+.contact-info {
+flex: 1;
+color: #fff;
+}
+
+.contact-info h2 {
+font-size: 42px;
+margin-bottom: 20px;
+color: #ffffff;
+}
+
+.contact-info p {
+margin-bottom: 25px;
+line-height: 1.6;
+color: #d1d1d1;
+}
+
+.info-item {
+display: flex;
+align-items: center;
+margin-bottom: 15px;
+gap: 10px;
+}
+
+.info-item i {
+color: #00aaff;
+font-size: 18px;
+}
+
+.social-icons {
+margin-top: 30px;
+}
+
+.social-icons a {
+color: #fff;
+margin-right: 15px;
+font-size: 20px;
+transition: 0.3s;
+}
+
+.social-icons a:hover {
+color: #00aaff;
+transform: translateY(-4px);
+}
+
+.contact-form {
+flex: 1;
+background: #0e3a5d;
+padding: 40px;
+border-radius: 15px;
+box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.input-group {
+display: flex;
+gap: 15px;
+margin-bottom: 15px;
+}
+
+.custom-select {
+position: relative;
+margin-bottom: 15px;
+}
+
+.custom-select i {
+position: absolute;
+right: 15px;
+top: 50%;
+transform: translateY(-50%);
+pointer-events: none;
+}
+
+textarea {
+height: 120px;
+margin-top: 15px;
+}

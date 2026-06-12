@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargando artículo... - Consultoría ATLOB</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS Principal -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/markdown.css">
+</head>
+<body>
+    <!-- Navbar (loaded dynamically) -->
+    <div id="header-container"></div>
+
+    <main class="article-view">
+        <!-- Hero del Articulo -->
+        <header class="article-header">
+            <div class="container article-header-content">
+                <span class="article-badge">Cargando...</span>
+                <h1>Cargando artículo...</h1>
+                <div class="article-meta">
+                    <span><i class="far fa-calendar"></i> ...</span>
+                    <span class="divider">•</span>
+                    <span><i class="far fa-clock"></i> ...</span>
+                    <span class="divider">•</span>
+                    <span><i class="far fa-user"></i> ...</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Layout Central 70/30 -->
+        <div class="container article-layout">
+            <article class="article-body">
+                <div style="text-align: center; padding: 50px 0;">
+                    <i class="fas fa-spinner fa-spin fa-3x" style="color: var(--azul-primario)"></i>
+                    <p style="margin-top: 15px;">Obteniendo información...</p>
+                </div>
+            </article>
+
+            <!-- Sidebar Derecho -->
+            <aside class="article-sidebar">
+                
+                <div class="sidebar-widget widget-author">
+                    <h3>Sobre el Autor</h3>
+                    <p>Equipo de analistas de <strong>Consultoría ATLOB</strong>, especializados en tributación, NIIF y auditoría preventiva empresarial.</p>
+                </div>
+
+                <div class="sidebar-widget widget-recursos">
+                    <h3>Recursos Gratuitos</h3>
+                    <ul class="recursos-list">
+                        <li>
+                            <i class="fas fa-file-excel"></i>
+                            <a href="#">Calculadora Laboral MYPE y General (Excel)</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-file-pdf"></i>
+                            <a href="#">Guía Práctica: Cronograma SUNAT 2026</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-widget widget-cta">
+                    <h3>¿Problemas Contables?</h3>
+                    <p>Evite multas millonarias y recupere el control financiero de su negocio hoy mismo.</p>
+                    <a href="../contacto.html" class="btn-primary" style="width: 100%; text-align: center; margin-top: 15px;">Solicitar Asesoría</a>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Footer (loaded dynamically) -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="../js/layout-loader.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/revista.js"></script>
+    <script>
+        // Progress bar for reading
+        const updateReadingProgress = () => {
+            const article = document.querySelector('.article-body');
+            if(!article) return;
+            const scrollTop = window.scrollY - article.offsetTop;
+            const docHeight = article.scrollHeight - window.innerHeight + 200;
+            let progress = 0;
+            if (scrollTop > 0) {
+                progress = (scrollTop / docHeight) * 100;
+            }
+            if(progress > 100) progress = 100;
+            if(progress < 0) progress = 0;
+            document.body.style.setProperty('--scroll-reading', progress + '%');
+        };
+        window.addEventListener("scroll", updateReadingProgress, { passive: true });
+
+        // Add a reading progress bar dynamically to body
+        const progressBar = document.createElement('div');
+        progressBar.style.position = 'fixed';
+        progressBar.style.top = '0';
+        progressBar.style.left = '0';
+        progressBar.style.height = '4px';
+        progressBar.style.background = 'var(--amarillo-acento)';
+        progressBar.style.zIndex = '999999';
+        progressBar.style.width = 'var(--scroll-reading, 0%)';
+        document.body.appendChild(progressBar);
+    </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+body {
+font-family: var(--font-main);
+margin: 0;
+}
+
+h1, h2, h3, h4 {
+font-family: var(--font-title);
+}
+
+section {
+padding: 90px 6%;
+}
+
+.container {
+max-width: 1200px;
+margin: auto;
+}
+
+h1 {
+font-size: 42px;
+margin-bottom: 20px;
+}
+
+h2 {
+font-size: 30px;
+margin-bottom: 20px;
+}
+
+p {
+line-height: 1.7;
+color: rgb(70,70,70);
+}
+
+/* ===================================== */
+/*     SISTEMA GLOBAL DE INTERSECTION    */
+/* ===================================== */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.9s ease;
+}
+
+.reveal.from-left {
+    transform: translateX(-60px);
+}
+
+.reveal.from-right {
+    transform: translateX(60px);
+}
+
+.reveal.from-bottom {
+    transform: translateY(60px);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+@keyframes fadeInUp {
+from {
+    opacity: 0;
+    transform: translateY(40px);
+}
+to {
+    opacity: 1;
+    transform: translateY(0);
+}
+}
+
+@keyframes pulse {
+0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.6); }
+70% { box-shadow: 0 0 0 15px rgba(37,211,102,0); }
+100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+}
+
+input, textarea, select {
+width: 100%;
+padding: 12px;
+border: none;
+border-radius: 6px;
+outline: none;
+}
+
+/* Utilidad para centrar contenido interno en tarjetas */
+.card-content-centered {
+text-align: center;
+}
+
+.card-content-centered::before {
+left: 50%;
+transform: translateX(-50%);
+}
+
+.card-content-centered .service-icon {
+margin-left: auto;
+margin-right: auto;
+}
+
+.card-content-centered .card-content {
+display: flex;
+flex-direction: column;
+align-items: center;
+text-align: center;
+}

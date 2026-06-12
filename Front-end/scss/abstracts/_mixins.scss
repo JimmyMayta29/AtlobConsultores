@@ -1,0 +1,15 @@
+/* MIXINS */
+
+@mixin flex-center {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+@mixin boton-base {
+padding: 10px 20px;
+border-radius: $borde-radio;
+border: none;
+cursor: pointer;
+transition: 0.3s ease;
+}

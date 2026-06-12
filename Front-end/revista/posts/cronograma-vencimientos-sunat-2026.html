@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Cronograma de Vencimientos SUNAT 2026 - Consultoría ATLOB</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS Principal -->
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <!-- Navbar (loaded dynamically) -->
+    <div id="header-container"></div>
+
+    <main class="article-view">
+        <!-- Hero del Articulo -->
+        <header class="article-header" style="background-image: linear-gradient(rgba(10, 42, 71, 0.8), rgba(10, 42, 71, 0.9)), url('/img/tech_cloud_1775951834123.png');">
+            <div class="container article-header-content">
+                <span class="article-badge">TRIBUTARIO</span>
+                <h1>Nuevo Cronograma de Vencimientos SUNAT 2026</h1>
+                <div class="article-meta">
+                    <span><i class="far fa-calendar"></i> 20 Abril, 2026</span>
+                    <span class="divider">•</span>
+                    <span><i class="far fa-clock"></i> 8 min de lectura</span>
+                    <span class="divider">•</span>
+                    <span><i class="far fa-user"></i> Jimmy CP</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Layout Central 70/30 -->
+        <div class="container article-layout">
+            <article class="article-body">
+                <!-- CONTENIDO DEL ARTICULO -->
+                <p>La administración tributaria ha publicado recientemente la Resolución de Superintendencia N° 000123-2026/SUNAT, estableciendo las fechas límites para el cumplimiento de las obligaciones tributarias mensuales del ejercicio 2026.</p>
+
+<h2>1. Fechas Clave para Buenos Contribuyentes</h2>
+<p>Si tu empresa cuenta con la condición de Buen Contribuyente, recuerda que tienes un plazo extendido que suele coincidir con la fecha de los 'Ulp' (Últimos dígitos de RUC).</p>
+
+<h2>2. Recomendaciones de Consultoría ATLOB</h2>
+<p>Para evitar contingencias con el sistema <strong>SIRE</strong> (Sistema Integrado de Registros Electrónicos), recomendamos cargar sus propuestas al menos 48 horas antes del vencimiento.</p>
+
+<h3>Tabla de Vencimientos Estimada (Ubicación referencial)</h3>
+<p>A continuación, detallamos los días base según el último dígito:</p>
+
+<p>* <strong>RUC 0:</strong> 15 de cada mes.</p>
+<p>* <strong>RUC 1:</strong> 16 de cada mes.</p>
+<p>* <strong>RUC 2:</strong> 17 de cada mes.</p>
+
+<strong>Recuerda:</strong> El incumplimiento de estas fechas genera multas equivalentes a 1 UIT o el 0.6% de los ingresos netos.
+
+<p>No dudes en contactarnos si necesitas asesoría para tu declaración mensual.</p>
+            </article>
+
+            <!-- Sidebar Derecho -->
+            <aside class="article-sidebar">
+                
+                <div class="sidebar-widget widget-author">
+                    <h3>Sobre el Autor</h3>
+                    <p>Equipo de analistas de <strong>Consultoría ATLOB</strong>, especializados en tributación, NIIF y auditoría preventiva empresarial.</p>
+                </div>
+
+                <div class="sidebar-widget widget-recursos">
+                    <h3>Recursos Gratuitos</h3>
+                    <ul class="recursos-list">
+                        <li>
+                            <i class="fas fa-file-excel"></i>
+                            <a href="#">Calculadora Laboral MYPE y General (Excel)</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-file-pdf"></i>
+                            <a href="#">Guía Práctica: Cronograma SUNAT 2026</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-widget widget-cta">
+                    <h3>¿Problemas Contables?</h3>
+                    <p>Evite multas millonarias y recupere el control financiero de su negocio hoy mismo.</p>
+                    <a href="/contacto.html" class="btn-primary" style="width: 100%; text-align: center; margin-top: 15px;">Solicitar Asesoría</a>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Footer (loaded dynamically) -->
+    <div id="footer-container"></div>
+
+    <!-- Script carga de layout -->
+    <script src="/js/layout-loader.js"></script>
+    <script>
+        // Progress bar for reading
+        const updateReadingProgress = () => {
+            const article = document.querySelector('.article-body');
+            if(!article) return;
+            const scrollTop = window.scrollY - article.offsetTop;
+            const docHeight = article.scrollHeight - window.innerHeight + 200;
+            let progress = 0;
+            if (scrollTop > 0) {
+                progress = (scrollTop / docHeight) * 100;
+            }
+            if(progress > 100) progress = 100;
+            if(progress < 0) progress = 0;
+            document.body.style.setProperty('--scroll-reading', progress + '%');
+        };
+        window.addEventListener("scroll", updateReadingProgress, { passive: true });
+
+        // Add a reading progress bar dynamically to body
+        const progressBar = document.createElement('div');
+        progressBar.style.position = 'fixed';
+        progressBar.style.top = '0';
+        progressBar.style.left = '0';
+        progressBar.style.height = '4px';
+        progressBar.style.background = 'var(--amarillo-acento)';
+        progressBar.style.zIndex = '999999';
+        progressBar.style.width = 'var(--scroll-reading, 0%)';
+        document.body.appendChild(progressBar);
+    </script>
+</body>
+</html>

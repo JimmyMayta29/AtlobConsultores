@@ -1,0 +1,9 @@
+node_modules/
+logs/
+uploads/articles/*
+uploads/thumbnails/*
+!uploads/articles/.gitkeep
+!uploads/thumbnails/.gitkeep
+.env
+*.log
+database/*.sqlite

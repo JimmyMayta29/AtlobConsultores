@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración — ATLOB CMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-card">
+            <div class="login-logo">
+                <div class="login-logo-icon"><i class="fas fa-shield-alt"></i></div>
+                <h1>ATLOB CMS</h1>
+                <p>Panel de Administración</p>
+            </div>
+            <form id="loginForm" autocomplete="on">
+                <div class="form-group">
+                    <label for="loginEmail">Correo electrónico</label>
+                    <div class="input-icon-wrap">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="loginEmail" placeholder="admin@atlob.com" required autocomplete="email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Contraseña</label>
+                    <div class="input-icon-wrap">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="loginPassword" placeholder="••••••••" required autocomplete="current-password">
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary-full" id="loginBtn">
+                    <span>Iniciar Sesión</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+                <div id="loginError" class="login-error"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main App Shell -->
+    <div id="appShell" class="app-shell" style="display:none;">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-brand">
+                <span class="brand-icon"><i class="fas fa-cube"></i></span>
+                <span class="brand-text">ATLOB CMS</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-page="dashboard">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-page="articles">
+                    <i class="fas fa-newspaper"></i>
+                    <span>Artículos</span>
+                </a>
+                <a href="#" class="nav-item" data-page="editor">
+                    <i class="fas fa-pen-fancy"></i>
+                    <span>Nuevo Artículo</span>
+                </a>
+                <a href="#" class="nav-item" data-page="categories">
+                    <i class="fas fa-folder-open"></i>
+                    <span>Categorías</span>
+                </a>
+                <a href="#" class="nav-item" data-page="media">
+                    <i class="fas fa-images"></i>
+                    <span>Media</span>
+                </a>
+                <a href="#" class="nav-item" data-page="tags">
+                    <i class="fas fa-tags"></i>
+                    <span>Etiquetas</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="#" id="btnLogout" class="nav-item nav-item--danger">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Cerrar Sesión</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-wrap">
+            <!-- Top Bar -->
+            <header class="topbar">
+                <button class="menu-toggle-admin" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="topbar-title" id="pageTitle">Dashboard</div>
+                <div class="topbar-right">
+                    <div class="user-badge" id="userBadge">
+                        <span class="user-avatar"><i class="fas fa-user"></i></span>
+                        <span class="user-name" id="userName">Admin</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Container -->
+            <main class="page-container" id="pageContainer">
+                <!-- Pages are dynamically loaded here -->
+            </main>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+
+/* ================================
+FOOTER PREMIUM
+================================ */
+
+.footer {
+background: #0b2f4a;
+color: #d9e3ec;
+padding-top: 70px;
+margin-top: 100px;
+}
+
+.footer-grid {
+display: grid;
+grid-template-columns: 1.5fr 1fr 1fr;
+gap: 60px;
+padding-bottom: 50px;
+}
+
+.footer h3 {
+color: #ffffff;
+margin-bottom: 15px;
+font-weight: 600;
+}
+
+.footer h4 {
+color: #ffffff;
+margin-bottom: 18px;
+font-weight: 500;
+position: relative;
+}
+
+.footer h4::after {
+content: "";
+display: block;
+width: 35px;
+height: 3px;
+background: #f2b705;
+margin-top: 8px;
+border-radius: 2px;
+}
+
+.footer p {
+font-size: 0.9rem;
+line-height: 1.6;
+color: #b8c6d4;
+}
+
+.footer ul {
+list-style: none;
+padding: 0;
+}
+
+.footer ul li {
+margin-bottom: 10px;
+}
+
+.footer ul li a {
+color: #b8c6d4;
+text-decoration: none;
+transition: color 0.3s ease;
+}
+
+.footer ul li a:hover {
+color: #f2b705;
+}
+
+.footer-contact {
+margin-top: 20px;
+}
+
+.footer-contact p {
+margin-bottom: 6px;
+font-size: 0.85rem;
+}
+
+.footer-social {
+margin-top: 20px;
+display: flex;
+gap: 15px;
+}
+
+.footer-social a {
+color: #d9e3ec;
+text-decoration: none;
+font-size: 0.85rem;
+position: relative;
+transition: all 0.3s ease;
+}
+
+.footer-social a::after {
+content: "";
+position: absolute;
+width: 0%;
+height: 2px;
+bottom: -3px;
+left: 0;
+background: #f2b705;
+transition: width 0.3s ease;
+}
+
+.footer-social a:hover {
+color: #f2b705;
+}
+
+.footer-social a:hover::after {
+width: 100%;
+}
+
+.footer-bottom {
+border-top: 1px solid rgba(255, 255, 255, 0.08);
+text-align: center;
+padding: 20px 0;
+font-size: 0.8rem;
+color: #9fb2c3;
+}
+
+@media (max-width: 900px) {
+.footer-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+}
+}
+
+/* WHATSAPP FLOAT */
+.whatsapp-float {
+position: fixed;
+bottom: 25px;
+right: 25px;
+background: #25D366;
+color: white;
+font-size: 28px;
+padding: 15px;
+border-radius: 50%;
+box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+animation: pulse 2s infinite;
+z-index: 999;
+}
+
+.whatsapp-float:hover {
+transform: scale(1.1);
+}

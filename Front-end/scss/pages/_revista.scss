@@ -1,0 +1,192 @@
+// ===============================
+// REVISTA ACADÉMICA ATLOB
+// ===============================
+
+// ===============================
+// PALETA
+// ===============================
+
+$primary-blue: #1f3c88;
+$deep-blue: #142850;
+$petroleum: #0f3057;
+$graphite: #2b2b2b;
+$light-gray: #f4f6f9;
+$white: #ffffff;
+
+$amarillo-acento: #f2b705; // NUEVO ACENTO VIVO
+
+
+// ===============================
+// SECCIÓN PRINCIPAL
+// ===============================
+
+.revista-preview {
+padding: 6rem 2rem;
+background: linear-gradient(135deg, #eef2f7, #dde6f2);
+
+&__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+// ===============================
+// HERO
+// ===============================
+
+&__hero {
+    margin-bottom: 4rem;
+}
+
+&__title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: $deep-blue;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+}
+
+&__subtitle {
+    font-size: 1.1rem;
+    color: $graphite;
+    max-width: 650px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+// ===============================
+// GRID - 3 POR FILA
+// ===============================
+
+&__card {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); // 🔥 3 fijas en desktop
+    gap: 2.2rem;
+    margin-bottom: 4rem;
+}
+
+// ===============================
+// CARD
+// ===============================
+
+&__item {
+    background: linear-gradient(145deg, $white, #f8fafc);
+    border-radius: 18px;
+    padding: 3rem 2rem; // 🔥 MÁS GRANDES
+    text-align: center;
+    text-decoration: none;
+    color: $graphite;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+
+    span {
+    display: block;
+    margin-top: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    font-size: 1.05rem;
+    }
+
+    // Barra superior dinámica
+    &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: $amarillo-acento;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+    }
+
+    &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.15);
+
+    &::before {
+        transform: scaleX(1);
+    }
+
+    .revista-preview__icon {
+        background: $amarillo-acento;
+        color: $deep-blue;
+        transform: scale(1.15);
+    }
+    }
+}
+
+// ===============================
+// ICONO
+// ===============================
+
+&__icon {
+    width: 85px;
+    height: 85px;
+    margin: 0 auto;
+    border-radius: 20px; // 🔥 más moderno que círculo
+    background: linear-gradient(135deg, $primary-blue, $petroleum);
+    color: $white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.9rem;
+    transition: all 0.4s ease;
+}
+
+// ===============================
+// CTA
+// ===============================
+
+&__cta {
+    margin-top: 3rem;
+
+    .btn-primary {
+    background: #FF8C00;
+    color: $white;
+    padding: 1rem 2.6rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.35s ease;
+    display: inline-block;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        background: #FF8200;
+    }
+    }
+}
+}
+
+
+// ===============================
+// RESPONSIVE
+// ===============================
+
+// Tablet → 2 por fila
+@media (max-width: 992px) {
+.revista-preview__card {
+    grid-template-columns: repeat(2, 1fr);
+}
+}
+
+// Móvil → 1 por fila
+@media (max-width: 576px) {
+.revista-preview {
+    padding: 4rem 1.2rem;
+
+    &__title {
+    font-size: 2.1rem;
+    }
+}
+
+.revista-preview__card {
+    grid-template-columns: 1fr;
+}
+}
