@@ -9,6 +9,7 @@ const categoryRoutes = require('./category.routes');
 const tagRoutes = require('./tag.routes');
 const mediaRoutes = require('./media.routes');
 const dashboardRoutes = require('./dashboard.routes');
+const newsletterRoutes = require('./newsletter.routes');
 
 // Health check
 router.get('/health', (req, res) => {
@@ -29,6 +30,7 @@ router.use('/categories', categoryRoutes);
 router.use('/tags', tagRoutes);
 router.use('/media', mediaRoutes);
 router.use('/dashboard', dashboardRoutes);
+router.use('/newsletter', newsletterRoutes);
 
 // SEO — Sitemap
 router.get('/sitemap.xml', async (req, res) => {

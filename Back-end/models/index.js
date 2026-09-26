@@ -5,6 +5,7 @@ const Tag = require('./tag.model');
 const ArticleTag = require('./articleTag.model');
 const Media = require('./media.model');
 const Comment = require('./comment.model');
+const Subscriber = require('./subscriber.model');
 
 // =============================================
 // ASSOCIATIONS
@@ -57,6 +58,7 @@ const {
   ArticleTagModel,
   MediaModel,
   CommentModel,
+  SubscriberModel,
 } = require('./inMemoryStore');
 
 function createModelProxy(realModel, mockModel) {
@@ -82,4 +84,5 @@ module.exports = {
   ArticleTag: createModelProxy(ArticleTag, ArticleTagModel),
   Media: createModelProxy(Media, MediaModel),
   Comment: createModelProxy(Comment, CommentModel),
+  Subscriber: createModelProxy(Subscriber, SubscriberModel),
 };

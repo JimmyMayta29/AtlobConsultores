@@ -73,7 +73,75 @@ document.addEventListener("DOMContentLoaded", () => {
         link.style.fontWeight = "600";
       }
     });
+
+    // Initialize Newsletter subscription form
+    initNewsletterForm();
   });
+
+  function initNewsletterForm() {
+    const form = document.getElementById("newsletter-form");
+    if (!form) return;
+    if (form.dataset.initialized === "true") return;
+    form.dataset.initialized = "true";
+
+    const emailInput = document.getElementById("newsletter-email");
+    const feedbackEl = document.getElementById("newsletter-feedback");
+    const submitBtn = document.getElementById("newsletter-submit-btn");
+
+    const showFeedback = (type, message) => {
+      if (!feedbackEl) return;
+      feedbackEl.className = `newsletter-feedback ${type}`;
+      feedbackEl.textContent = message;
+    };
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = emailInput ? emailInput.value.trim() : "";
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!email) {
+        showFeedback("error", "Por favor ingresa tu correo electrónico.");
+        if (emailInput) emailInput.focus();
+        return;
+      }
+
+      if (!emailRegex.test(email)) {
+        showFeedback("error", "Por favor ingresa un correo electrónico válido.");
+        if (emailInput) emailInput.focus();
+        return;
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<span>Enviando...</span> <i class="fas fa-spinner fa-spin"></i>`;
+      }
+      showFeedback("info", "Procesando suscripción...");
+
+      try {
+        const response = await fetch("/api/newsletter/subscribe", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, source: "footer_form" })
+        });
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          showFeedback("success", data.message || "¡Gracias por suscribirte al boletín!");
+          if (emailInput) emailInput.value = "";
+        } else {
+          showFeedback("error", data.message || "No se pudo procesar la suscripción.");
+        }
+      } catch (err) {
+        console.error("Error en suscripción:", err);
+        showFeedback("error", "Error de conexión. Por favor intente más tarde.");
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = `<span>Suscribirme</span> <i class="fas fa-paper-plane"></i>`;
+        }
+      }
+    });
+  }
 
 });
 

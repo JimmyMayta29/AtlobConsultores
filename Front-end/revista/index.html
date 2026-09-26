@@ -38,13 +38,34 @@
                 <div id="featured-article-container"></div>
                 <!-- FEATURED_HOOK_END -->
 
-                <nav class="magazine-nav reveal from-bottom" aria-label="Categorías del blog">
-                    <a href="index.html" class="magazine-nav-pill active">Todos</a>
-                    <a href="tributario.html" class="magazine-nav-pill">Normativa Tributaria</a>
-                    <a href="contabilidad.html" class="magazine-nav-pill">Casos Prácticos</a>
-                    <a href="auditoria.html" class="magazine-nav-pill">Auditoría y NIIF</a>
-                    <a href="laboral.html" class="magazine-nav-pill">Laboral y Planillas</a>
-                </nav>
+                <!-- Search and Categories Toolbar -->
+                <div class="magazine-controls-wrapper">
+                    <div class="magazine-search-container">
+                        <div class="magazine-search-bar">
+                            <i class="fas fa-search search-icon" aria-hidden="true"></i>
+                            <input 
+                                type="search" 
+                                id="magazine-search-input" 
+                                class="magazine-search-input" 
+                                placeholder="Buscar artículos por título, tema o palabras clave (ej: SUNAT, IGV, PCGE)..." 
+                                autocomplete="off"
+                                aria-label="Buscar artículos en la revista"
+                            >
+                            <button type="button" id="magazine-search-clear" class="search-clear-btn" aria-label="Limpiar búsqueda" title="Limpiar búsqueda" style="display: none;">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div id="search-feedback" class="search-feedback" aria-live="polite"></div>
+                    </div>
+
+                    <nav class="magazine-nav reveal from-bottom" aria-label="Categorías del blog" id="magazine-categories-nav">
+                        <a href="index.html" class="magazine-nav-pill active" data-category="all">Todos</a>
+                        <a href="tributario.html" class="magazine-nav-pill" data-category="Tributario">Normativa Tributaria</a>
+                        <a href="contabilidad.html" class="magazine-nav-pill" data-category="Contabilidad">Casos Prácticos</a>
+                        <a href="auditoria.html" class="magazine-nav-pill" data-category="Auditoría">Auditoría y NIIF</a>
+                        <a href="laboral.html" class="magazine-nav-pill" data-category="Laboral">Laboral y Planillas</a>
+                    </nav>
+                </div>
 
                 <div class="magazine-grid" id="articles-grid">
                     <!-- POSTS_HOOK_START -->

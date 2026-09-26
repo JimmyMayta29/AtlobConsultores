@@ -28,3 +28,79 @@
 [2026-09-26 01:28:59] INFO: Login exitoso: admin@atlob.com
 [2026-09-26 01:29:05] INFO: Login exitoso: admin@atlob.com
 [2026-09-26 01:29:10] INFO: Login exitoso: admin@atlob.com
+[2026-09-26 15:56:25] INFO: 📁 Directorios de uploads verificados
+[2026-09-26 15:56:25] WARN: ⚠️ MySQL no conectado (connect ECONNREFUSED 127.0.0.1:3306). Activando base de datos en memoria para AI Studio.
+[2026-09-26 15:56:25] INFO: 🌱 Ejecutando seeder inicial...
+[2026-09-26 15:56:26] INFO: ✅ Admin creado: admin@atlob.com
+[2026-09-26 15:56:26] INFO: ✅ Categorías base creadas
+[2026-09-26 15:56:26] INFO: ✅ Tags iniciales creados
+[2026-09-26 15:56:26] INFO: 🌱 Seeder completado exitosamente
+[2026-09-26 15:56:26] INFO: 
+╔══════════════════════════════════════════════╗
+║                                              ║
+║   🚀 ATLOB Backend v1.0                     ║
+║   Servidor: http://localhost:3000          ║
+║   API:      http://localhost:3000/api      ║
+║   Admin:    http://localhost:3000/admin     ║
+║   Entorno:  development                      ║
+║                                              ║
+╚══════════════════════════════════════════════╝
+      
+[2026-09-26 15:59:46] INFO: 📁 Directorios de uploads verificados
+[2026-09-26 15:59:46] WARN: ⚠️ MySQL no conectado (connect ECONNREFUSED 127.0.0.1:3306). Activando base de datos en memoria para AI Studio.
+[2026-09-26 15:59:46] INFO: 🌱 Ejecutando seeder inicial...
+[2026-09-26 15:59:46] INFO: ✅ Admin creado: admin@atlob.com
+[2026-09-26 15:59:46] INFO: ✅ Categorías base creadas
+[2026-09-26 15:59:46] INFO: ✅ Tags iniciales creados
+[2026-09-26 15:59:46] INFO: 🌱 Seeder completado exitosamente
+[2026-09-26 15:59:46] INFO: 
+╔══════════════════════════════════════════════╗
+║                                              ║
+║   🚀 ATLOB Backend v1.0                     ║
+║   Servidor: http://localhost:3000          ║
+║   API:      http://localhost:3000/api      ║
+║   Admin:    http://localhost:3000/admin     ║
+║   Entorno:  development                      ║
+║                                              ║
+╚══════════════════════════════════════════════╝
+      
+[2026-09-26 15:59:49] INFO: 📧 Nuevo suscriptor al boletín: contacto@empresa.com
+[2026-09-26 15:59:50] ERROR: Error enviando email a contacto@empresa.com:
+[2026-09-26 16:01:27] INFO: 📁 Directorios de uploads verificados
+[2026-09-26 16:01:27] WARN: ⚠️ MySQL no conectado (connect ECONNREFUSED 127.0.0.1:3306). Activando base de datos en memoria para AI Studio.
+[2026-09-26 16:01:27] INFO: 🌱 Ejecutando seeder inicial...
+[2026-09-26 16:01:27] INFO: ✅ Admin creado: admin@atlob.com
+[2026-09-26 16:01:27] INFO: ✅ Categorías base creadas
+[2026-09-26 16:01:27] INFO: ✅ Tags iniciales creados
+[2026-09-26 16:01:27] INFO: 🌱 Seeder completado exitosamente
+[2026-09-26 16:01:27] INFO: 
+╔══════════════════════════════════════════════╗
+║                                              ║
+║   🚀 ATLOB Backend v1.0                     ║
+║   Servidor: http://localhost:3000          ║
+║   API:      http://localhost:3000/api      ║
+║   Admin:    http://localhost:3000/admin     ║
+║   Entorno:  development                      ║
+║                                              ║
+╚══════════════════════════════════════════════╝
+      
+[2026-09-26 16:02:00] INFO: 📁 Directorios de uploads verificados
+[2026-09-26 16:02:00] WARN: ⚠️ MySQL no conectado (connect ECONNREFUSED 127.0.0.1:3306). Activando base de datos en memoria para AI Studio.
+[2026-09-26 16:02:00] INFO: 🌱 Ejecutando seeder inicial...
+[2026-09-26 16:02:01] INFO: ✅ Admin creado: admin@atlob.com
+[2026-09-26 16:02:01] INFO: ✅ Categorías base creadas
+[2026-09-26 16:02:01] INFO: ✅ Tags iniciales creados
+[2026-09-26 16:02:01] INFO: 🌱 Seeder completado exitosamente
+[2026-09-26 16:02:01] INFO: 
+╔══════════════════════════════════════════════╗
+║                                              ║
+║   🚀 ATLOB Backend v1.0                     ║
+║   Servidor: http://localhost:3000          ║
+║   API:      http://localhost:3000/api      ║
+║   Admin:    http://localhost:3000/admin     ║
+║   Entorno:  development                      ║
+║                                              ║
+╚══════════════════════════════════════════════╝
+      
+[2026-09-26 16:02:06] INFO: 📧 Nuevo suscriptor al boletín: gerencia@empresa.com
+[2026-09-26 16:02:06] ERROR: Error enviando email a gerencia@empresa.com:

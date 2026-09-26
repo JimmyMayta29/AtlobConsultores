@@ -6,6 +6,7 @@ let tagNextId = 1;
 let articleNextId = 1;
 let mediaNextId = 1;
 let commentNextId = 1;
+let subscriberNextId = 1;
 
 const users = [];
 const categories = [];
@@ -14,6 +15,7 @@ const articles = [];
 const articleTags = [];
 const mediaList = [];
 const comments = [];
+const subscribers = [];
 
 class UserInstance {
   constructor(data) {
@@ -250,6 +252,26 @@ class CommentInstance {
   async destroy() {
     const idx = comments.findIndex(c => c.id === this.id);
     if (idx !== -1) comments.splice(idx, 1);
+  }
+}
+
+class SubscriberInstance {
+  constructor(data) {
+    this.id = data.id || subscriberNextId++;
+    this.email = (data.email || '').trim().toLowerCase();
+    this.status = data.status || 'active';
+    this.source = data.source || 'footer_form';
+    this.createdAt = data.createdAt || new Date();
+    this.updatedAt = data.updatedAt || new Date();
+  }
+
+  get(attr) {
+    return attr ? this[attr] : { ...this };
+  }
+
+  async destroy() {
+    const idx = subscribers.findIndex(s => s.id === this.id);
+    if (idx !== -1) subscribers.splice(idx, 1);
   }
 }
 
@@ -525,6 +547,27 @@ const CommentModel = {
   },
 };
 
+const SubscriberModel = {
+  async findOne({ where } = {}) {
+    return subscribers.find(s => matchesWhere(s, where)) || null;
+  },
+  async findAll({ where } = {}) {
+    return subscribers.filter(s => matchesWhere(s, where));
+  },
+  async findByPk(id) {
+    return subscribers.find(s => s.id === Number(id)) || null;
+  },
+  async count(options = {}) {
+    if (!options.where) return subscribers.length;
+    return subscribers.filter(s => matchesWhere(s, options.where)).length;
+  },
+  async create(data) {
+    const instance = new SubscriberInstance(data);
+    subscribers.push(instance);
+    return instance;
+  },
+};
+
 // Seed default initial data
 function seedInitialData() {
   if (categories.length === 0) {
@@ -642,5 +685,6 @@ module.exports = {
   ArticleTagModel,
   MediaModel,
   CommentModel,
+  SubscriberModel,
   seedInitialData,
 };

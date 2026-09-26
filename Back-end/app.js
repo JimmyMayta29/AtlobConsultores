@@ -11,6 +11,9 @@ const logger = require('./utils/logger');
 
 const app = express();
 
+// Trust proxy for reverse proxy environments (e.g. Google Cloud Run, Nginx)
+app.set('trust proxy', 1);
+
 // =============================================
 // SECURITY
 // =============================================
@@ -68,7 +71,9 @@ if (env.NODE_ENV === 'development') {
 // =============================================
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Serve Front-end
+// Serve Front-end (with case-safe alias for /components and /Components)
+app.use('/components', express.static(path.join(__dirname, '../Front-end/Components')));
+app.use('/Components', express.static(path.join(__dirname, '../Front-end/Components')));
 app.use(express.static(path.join(__dirname, '../Front-end')));
 
 // Serve Admin Panel
