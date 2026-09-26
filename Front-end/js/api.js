@@ -3,7 +3,7 @@
  * Handles communication with the Backend CMS
  */
 
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = '/api';
 
 const atlobApi = {
     /**
@@ -54,12 +54,15 @@ const atlobApi = {
      * Resolve image URL (if it's a relative path from backend)
      */
     resolveImageUrl: (path) => {
-        if (!path) return '../iconos/vistaoficina.jpg'; // Fallback
+        if (!path) return '/iconos/vistaoficina.jpg'; // Fallback
         if (path.startsWith('http')) return path;
         // Check if path already contains '/uploads/'
         if (path.startsWith('/uploads/')) {
-            return `http://localhost:3000${path}`;
+            return path;
         }
-        return `http://localhost:3000/uploads/${path}`;
+        if (path.startsWith('/')) {
+            return path;
+        }
+        return `/uploads/${path}`;
     }
 };

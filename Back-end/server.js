@@ -21,7 +21,7 @@ const startServer = async () => {
     await runSeeder();
 
     // 4. Start HTTP server
-    app.listen(env.PORT, () => {
+    app.listen(env.PORT, '0.0.0.0', () => {
       logger.info(`
 ╔══════════════════════════════════════════════╗
 ║                                              ║

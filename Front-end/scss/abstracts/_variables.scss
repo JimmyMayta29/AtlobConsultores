@@ -1,80 +1,48 @@
-/* ═══════════════════════════════════════════════
-   VARIABLES — Apple-Inspired Design System (ATLOB)
-   ═══════════════════════════════════════════════ */
+/* VARIABLES — Design System */
 
 :root {
-  /* ─── Colores Principales ATLOB ─── */
+  /* Colores Primarios */
   --azul-principal: #0f3d66;
   --azul-oscuro: #0a2a47;
   --azul-profundo: #061c30;
+
+  /* Colores Secundarios */
   --azul-medio: #1a5a8a;
   --azul-claro: #2980b9;
   --azul-suave: #5dade2;
 
-  /* ─── Acentos Apple & ATLOB ─── */
-  --azul-apple: #0071e3;
-  --azul-apple-hover: #0077ed;
+  /* Acentos */
   --amarillo-acento: #f2b705;
   --amarillo-hover: #e6a800;
   --amarillo-suave: #ffd449;
   --naranja-cta: #e67e22;
-  --verde-apple: #30d158;
 
-  /* ─── Paleta de Superficies Apple (Light & Dark Studio) ─── */
-  --apple-canvas: #fbfbfd;
-  --apple-dark-canvas: #000000;
-  --fondo-claro: #f5f5f7;
-  --fondo-secciones: #f0f2f7;
-  --fondo-crema: #f8f7f4;
-  --gris-texto: #515154;
-  --gris-texto-muted: #86868b;
-  --gris-suave: #a1a1a6;
-  --gris-borde: rgba(0, 0, 0, 0.08);
+  /* Neutros */
+  --fondo-claro: #f7f9fc;
+  --fondo-secciones: #eef2f8;
+  --gris-texto: #4a5568;
+  --gris-suave: #718096;
+  --gris-borde: #e2e8f0;
   --blanco-puro: #ffffff;
 
-  /* ─── Liquid Glass & Materiales Traslúcidos ─── */
-  --glass-bg-light: rgba(255, 255, 255, 0.78);
-  --glass-bg-dark: rgba(14, 18, 26, 0.78);
-  --glass-bg-subtle: rgba(255, 255, 255, 0.45);
-  --glass-blur: blur(20px) saturate(180%);
-  --glass-border-light: 1px solid rgba(255, 255, 255, 0.6);
-  --glass-border-dark: 1px solid rgba(255, 255, 255, 0.12);
-  --glass-border-subtle: 1px solid rgba(0, 0, 0, 0.06);
-
-  /* ─── Superficies Bento ─── */
-  --superficie-bento: #ffffff;
-  --superficie-bento-dark: #0a111a;
-  --superficie-bento-card: rgba(255, 255, 255, 0.9);
+  /* Superficies */
+  --superficie-card: #ffffff;
   --superficie-elevada: rgba(255, 255, 255, 0.85);
-
-  /* ─── Sombras & Depth Apple ─── */
-  --sombra-bento: 0 4px 24px rgba(15, 61, 102, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
-  --sombra-bento-hover: 0 16px 40px rgba(15, 61, 102, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
-  --sombra-dark-card: 0 20px 50px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   --sombra-suave: 0 4px 20px rgba(15, 61, 102, 0.08);
   --sombra-media: 0 12px 35px rgba(15, 61, 102, 0.12);
   --sombra-elevada: 0 20px 50px rgba(15, 61, 102, 0.16);
-  --glow-apple-blue: 0 0 30px rgba(0, 113, 227, 0.25);
-  --glow-apple-amber: 0 0 30px rgba(242, 183, 5, 0.22);
 
-  /* ─── Tipografía ─── */
-  --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
-  --font-title: 'Outfit', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  /* Tipografía */
+  --font-main: 'Outfit', sans-serif;
 
-  /* ─── Curvas de Animación Apple (Spring & Smooth Physics) ─── */
-  --ease-apple-spring: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-apple-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+  /* Transiciones */
   --ease-premium: cubic-bezier(0.22, 0.61, 0.36, 1);
-  --transition-normal: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-smooth: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+  --transition-fast: 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
 
-  /* ─── Radios Continuos Squircle ─── */
-  --radius-sm: 10px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
-  --radius-xl: 32px;
-  --radius-bento: 26px;
-  --radius-bento-lg: 34px;
-  --radius-pill: 9999px;
+  /* Bordes */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 50px;
 }

@@ -22,6 +22,8 @@ const sequelize = new Sequelize(env.DB_NAME, env.DB_USER, env.DB_PASS, {
   },
 });
 
+let isMockMode = false;
+
 /**
  * Test connection and sync models
  * @param {boolean} force - Drop and recreate tables (DANGEROUS in production)
@@ -34,10 +36,14 @@ const connectDB = async (force = false) => {
     // Sync all models
     await sequelize.sync({ alter: env.NODE_ENV === 'development', force });
     logger.info('✅ Modelos sincronizados');
+    isMockMode = false;
   } catch (error) {
-    logger.error('❌ Error de conexión MySQL:', error.message);
-    process.exit(1);
+    logger.warn(`⚠️ MySQL no conectado (${error.message}). Activando base de datos en memoria para AI Studio.`);
+    isMockMode = true;
   }
 };
 
-module.exports = { sequelize, connectDB };
+const getIsMock = () => isMockMode;
+const setIsMock = (val) => { isMockMode = val; };
+
+module.exports = { sequelize, connectDB, getIsMock, setIsMock };

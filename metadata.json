@@ -1,0 +1,8 @@
+{
+  "name": "Consultoría ATLOB — Soluciones Contables Estratégicas",
+  "description": "Consultoría contable y financiera con enfoque tecnológico. Auditoría, asesoría tributaria, gestión laboral, outsourcing contable y revista académica.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

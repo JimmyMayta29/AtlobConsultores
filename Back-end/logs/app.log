@@ -1,0 +1,30 @@
+[2026-09-26 01:28:09] INFO: 📁 Directorios de uploads verificados
+[2026-09-26 01:28:09] WARN: ⚠️ MySQL no conectado (connect ECONNREFUSED 127.0.0.1:3306). Activando base de datos en memoria para AI Studio.
+[2026-09-26 01:28:09] INFO: 🌱 Ejecutando seeder inicial...
+[2026-09-26 01:28:10] INFO: ✅ Admin creado: admin@atlob.com
+[2026-09-26 01:28:21] INFO: 📁 Directorios de uploads verificados
+[2026-09-26 01:28:21] WARN: ⚠️ MySQL no conectado (connect ECONNREFUSED 127.0.0.1:3306). Activando base de datos en memoria para AI Studio.
+[2026-09-26 01:28:21] INFO: 🌱 Ejecutando seeder inicial...
+[2026-09-26 01:28:21] INFO: ✅ Admin creado: admin@atlob.com
+[2026-09-26 01:28:21] INFO: ✅ Categorías base creadas
+[2026-09-26 01:28:21] INFO: ✅ Tags iniciales creados
+[2026-09-26 01:28:21] INFO: 🌱 Seeder completado exitosamente
+[2026-09-26 01:28:21] INFO: 
+╔══════════════════════════════════════════════╗
+║                                              ║
+║   🚀 ATLOB Backend v1.0                     ║
+║   Servidor: http://localhost:3000          ║
+║   API:      http://localhost:3000/api      ║
+║   Admin:    http://localhost:3000/admin     ║
+║   Entorno:  development                      ║
+║                                              ║
+╚══════════════════════════════════════════════╝
+      
+[2026-09-26 01:28:53] INFO: 🌱 Ejecutando seeder inicial...
+[2026-09-26 01:28:54] INFO: ✅ Admin creado: admin@atlob.com
+[2026-09-26 01:28:54] INFO: ✅ Categorías base creadas
+[2026-09-26 01:28:54] INFO: ✅ Tags iniciales creados
+[2026-09-26 01:28:54] INFO: 🌱 Seeder completado exitosamente
+[2026-09-26 01:28:59] INFO: Login exitoso: admin@atlob.com
+[2026-09-26 01:29:05] INFO: Login exitoso: admin@atlob.com
+[2026-09-26 01:29:10] INFO: Login exitoso: admin@atlob.com

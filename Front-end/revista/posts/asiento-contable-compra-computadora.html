@@ -12,8 +12,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- CSS Principal -->
     <link rel="stylesheet" href="../../css/main.css">
-    <script defer src="../../js/layout-loader.js"></script>
-    <script defer src="../../js/main.js"></script>
 </head>
 <body>
     <!-- Navbar (loaded dynamically) -->
@@ -21,7 +19,7 @@
 
     <main class="article-view">
         <!-- Hero del Articulo -->
-        <header class="article-header" style="background-image: linear-gradient(rgba(10, 42, 71, 0.8), rgba(10, 42, 71, 0.9)), url('../../img/tech_automation_1775951818804.png');">
+        <header class="article-header" style="background-image: linear-gradient(rgba(10, 42, 71, 0.8), rgba(10, 42, 71, 0.9)), url('/img/tech_automation_1775951818804.png');">
             <div class="container article-header-content">
                 <span class="article-badge">CASO PRÁCTICO</span>
                 <h1>Asiento Contable por Compra de Computadora (Laptop)</h1>
@@ -176,6 +174,8 @@
     <!-- Footer (loaded dynamically) -->
     <div id="footer-container"></div>
 
+    <!-- Script carga de layout -->
+    <script src="/js/layout-loader.js"></script>
     <script>
         // Progress bar for reading
         const updateReadingProgress = () => {

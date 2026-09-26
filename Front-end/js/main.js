@@ -1,150 +1,114 @@
-/* ═══════════════════════════════════════════════
-   MAIN JS — Apple-Inspired Interactive Systems
-   ═══════════════════════════════════════════════ */
-
 document.addEventListener("DOMContentLoaded", () => {
 
   /* ================================================
-     1. REVEAL SYSTEM — Apple Spring Entrance
+     REVEAL SYSTEM — IntersectionObserver with stagger
      ================================================ */
   const revealElements = document.querySelectorAll(".reveal");
 
   if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
+        entries.forEach((entry, i) => {
           if (entry.isIntersecting) {
-            const parent = entry.target.parentElement;
-            const siblings = Array.from(parent?.children || []).filter(el => el.classList.contains("reveal"));
-            const index = siblings.indexOf(entry.target);
-            const delay = Math.min(index * 70, 350);
+            // Stagger delay for siblings in same parent
+            const delay = Array.from(entry.target.parentElement?.children || [])
+              .filter(el => el.classList.contains("reveal"))
+              .indexOf(entry.target) * 80;
 
             setTimeout(() => {
               entry.target.classList.add("active");
-            }, delay);
+            }, Math.min(delay, 400));
 
             observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
     );
 
     revealElements.forEach((el) => observer.observe(el));
   } else {
-    // Fallback
-    revealElements.forEach((el) => el.classList.add("active"));
+    // Fallback for older browsers
+    const activateRevealByScroll = () => {
+      revealElements.forEach((element) => {
+        const windowHeight = window.innerHeight;
+        const elementTop = element.getBoundingClientRect().top;
+        if (elementTop < windowHeight - 100) {
+          element.classList.add("active");
+        }
+      });
+    };
+    activateRevealByScroll();
+    window.addEventListener("scroll", activateRevealByScroll, { passive: true });
   }
 
   /* ================================================
-     2. APPLE SPOTLIGHT EFFECT ON BENTO CARDS
+     HAMBURGER MENU
      ================================================ */
-  const spotlightCards = document.querySelectorAll(".bento-card-spotlight");
+  document.addEventListener("click", (event) => {
+    const toggle = event.target.closest(".menu-toggle");
+    if (!toggle) return;
 
-  spotlightCards.forEach((card) => {
-    card.addEventListener("mousemove", (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+    const isActive = toggle.classList.toggle("active");
+    toggle.setAttribute("aria-expanded", isActive);
 
-      card.style.setProperty("--mouse-x", `${x}px`);
-      card.style.setProperty("--mouse-y", `${y}px`);
-    });
+    const navMenu = document.querySelector(".nav-center");
+    const navRight = document.querySelector(".nav-right");
+
+    if (navMenu) navMenu.classList.toggle("active");
+    if (navRight) navRight.classList.toggle("active");
+  });
+
+  // Close menu when clicking a nav link
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest(".nav-center a");
+    if (!link) return;
+
+    const toggle = document.querySelector(".menu-toggle");
+    const navMenu = document.querySelector(".nav-center");
+    const navRight = document.querySelector(".nav-right");
+
+    if (toggle && toggle.classList.contains("active")) {
+      toggle.classList.remove("active");
+      toggle.setAttribute("aria-expanded", "false");
+      if (navMenu) navMenu.classList.remove("active");
+      if (navRight) navRight.classList.remove("active");
+    }
   });
 
   /* ================================================
-     3. CINEMATIC CAROUSEL (DRAG & TOUCH WITH INERTIA)
+     SCROLL PROGRESS BAR
      ================================================ */
-  const scroller = document.getElementById("innovation-scroller");
-  const dots = document.querySelectorAll(".cinema-dot");
-
-  if (scroller) {
-    let isDown = false;
-    let startX = 0;
-    let scrollLeft = 0;
-    let isDragging = false;
-
-    // Mouse drag
-    scroller.addEventListener("mousedown", (e) => {
-      isDown = true;
-      isDragging = false;
-      scroller.classList.add("active");
-      startX = e.pageX - scroller.offsetLeft;
-      scrollLeft = scroller.scrollLeft;
-    });
-
-    document.addEventListener("mouseup", () => {
-      if (!isDown) return;
-      isDown = false;
-      scroller.classList.remove("active");
-      setTimeout(() => { isDragging = false; }, 50);
-    });
-
-    scroller.addEventListener("mousemove", (e) => {
-      if (!isDown) return;
-      e.preventDefault();
-      isDragging = true;
-      const x = e.pageX - scroller.offsetLeft;
-      const walk = (x - startX) * 1.8;
-      scroller.scrollLeft = scrollLeft - walk;
-    });
-
-    // Prevent link clicks during drag
-    scroller.addEventListener("click", (e) => {
-      if (isDragging) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-    });
-
-    // Sync active dots with scroll position
-    const updateDots = () => {
-      const cardWidth = scroller.querySelector(".cinema-card")?.offsetWidth || 350;
-      const gap = 24;
-      const index = Math.round(scroller.scrollLeft / (cardWidth + gap));
-
-      dots.forEach((dot, i) => {
-        dot.classList.toggle("active", i === index);
-      });
+  const scrollProgress = document.getElementById("scrollProgress");
+  if (scrollProgress) {
+    const updateProgress = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      scrollProgress.style.width = progress + "%";
     };
 
-    scroller.addEventListener("scroll", updateDots, { passive: true });
-
-    // Click dot to scroll to card
-    dots.forEach((dot) => {
-      dot.addEventListener("click", () => {
-        const index = parseInt(dot.getAttribute("data-index"), 10);
-        const cardWidth = scroller.querySelector(".cinema-card")?.offsetWidth || 350;
-        const gap = 24;
-        scroller.scrollTo({
-          left: index * (cardWidth + gap),
-          behavior: "smooth"
-        });
-      });
-    });
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    updateProgress();
   }
 
   /* ================================================
-     4. ANIMATED COUNTERS (APPLE EASE PHYSICS)
+     ANIMATED COUNTERS — Stats section (Basel-style)
      ================================================ */
-  const statNumbers = document.querySelectorAll(".stat-number[data-count]");
+  const statNumbers = document.querySelectorAll(".stat-number");
 
   if (statNumbers.length && "IntersectionObserver" in window) {
     const animateCounter = (el) => {
-      const countAttr = el.getAttribute("data-count");
-      if (!countAttr) return;
-      const target = parseInt(countAttr, 10);
-      if (isNaN(target)) return;
-
+      const target = parseInt(el.getAttribute("data-count"), 10);
       const isOrdinal = el.classList.contains("ordinal");
-      const duration = 1600;
+      const duration = 1800;
       const start = performance.now();
 
       const step = (now) => {
         const elapsed = now - start;
         const progress = Math.min(elapsed / duration, 1);
-        // Spring ease out
-        const eased = 1 - Math.pow(1 - progress, 4);
+        // Ease out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
         const current = Math.round(eased * target);
 
         if (isOrdinal) {
@@ -171,64 +135,20 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         });
       },
-      { threshold: 0.4 }
+      { threshold: 0.5 }
     );
 
     statNumbers.forEach((el) => counterObserver.observe(el));
   }
 
   /* ================================================
-     5. HAMBURGER MENU (RESPONSIVE)
+     SMOOTH SCROLL for anchor links
      ================================================ */
-  document.addEventListener("click", (event) => {
-    const toggle = event.target.closest(".menu-toggle");
-    if (!toggle) return;
-
-    const isActive = toggle.classList.toggle("active");
-    toggle.setAttribute("aria-expanded", isActive);
-
-    const navMenu = document.querySelector(".nav-center");
-    if (navMenu) navMenu.classList.toggle("active");
-  });
-
-  document.addEventListener("click", (event) => {
-    const link = event.target.closest(".nav-center a");
-    if (!link) return;
-
-    const toggle = document.querySelector(".menu-toggle");
-    const navMenu = document.querySelector(".nav-center");
-
-    if (toggle && toggle.classList.contains("active")) {
-      toggle.classList.remove("active");
-      toggle.setAttribute("aria-expanded", "false");
-      if (navMenu) navMenu.classList.remove("active");
-    }
-  });
-
-  /* ================================================
-     6. SCROLL PROGRESS BAR
-     ================================================ */
-  const scrollProgress = document.getElementById("scrollProgress");
-  if (scrollProgress) {
-    const updateProgress = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      scrollProgress.style.width = progress + "%";
-    };
-
-    window.addEventListener("scroll", updateProgress, { passive: true });
-    updateProgress();
-  }
-
-  /* ================================================
-     7. SMOOTH SCROLL FOR INTERNAL LINKS
-     ================================================ */
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener("click", (e) => {
       const targetId = anchor.getAttribute("href");
       if (targetId === "#") return;
-
+      
       const target = document.querySelector(targetId);
       if (target) {
         e.preventDefault();
@@ -236,5 +156,4 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
-
 });

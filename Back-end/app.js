@@ -17,10 +17,16 @@ const app = express();
 app.use(helmet({
   crossOriginResourcePolicy: { policy: 'cross-origin' },
   contentSecurityPolicy: false,
+  xFrameOptions: false,
 }));
 
+app.use((req, res, next) => {
+  res.removeHeader('X-Frame-Options');
+  next();
+});
+
 app.use(cors({
-  origin: [env.FRONTEND_URL, 'http://localhost:5500', 'http://127.0.0.1:5500'],
+  origin: true,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
