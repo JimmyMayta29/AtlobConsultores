@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Revista Académica ATLOB — Publicaciones, recursos técnicos y comunidad profesional especializada en contabilidad, tributación y auditoría.">
-    <title>Revista Académica — Consultoría ATLOB</title>
+    <meta name="description" content="Laboral y Planillas — Revista ATLOB. Normativa sociolaboral, beneficios sociales, T-Registro y fiscalizaciones SUNAFIL.">
+    <title>Laboral y Planillas — Revista ATLOB</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,6 +15,7 @@
 
     <script defer src="../js/layout-loader.js"></script>
     <script defer src="../js/main.js"></script>
+    <script defer src="../js/api.js"></script>
     <script defer src="../js/revista.js"></script>
 </head>
 <body>
@@ -24,17 +25,15 @@
     <main>
         <section class="services-header" id="revista-inicio">
             <div class="container">
-                <span class="section-label reveal from-bottom">BLOG & ACTUALIDAD</span>
-                <h1 class="reveal from-bottom">Revista ATLOB</h1>
-                <p class="reveal from-bottom">Análisis fiscal, asientos contables y novedades normativas para estar siempre un paso adelante.</p>
+                <span class="section-label reveal from-bottom">CATEGORÍA</span>
+                <h1 class="reveal from-bottom">Laboral y Planillas</h1>
+                <p class="reveal from-bottom">Cálculo de liquidaciones, régimen laboral MYPE y general, y cumplimiento ante SUNAFIL.</p>
             </div>
         </section>
 
         <section class="magazine-container" id="revista-grid">
             <div class="container">
-                <!-- Featured Article Slot -->
-                <!-- FEATURED_HOOK_START -->
-                <!-- FEATURED_HOOK_END -->
+                <div id="featured-article-container"></div>
 
                 <nav class="magazine-nav reveal from-bottom" aria-label="Categorías del blog">
                     <a href="index.html" class="magazine-nav-pill">Todos</a>
@@ -44,11 +43,7 @@
                     <a href="laboral.html" class="magazine-nav-pill active">Laboral y Planillas</a>
                 </nav>
 
-                <div class="magazine-grid">
-                    <!-- POSTS_HOOK_START -->
-
-                    <!-- POSTS_HOOK_END -->
-                </div>
+                <div class="magazine-grid" id="articles-grid"></div>
             </div>
         </section>
     </main>

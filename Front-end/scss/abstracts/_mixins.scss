@@ -1,15 +1,38 @@
-/* MIXINS */
+/* ═══════════════════════════════════════════════
+   MIXINS — Apple Design System & Bento Layouts
+   ═══════════════════════════════════════════════ */
 
 @mixin flex-center {
-display: flex;
-justify-content: center;
-align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-@mixin boton-base {
-padding: 10px 20px;
-border-radius: $borde-radio;
-border: none;
-cursor: pointer;
-transition: 0.3s ease;
+@mixin glass-panel($bg: var(--glass-bg-light), $border: var(--glass-border-light)) {
+  background: $bg;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: $border;
+  box-shadow: var(--sombra-bento);
+}
+
+@mixin squircle-card($radius: var(--radius-bento)) {
+  border-radius: $radius;
+  overflow: hidden;
+  position: relative;
+  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
+}
+
+@mixin apple-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 26px;
+  border-radius: var(--radius-pill);
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.35s var(--ease-apple-spring);
 }

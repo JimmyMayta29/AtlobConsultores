@@ -3,8 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Revista Académica ATLOB — Publicaciones, recursos técnicos y comunidad profesional especializada en contabilidad, tributación y auditoría.">
-    <title>Revista Académica — Consultoría ATLOB</title>
+    <meta name="description" content="Normativa Tributaria — Revista ATLOB. Análisis de cronogramas SUNAT, reformas fiscales y cumplimiento tributario en Perú.">
+    <meta name="keywords" content="normativa tributaria peru, cronograma vencimientos sunat 2026, igv renta sire, consultoria atlob">
+    <title>Normativa Tributaria — Revista ATLOB</title>
+
+    <!-- Open Graph / Redes Sociales -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Normativa Tributaria — Revista ATLOB">
+    <meta property="og:description" content="Consulta fechas de vencimiento SUNAT 2026 y novedades tributarias para empresas.">
+    <meta property="og:image" content="../img/tech_cloud_1775951834123.png">
+    <meta property="og:url" content="https://consultoriaatlob.com/revista/tributario.html">
+    <meta name="twitter:card" content="summary_large_image">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +24,9 @@
 
     <script defer src="../js/layout-loader.js"></script>
     <script defer src="../js/main.js"></script>
+    <script defer src="../js/api.js"></script>
     <script defer src="../js/revista.js"></script>
+    <script defer src="../js/cronograma-sunat.js"></script>
 </head>
 <body>
     <div class="scroll-progress" id="scrollProgress"></div>
@@ -24,34 +35,54 @@
     <main>
         <section class="services-header" id="revista-inicio">
             <div class="container">
-                <span class="section-label reveal from-bottom">BLOG & ACTUALIDAD</span>
-                <h1 class="reveal from-bottom">Revista ATLOB</h1>
-                <p class="reveal from-bottom">Análisis fiscal, asientos contables y novedades normativas para estar siempre un paso adelante.</p>
+                <span class="section-label reveal from-bottom">CATEGORÍA</span>
+                <h1 class="reveal from-bottom">Normativa Tributaria</h1>
+                <p class="reveal from-bottom">Análisis fiscal, cronogramas de vencimientos y novedades tributarias de la SUNAT.</p>
+            </div>
+        </section>
+
+        <!-- WIDGET CRONOGRAMA SUNAT INTERACTIVO -->
+        <section class="sunat-widget-section reveal from-bottom">
+            <div class="container">
+                <div class="sunat-widget-card" id="cronograma-sunat-widget">
+                    <div class="sunat-widget-header">
+                        <div class="sunat-badge"><i class="fas fa-calendar-check"></i> HERRAMIENTA TRIBUTARIA</div>
+                        <h3>Consulta tu Vencimiento SUNAT 2026</h3>
+                        <p>Selecciona el <strong>último dígito de tu RUC</strong> para conocer tu fecha límite de declaración mensual:</p>
+                    </div>
+
+                    <div class="sunat-digits-bar">
+                        <button type="button" class="digit-btn active" data-digit="0">0</button>
+                        <button type="button" class="digit-btn" data-digit="1">1</button>
+                        <button type="button" class="digit-btn" data-digit="2">2</button>
+                        <button type="button" class="digit-btn" data-digit="3">3</button>
+                        <button type="button" class="digit-btn" data-digit="4">4</button>
+                        <button type="button" class="digit-btn" data-digit="5">5</button>
+                        <button type="button" class="digit-btn" data-digit="6">6</button>
+                        <button type="button" class="digit-btn" data-digit="7">7</button>
+                        <button type="button" class="digit-btn" data-digit="8">8</button>
+                        <button type="button" class="digit-btn" data-digit="9">9</button>
+                        <button type="button" class="digit-btn digit-btn--wide" data-digit="buenos">Buenos Contrib.</button>
+                    </div>
+
+                    <div class="sunat-result-box">
+                        <div class="sunat-res-item">
+                            <span class="res-tag" id="sunat-res-digito">Último dígito: 0</span>
+                            <h4 id="sunat-res-fecha">15 de cada mes</h4>
+                            <span class="res-status" id="sunat-res-estado">Vence pronto</span>
+                        </div>
+                        <div class="sunat-res-note">
+                            <i class="fas fa-info-circle"></i>
+                            <span id="sunat-res-alerta">Cargar SIRE y validar compras con 48h de anticipación para evitar multas.</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section class="magazine-container" id="revista-grid">
             <div class="container">
-                <!-- Featured Article Slot -->
-                <!-- FEATURED_HOOK_START -->
-
-                <section class="featured-post-container reveal from-bottom">
-                    <div class="featured-post-card">
-                        <div class="featured-image">
-                            <img src="../img/tech_cloud_1775951834123.png" alt="Destacado">
-                        </div>
-                        <div class="featured-content">
-                            <span class="post-category-badge">LO ÚLTIMO: TRIBUTARIO</span>
-                            <h2>Nuevo Cronograma de Vencimientos SUNAT 2026</h2>
-                            <p>Revisa las fechas críticas para la declaración del IGV y Renta mensual según el último dígito de tu RUC. Evita multas innecesarias.</p>
-                            <a href="./posts/cronograma-vencimientos-sunat-2026.html" class="btn-pill">
-                                <span>Leer ahora</span>
-                                <span class="btn-pill-arrow"><i class="fas fa-arrow-right"></i></span>
-                            </a>
-                        </div>
-                    </div>
-                </section>
-                <!-- FEATURED_HOOK_END -->
+                <div id="featured-article-container"></div>
 
                 <nav class="magazine-nav reveal from-bottom" aria-label="Categorías del blog">
                     <a href="index.html" class="magazine-nav-pill">Todos</a>
@@ -61,27 +92,7 @@
                     <a href="laboral.html" class="magazine-nav-pill">Laboral y Planillas</a>
                 </nav>
 
-                <div class="magazine-grid">
-                    <!-- POSTS_HOOK_START -->
-
-                    <article class="magazine-post-card reveal from-bottom" data-category="TRIBUTARIO">
-                        <div class="post-card-img">
-                            <span class="post-category-badge">TRIBUTARIO</span>
-                            <img src="../img/tech_cloud_1775951834123.png" alt="Nuevo Cronograma de Vencimientos SUNAT 2026" loading="lazy">
-                        </div>
-                        <div class="post-card-content">
-                            <div class="post-meta">
-                                <i class="far fa-calendar"></i> 20 Abril, 2026
-                                <span style="margin: 0 5px">•</span>
-                                <i class="far fa-clock"></i> 8 min
-                            </div>
-                            <h3 class="post-title"><a href="./posts/cronograma-vencimientos-sunat-2026.html">Nuevo Cronograma de Vencimientos SUNAT 2026</a></h3>
-                            <p class="post-excerpt">Revisa las fechas críticas para la declaración del IGV y Renta mensual según el último dígito de tu RUC. Evita multas innecesarias.</p>
-                            <a href="./posts/cronograma-vencimientos-sunat-2026.html" class="post-read-more">Ver detalles <i class="fas fa-long-arrow-alt-right"></i></a>
-                        </div>
-                    </article>
-                    <!-- POSTS_HOOK_END -->
-                </div>
+                <div class="magazine-grid" id="articles-grid"></div>
             </div>
         </section>
     </main>

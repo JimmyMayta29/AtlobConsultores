@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Auditoría y NIIF — Revista ATLOB. Control interno, estados financieros y aplicación de normas internacionales.">
-    <title>Auditoría y NIIF — Revista ATLOB</title>
+    <meta name="description" content="Revista Académica ATLOB — Publicaciones, recursos técnicos y comunidad profesional especializada en contabilidad, tributación y auditoría.">
+    <title>Revista Académica — Consultoría ATLOB</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,25 +25,32 @@
     <main>
         <section class="services-header" id="revista-inicio">
             <div class="container">
-                <span class="section-label reveal from-bottom">CATEGORÍA</span>
-                <h1 class="reveal from-bottom">Auditoría y NIIF</h1>
-                <p class="reveal from-bottom">Auditorías preventivas, control interno y aplicación de Normas Internacionales de Información Financiera.</p>
+                <span class="section-label reveal from-bottom">BLOG & ACTUALIDAD</span>
+                <h1 class="reveal from-bottom">Revista ATLOB</h1>
+                <p class="reveal from-bottom">Análisis fiscal, asientos contables y novedades normativas para estar siempre un paso adelante.</p>
             </div>
         </section>
 
         <section class="magazine-container" id="revista-grid">
             <div class="container">
+                <!-- Featured Article Slot -->
+                <!-- FEATURED_HOOK_START -->
                 <div id="featured-article-container"></div>
+                <!-- FEATURED_HOOK_END -->
 
                 <nav class="magazine-nav reveal from-bottom" aria-label="Categorías del blog">
-                    <a href="index.html" class="magazine-nav-pill">Todos</a>
+                    <a href="index.html" class="magazine-nav-pill active">Todos</a>
                     <a href="tributario.html" class="magazine-nav-pill">Normativa Tributaria</a>
                     <a href="contabilidad.html" class="magazine-nav-pill">Casos Prácticos</a>
-                    <a href="auditoria.html" class="magazine-nav-pill active">Auditoría y NIIF</a>
+                    <a href="auditoria.html" class="magazine-nav-pill">Auditoría y NIIF</a>
                     <a href="laboral.html" class="magazine-nav-pill">Laboral y Planillas</a>
                 </nav>
 
-                <div class="magazine-grid" id="articles-grid"></div>
+                <div class="magazine-grid" id="articles-grid">
+                    <!-- POSTS_HOOK_START -->
+                    <!-- Los artículos se cargarán dinámicamente aquí mediante JS -->
+                    <!-- POSTS_HOOK_END -->
+                </div>
             </div>
         </section>
     </main>

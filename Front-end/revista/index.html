@@ -3,8 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Revista Académica ATLOB — Publicaciones, recursos técnicos y comunidad profesional especializada en contabilidad, tributación y auditoría.">
+    <meta name="description" content="Revista Académica ATLOB — Publicaciones, recursos técnicos, cronograma SUNAT y artículos especializados en contabilidad, tributación y auditoría.">
+    <meta name="keywords" content="revista contable peru, cronograma sunat 2026, asientos contables pcge, auditoria niif, consultoria atlob blog">
     <title>Revista Académica — Consultoría ATLOB</title>
+
+    <!-- Open Graph / Redes Sociales -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Revista ATLOB — Publicaciones Contables y Tributarias">
+    <meta property="og:description" content="Análisis fiscal, asientos contables comentados y cronogramas tributarios SUNAT 2026.">
+    <meta property="og:image" content="../img/tech_cloud_1775951834123.png">
+    <meta property="og:url" content="https://consultoriaatlob.com/revista/index.html">
+    <meta name="twitter:card" content="summary_large_image">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,6 +26,7 @@
     <script defer src="../js/main.js"></script>
     <script defer src="../js/api.js"></script>
     <script defer src="../js/revista.js"></script>
+    <script defer src="../js/cronograma-sunat.js"></script>
 </head>
 <body>
     <div class="scroll-progress" id="scrollProgress"></div>
@@ -31,12 +41,50 @@
             </div>
         </section>
 
+        <!-- WIDGET CRONOGRAMA SUNAT INTERACTIVO -->
+        <section class="sunat-widget-section reveal from-bottom">
+            <div class="container">
+                <div class="sunat-widget-card" id="cronograma-sunat-widget">
+                    <div class="sunat-widget-header">
+                        <div class="sunat-badge"><i class="fas fa-calendar-check"></i> HERRAMIENTA TRIBUTARIA</div>
+                        <h3>Consulta tu Vencimiento SUNAT 2026</h3>
+                        <p>Selecciona el <strong>último dígito de tu RUC</strong> para conocer tu fecha límite de declaración mensual:</p>
+                    </div>
+
+                    <div class="sunat-digits-bar">
+                        <button type="button" class="digit-btn active" data-digit="0">0</button>
+                        <button type="button" class="digit-btn" data-digit="1">1</button>
+                        <button type="button" class="digit-btn" data-digit="2">2</button>
+                        <button type="button" class="digit-btn" data-digit="3">3</button>
+                        <button type="button" class="digit-btn" data-digit="4">4</button>
+                        <button type="button" class="digit-btn" data-digit="5">5</button>
+                        <button type="button" class="digit-btn" data-digit="6">6</button>
+                        <button type="button" class="digit-btn" data-digit="7">7</button>
+                        <button type="button" class="digit-btn" data-digit="8">8</button>
+                        <button type="button" class="digit-btn" data-digit="9">9</button>
+                        <button type="button" class="digit-btn digit-btn--wide" data-digit="buenos">Buenos Contrib.</button>
+                    </div>
+
+                    <div class="sunat-result-box">
+                        <div class="sunat-res-item">
+                            <span class="res-tag" id="sunat-res-digito">Último dígito: 0</span>
+                            <h4 id="sunat-res-fecha">15 de cada mes</h4>
+                            <span class="res-status" id="sunat-res-estado">Vence pronto</span>
+                        </div>
+                        <div class="sunat-res-note">
+                            <i class="fas fa-info-circle"></i>
+                            <span id="sunat-res-alerta">Cargar SIRE y validar compras con 48h de anticipación para evitar multas.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTENIDO PRINCIPAL DE LA REVISTA -->
         <section class="magazine-container" id="revista-grid">
             <div class="container">
                 <!-- Featured Article Slot -->
-                <!-- FEATURED_HOOK_START -->
                 <div id="featured-article-container"></div>
-                <!-- FEATURED_HOOK_END -->
 
                 <nav class="magazine-nav reveal from-bottom" aria-label="Categorías del blog">
                     <a href="index.html" class="magazine-nav-pill active">Todos</a>
@@ -46,11 +94,7 @@
                     <a href="laboral.html" class="magazine-nav-pill">Laboral y Planillas</a>
                 </nav>
 
-                <div class="magazine-grid" id="articles-grid">
-                    <!-- POSTS_HOOK_START -->
-                    <!-- Los artículos se cargarán dinámicamente aquí mediante JS -->
-                    <!-- POSTS_HOOK_END -->
-                </div>
+                <div class="magazine-grid" id="articles-grid"></div>
             </div>
         </section>
     </main>
