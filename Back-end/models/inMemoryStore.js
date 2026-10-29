@@ -154,7 +154,21 @@ class ArticleInstance {
 
   get author() {
     const u = users.find(x => x.id === this.authorId);
-    return u ? { id: u.id, name: u.name, email: u.email } : null;
+    return u ? { 
+      id: u.id, 
+      name: u.name, 
+      email: u.email,
+      role: u.role || 'Especialista Tributario',
+      avatar: u.avatar || '/img/avatar-default.svg',
+      bio: u.bio || 'Contador Público Colegiado con amplia experiencia en asesoría tributaria, auditoría financiera y aplicación del PCGE para empresas en el Perú.',
+    } : {
+      id: 1,
+      name: 'Equipo Editorial ATLOB',
+      email: 'editorial@atlob.pe',
+      role: 'Consultores Contables',
+      avatar: '/img/avatar-default.svg',
+      bio: 'Equipo multidisciplinario de contadores y asesores tributarios dedicados al análisis y difusión de la normativa contable en el Perú.',
+    };
   }
 
   get category() {
@@ -168,6 +182,15 @@ class ArticleInstance {
   }
 
   get dataValues() {
+    return {
+      ...this,
+      author: this.author,
+      category: this.category,
+      tags: this.tags,
+    };
+  }
+
+  toJSON() {
     return {
       ...this,
       author: this.author,
@@ -667,11 +690,134 @@ La empresa **Consultoría ATLOB S.A.C.** adquiere una Laptop marca Lenovo por S/
     });
     articles.push(sampleArticle2);
 
+    const sampleArticle3 = new ArticleInstance({
+      title: 'Reforma Tributaria 2026: Cambios Clave en IGV y Bancarización',
+      slug: 'reforma-tributaria-igv-bancarizacion-2026',
+      content: `Las modificaciones al reglamento de la Ley del IGV y a la Ley para la Lucha contra la Evasión y para la Formalización de la Economía introducen exigencias más estrictas sobre los medios de pago bancarizados y sustento de crédito fiscal.
+
+## 1. Medios de Pago Válidos
+Para transacciones superiores a S/ 2,000 o US$ 500 es mandatorio canalizar el pago mediante entidades del sistema financiero. El incumplimiento acarrea el desconocimiento del costo o gasto y del crédito fiscal del IGV.
+
+## 2. Recomendaciones de Auditoría Preventiva
+Conserva vouchers y estados de cuenta vinculados cronológicamente al registro de compras electrónico en SIRE.`,
+      contentHtml: `<p>Las modificaciones al reglamento de la Ley del IGV y a la Ley para la Lucha contra la Evasión y para la Formalización de la Economía introducen exigencias más estrictas sobre los medios de pago bancarizados y sustento de crédito fiscal.</p>
+<h2>1. Medios de Pago Válidos</h2>
+<p>Para transacciones superiores a S/ 2,000 o US$ 500 es mandatorio canalizar el pago mediante entidades del sistema financiero. El incumplimiento acarrea el desconocimiento del costo o gasto y del crédito fiscal del IGV.</p>
+<h2>2. Recomendaciones de Auditoría Preventiva</h2>
+<p>Conserva vouchers y estados de cuenta vinculados cronológicamente al registro de compras electrónico en SIRE.</p>`,
+      excerpt: 'Conoce los nuevos criterios de la SUNAT sobre bancarización obligatoria y los requisitos para no perder el crédito fiscal del IGV.',
+      featuredImage: '/img/tech_intelligence_1775951847405.png',
+      thumbnailImage: '/img/tech_intelligence_1775951847405.png',
+      status: 'published',
+      isFeatured: false,
+      readTime: 5,
+      views: 730,
+      publishedAt: new Date('2026-04-18'),
+      authorId: 1,
+      categoryId: 1, // Tributario
+    });
+    articles.push(sampleArticle3);
+
+    const sampleArticle4 = new ArticleInstance({
+      title: 'Cierre Contable Anual y Conciliación con el Balance de Comprobación',
+      slug: 'cierre-contable-balance-comprobacion',
+      content: `El proceso de cierre del ejercicio económico requiere la regularización de cuentas de gestión patrimoniales y la correcta determinación del resultado antes y después de participaciones e impuesto a la renta.
+
+## Pasos Metodológicos
+1. Ajuste de diferencias de cambio según NIC 21.
+2. Estimación de cobranza dudosa y desvalorización de inventarios (NIC 2).
+3. Asientos de refundición de las cuentas del elemento 6, 7 y 8 del PCGE.`,
+      contentHtml: `<p>El proceso de cierre del ejercicio económico requiere la regularización de cuentas de gestión patrimoniales y la correcta determinación del resultado antes y después de participaciones e impuesto a la renta.</p>
+<h2>Pasos Metodológicos</h2>
+<ol>
+<li>Ajuste de diferencias de cambio según NIC 21.</li>
+<li>Estimación de cobranza dudosa y desvalorización de inventarios (NIC 2).</li>
+<li>Asientos de refundición de las cuentas del elemento 6, 7 y 8 del PCGE.</li>
+</ol>`,
+      excerpt: 'Guía metodológica para elaborar el balance de comprobación y formular los asientos de cierre contable conforme al PCGE.',
+      featuredImage: '/img/tech_security_1775951860932.png',
+      thumbnailImage: '/img/tech_security_1775951860932.png',
+      status: 'published',
+      isFeatured: false,
+      readTime: 7,
+      views: 615,
+      publishedAt: new Date('2026-04-10'),
+      authorId: 1,
+      categoryId: 2, // Contabilidad
+    });
+    articles.push(sampleArticle4);
+
+    const sampleArticle5 = new ArticleInstance({
+      title: 'Cálculo de Beneficios Sociales: CTS y Gratificaciones en MYPE y Régimen General',
+      slug: 'calculo-beneficios-sociales-cts-gratificaciones',
+      content: `Calcular correctamente la Compensación por Tiempo de Servicios (CTS) y las gratificaciones legales es fundamental para evitar multas de la SUNAFIL y asegurar la paz laboral en la empresa.
+
+## Base de Cálculo y Remuneración Computable
+Se considera la remuneración básica percibida más asignación familiar y promedio de conceptos variables o imprecisos percibidos al menos 3 veces en el semestre.`,
+      contentHtml: `<p>Calcular correctamente la Compensación por Tiempo de Servicios (CTS) y las gratificaciones legales es fundamental para evitar multas de la SUNAFIL y asegurar la paz laboral en la empresa.</p>
+<h2>Base de Cálculo y Remuneración Computable</h2>
+<p>Se considera la remuneración básica percibida más asignación familiar y promedio de conceptos variables o imprecisos percibidos al menos 3 veces en el semestre.</p>`,
+      excerpt: 'Aprende a liquidar la CTS y gratificaciones con fórmulas prácticas y diferencias clave entre Micro, Pequeña y Gran Empresa.',
+      featuredImage: '/img/hero_services_1775954528898.png',
+      thumbnailImage: '/img/hero_services_1775954528898.png',
+      status: 'published',
+      isFeatured: false,
+      readTime: 6,
+      views: 940,
+      publishedAt: new Date('2026-04-05'),
+      authorId: 1,
+      categoryId: 4, // Laboral
+    });
+    articles.push(sampleArticle5);
+
+    const sampleArticle6 = new ArticleInstance({
+      title: 'Auditoría Tributaria Preventiva: Inconsistencias Frecuentes en el SIRE SUNAT',
+      slug: 'auditoria-tributaria-preventiva-sire-sunat',
+      content: `La implementación del Sistema Integrado de Registros Electrónicos (SIRE) ha permitido a la SUNAT contrastar en tiempo real los comprobantes emitidos contra las compras y ventas declaradas por los contribuyentes.
+
+## Puntos Críticos a Auditar
+* Comprobantes de compras anotados fuera de plazo.
+* Notas de crédito no aplicadas o duplicadas en el RVIE.
+* Inconsistencias en el tipo de cambio SUNAT en compras en dólares.`,
+      contentHtml: `<p>La implementación del Sistema Integrado de Registros Electrónicos (SIRE) ha permitido a la SUNAT contrastar en tiempo real los comprobantes emitidos contra las compras y ventas declaradas por los contribuyentes.</p>
+<h2>Puntos Críticos a Auditar</h2>
+<ul>
+<li>Comprobantes de compras anotados fuera de plazo.</li>
+<li>Notas de crédito no aplicadas o duplicadas en el RVIE.</li>
+<li>Inconsistencias en el tipo de cambio SUNAT en compras en dólares.</li>
+</ul>`,
+      excerpt: 'Detecta y corrige discrepancias entre el RVIE/RCE del SIRE y tu contabilidad antes de que la SUNAT emita cartas inductivas.',
+      featuredImage: '/img/hero_about_us_1775954475087.png',
+      thumbnailImage: '/img/hero_about_us_1775954475087.png',
+      status: 'published',
+      isFeatured: false,
+      readTime: 5,
+      views: 1105,
+      publishedAt: new Date('2026-04-02'),
+      authorId: 1,
+      categoryId: 3, // Auditoría
+    });
+    articles.push(sampleArticle6);
+
     // Link tags to sample articles
     articleTags.push({ article_id: sampleArticle1.id, tag_id: 1 }); // SUNAT
     articleTags.push({ article_id: sampleArticle1.id, tag_id: 2 }); // IGV
+    articleTags.push({ article_id: sampleArticle1.id, tag_id: 10 }); // Multas
     articleTags.push({ article_id: sampleArticle2.id, tag_id: 5 }); // PCGE
     articleTags.push({ article_id: sampleArticle2.id, tag_id: 9 }); // Casos Prácticos
+    articleTags.push({ article_id: sampleArticle2.id, tag_id: 3 }); // Renta
+    articleTags.push({ article_id: sampleArticle3.id, tag_id: 1 }); // SUNAT
+    articleTags.push({ article_id: sampleArticle3.id, tag_id: 2 }); // IGV
+    articleTags.push({ article_id: sampleArticle3.id, tag_id: 10 }); // Multas
+    articleTags.push({ article_id: sampleArticle4.id, tag_id: 5 }); // PCGE
+    articleTags.push({ article_id: sampleArticle4.id, tag_id: 4 }); // NIIF
+    articleTags.push({ article_id: sampleArticle4.id, tag_id: 9 }); // Casos Prácticos
+    articleTags.push({ article_id: sampleArticle5.id, tag_id: 6 }); // Planillas
+    articleTags.push({ article_id: sampleArticle5.id, tag_id: 7 }); // PLAME
+    articleTags.push({ article_id: sampleArticle5.id, tag_id: 9 }); // Casos Prácticos
+    articleTags.push({ article_id: sampleArticle6.id, tag_id: 1 }); // SUNAT
+    articleTags.push({ article_id: sampleArticle6.id, tag_id: 10 }); // Multas
+    articleTags.push({ article_id: sampleArticle6.id, tag_id: 9 }); // Casos Prácticos
   }
 }
 

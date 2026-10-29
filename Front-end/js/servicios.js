@@ -61,12 +61,83 @@ const servicesData = {
     ]
   },
   "auditoria": {
-    title: "Auditoría Financiera",
+    title: "Auditoría Financiera y Preventiva",
     description: "Evaluamos rigurosamente sus procesos contables y financieros para garantizar transparencia ante socios y cumplimiento normativo ante entidades fiscalizadoras.",
     list: [
-      "Auditoría de estados financieros",
-      "Control interno operativo",
-      "Revisión y prevención pre-fiscalización SUNAT"
+      "Auditoría de estados financieros bajo NIIF",
+      "Control interno operativo y arqueos",
+      "Revisión y prevención pre-fiscalización SUNAT",
+      "Identificación de contingencias y pasivos ocultos"
+    ]
+  },
+  "declaraciones-sunat": {
+    title: "Declaraciones & Cumplimiento SUNAT",
+    description: "Presentación puntual de obligaciones tributarias para empresas en régimen MYPE y General.",
+    list: [
+      "Declaración mensual PDT 621 / Declara Fácil",
+      "Liquidación y presentación del Impuesto a la Renta anual",
+      "Validación de compras y ventas en el SIRE",
+      "Atención de esquelas y cartas inductivas"
+    ]
+  },
+  "asesoria-empresarial": {
+    title: "Asesoría Empresarial & Societaria",
+    description: "Acompañamiento integral para la estructuración y formalización de sociedades mercantiles.",
+    list: [
+      "Constitución e inscripción registral en SUNARP",
+      "Elección de régimen societario (S.A.C., S.R.L., E.I.R.L.)",
+      "Elaboración de estatutos y libros de actas",
+      "Planeamiento tributario desde el día uno"
+    ]
+  },
+  "analisis-financiero": {
+    title: "Análisis Financiero Estratégico",
+    description: "Diagnóstico profundo de los balances y estados de resultados de su organización.",
+    list: [
+      "Ratios de liquidez, solvencia y endeudamiento",
+      "Cálculo del ciclo de conversión de efectivo",
+      "Determinación del punto de equilibrio operativo",
+      "Evaluación del retorno sobre inversión (ROI/ROE)"
+    ]
+  },
+  "planeamiento-financiero": {
+    title: "Planeamiento Financiero & Presupuestos",
+    description: "Herramientas de previsión y control financiero para respaldar el crecimiento empresarial.",
+    list: [
+      "Diseño de presupuesto maestro anual",
+      "Control de desviaciones presupuestales mes a mes",
+      "Políticas de cobro a clientes y crédito comercial",
+      "Estructuración de costos fijos y variables"
+    ]
+  },
+  "dashboards-kpi": {
+    title: "Dashboards de Rentabilidad & Márgenes",
+    description: "Inteligencia de negocios adaptada a directores y gerentes generales.",
+    list: [
+      "Visualización en tiempo real de Margen Bruto y EBITDA",
+      "Comparativas históricas y estacionales",
+      "Acceso web seguro multidispositivo",
+      "Alertas automáticas ante variaciones críticas"
+    ]
+  },
+  "control-gastos": {
+    title: "Control de Gastos & Costos Operativos",
+    description: "Monitoreo detallado de egresos por centro de costo y unidad de negocio.",
+    list: [
+      "Clasificación automática de gastos fijos y variables",
+      "Seguimiento de compras y órdenes de servicio",
+      "Detección de sobrecostos o gastos hormiga",
+      "Reportes ejecutivos para comités de gerencia"
+    ]
+  },
+  "proyecciones-flujo": {
+    title: "Proyecciones & Flujo de Caja en Tiempo Real",
+    description: "Simulaciones paramétricas para anticipar requerimientos de liquidez y financiamiento.",
+    list: [
+      "Flujo de caja libre a 6 y 12 meses",
+      "Escenarios conservador, base y optimista",
+      "Previsión de cronograma de pagos tributarios y laborales",
+      "Estrategias de amortización y financiamiento"
     ]
   },
   "reportes": {

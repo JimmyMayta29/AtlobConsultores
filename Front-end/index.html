@@ -3,22 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Consultoría contable y financiera con enfoque tecnológico. Auditoría, asesoría tributaria, gestión laboral, outsourcing contable y revista académica.">
-    <meta property="og:title" content="Consultoría ATLOB — Soluciones Contables Estratégicas">
-    <meta property="og:description" content="Consultoría contable y financiera con enfoque tecnológico. Auditoría, asesoría tributaria, gestión laboral, outsourcing contable y revista académica.">
-    <meta name="keywords" content="consultoría contable, asesoría tributaria, auditoría financiera, outsourcing contable, Jauja, Perú">
-    <title>Consultoría ATLOB — Soluciones Contables Estratégicas</title>
+    <meta name="description" content="Atlob Consultores — Soluciones contables, asesoría tributaria SUNAT, auditoría y dashboards financieros interactivos en Perú. Control de KPIs, flujo de caja y rentabilidad empresarial.">
+    <meta name="keywords" content="estudio contable, consultoría financiera, asesoría tributaria SUNAT, dashboards financieros, calculadora IGV, cronograma SUNAT 2026, outsourcing contable Perú">
+    <link rel="canonical" href="/">
+    <title>Atlob Consultores — Soluciones Contables, Auditoría & Inteligencia Financiera</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" type="image/png" href="/favicon.png">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Atlob Consultores — Soluciones Contables, Auditoría & Inteligencia Financiera">
+    <meta property="og:description" content="Servicios contables, tributarios, dashboards de KPIs interactivos, calendario SUNAT y calculadora de IGV para empresas en Perú.">
+    <meta property="og:image" content="/img/og-preview.png">
+    <meta property="og:url" content="/">
+    <meta property="og:site_name" content="Atlob Consultores">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Atlob Consultores — Soluciones Contables & Financieras">
+    <meta name="twitter:description" content="Auditoría, asesoría tributaria, gestión laboral y dashboards financieros en Perú.">
+    <meta name="twitter:image" content="/img/og-preview.png">
+
+    <!-- RSS Alternate Link -->
+    <link rel="alternate" type="application/rss+xml" title="Revista ATLOB RSS Feed" href="/rss.xml">
+
+    <!-- Schema.org JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AccountingService",
+      "name": "Atlob Consultores — Consultoría y Asesoría ATLOB S.A.C.",
+      "alternateName": "Atlob Consultores",
+      "url": "https://consultoriaatlob.pe",
+      "logo": "https://consultoriaatlob.pe/favicon.svg",
+      "image": "https://consultoriaatlob.pe/img/og-preview.png",
+      "description": "Firma contable y financiera con enfoque tecnológico. Auditoría, asesoría tributaria SUNAT, gestión laboral de planillas, dashboards financieros interactivos y revista académica.",
+      "telephone": "+51940781298",
+      "email": "contacto@atlob.pe",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Jr. Mateo Pumacahua 355, Óvalo de Cormis",
+        "addressLocality": "Jauja",
+        "addressRegion": "Junín",
+        "postalCode": "12601",
+        "addressCountry": "PE"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "08:30",
+          "closes": "18:30"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Saturday"],
+          "opens": "09:00",
+          "closes": "13:00"
+        }
+      ],
+      "priceRange": "$$"
+    }
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" as="style">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/main.css?v=2.2">
 
+    <!-- Chart.js CDN para gráficos interactivos del dashboard -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script defer src="./js/cookie-consent.js"></script>
+    <script defer src="./js/analytics.js"></script>
     <script defer src="./js/layout-loader.js"></script>
-    <script defer src="./js/main.js"></script>
+    <script defer src="./js/main.js?v=2.2"></script>
+    <script defer src="./js/dashboard-demo.js"></script>
 </head>
 <body>
     <!-- Scroll Progress Bar -->
@@ -31,16 +96,20 @@
     <section class="hero" id="hero">
         <div class="hero-inner">
             <div class="hero-title-block">
-                <h1>Soluciones<br>contables<br>estratégicas</h1>
+                <h1>Soluciones<br>contables &<br>financieras</h1>
             </div>
             <div class="hero-info-block">
                 <p class="hero-subtitle">
-                    En <strong>Consultoría Atlob</strong> impulsamos la contabilidad financiera de tu empresa mediante auditoría, asesoría tributaria, gestión laboral y outsourcing contable.
+                    En <strong>Atlob Consultores</strong> impulsamos la salud financiera de tu empresa mediante asesoría contable, auditoría preventiva, planificación fiscal y dashboards ejecutivos en tiempo real.
                 </p>
                 <div class="hero-buttons">
-                    <a href="./servicios.html" class="btn-pill" id="btn-servicios">
+                    <a href="#servicios" class="btn-pill" id="btn-servicios">
                         <span>Nuestros Servicios</span>
-                        <span class="btn-pill-arrow"><i class="fas fa-arrow-up-right-from-square"></i></span>
+                        <span class="btn-pill-arrow"><i class="fas fa-arrow-down"></i></span>
+                    </a>
+                    <a href="#dashboard-demo" class="btn-pill" style="background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.35); color: var(--blanco-puro);" id="btn-demo-hero">
+                        <span><i class="fas fa-chart-pie" style="color: var(--amarillo-acento); margin-right: 6px;"></i> Demo Dashboard</span>
+                        <span class="btn-pill-arrow"><i class="fas fa-arrow-right"></i></span>
                     </a>
                 </div>
             </div>
@@ -68,167 +137,585 @@
             </div>
         </section>
 
-        <!-- SERVICES — Basel "Welcome to Supercluster" style cards -->
-        <section class="services-showcase" id="services">
+        <!-- ═══════════════════════════════════════════════════════
+             TAREA 1: SERVICIOS REORGANIZADOS EN 3 BLOQUES
+             ═══════════════════════════════════════════════════════ -->
+        <section class="services-section-wrapper" id="servicios">
             <div class="container">
-                <div class="showcase-header reveal from-bottom">
-                    <span class="section-label">NUESTRAS ÁREAS DE ESPECIALIZACIÓN</span>
-                    <h2>Servicios que impulsan tu empresa</h2>
+                <div class="showcase-header reveal from-bottom" style="text-align: center; margin-bottom: 50px;">
+                    <span class="section-badge">ÁREAS DE ESPECIALIZACIÓN PROFESIONAL</span>
+                    <h2 class="section-title">Servicios que impulsan la solidez de tu empresa</h2>
+                    <p class="section-subtitle">
+                        Estructura integral de consultoría contable, tributaria y estratégica con enfoque preventivo, rigor normativo y tecnología para la toma de decisiones gerenciales.
+                    </p>
                 </div>
-                <div class="showcase-grid">
-                    <!-- Card grande izq -->
-                    <a href="./servicios.html" class="showcase-card showcase-card--large reveal from-left">
-                        <img src="./iconos/asesoria-contable.jpg" alt="Auditoría Financiera" loading="lazy">
-                        <div class="showcase-card__content">
-                            <span class="showcase-card__tag">AUDITORÍA</span>
-                            <h3>Revisión integral de estados financieros</h3>
+
+                <!-- BLOQUE 1: Servicios Contables y Tributarios (Acordeón Horizontal Dinámico) -->
+                <div class="services-block reveal from-bottom">
+                    <div class="services-block-header">
+                        <div class="services-block-header-title">
+                            <h3><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i> 1. Servicios Contables y Tributarios</h3>
+                            <p>Gestión contable integral, cumplimiento fiscal estricto y prevención de contingencias ante SUNAT.</p>
                         </div>
-                        <span class="showcase-card__arrow"><i class="fas fa-arrow-right"></i></span>
-                    </a>
-                    <!-- Card grande der -->
-                    <a href="./servicios.html" class="showcase-card showcase-card--large reveal from-right">
-                        <img src="./iconos/tributaria.jpg" alt="Asesoría Tributaria" loading="lazy">
-                        <div class="showcase-card__content">
-                            <span class="showcase-card__tag">TRIBUTARIA</span>
-                            <h3>Planificación fiscal estratégica</h3>
-                            <p class="showcase-card__desc">Optimizamos tu carga impositiva dentro del marco legal, con planificación tributaria y cumplimiento ante SUNAT.</p>
+                        <a href="./servicios.html" class="service-card-link" style="color: var(--azul-claro);">
+                            <span>Ver detalles normativos</span> <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="services-accordion-wrapper" role="region" aria-label="Servicios Contables y Tributarios">
+                        <!-- Panel 1: Contabilidad Integral & Outsourcing (Activo por defecto) -->
+                        <div class="service-accordion-panel is-active" tabindex="0" data-service="contabilidad-integral" aria-label="Contabilidad Integral & Outsourcing">
+                            <!-- Estado Colapsado Vertical (Fondo blanco, chip celeste, texto vertical) -->
+                            <div class="accordion-collapsed-content" aria-hidden="true">
+                                <div class="accordion-panel-chip">
+                                    <i class="fas fa-book-open" aria-hidden="true"></i>
+                                </div>
+                                <span class="accordion-vertical-title">Contabilidad Integral & Outsourcing</span>
+                            </div>
+
+                            <!-- Estado Expandido (Fondo azul noche, vitrina con icono dorado, tags, botón naranja) -->
+                            <div class="accordion-expanded-content">
+                                <div class="accordion-showcase-box">
+                                    <svg class="accordion-showcase-icon" width="68" height="68" viewBox="0 0 24 24" fill="none" stroke="#f5b72e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                                    </svg>
+                                </div>
+                                <div class="accordion-expanded-body">
+                                    <h4>Contabilidad Integral & Outsourcing</h4>
+                                    <p>Registro sistemático de operaciones, conciliaciones bancarias, libros electrónicos (PLE/SIRE) y elaboración de balances contables mensuales confiables.</p>
+                                    <div class="service-tags-list">
+                                        <span class="service-tag-pill">Conciliaciones</span>
+                                        <span class="service-tag-pill">PLE / SIRE</span>
+                                        <span class="service-tag-pill">Balances</span>
+                                    </div>
+                                    <div class="service-box-card__footer">
+                                        <a href="./servicios.html#outsourcing-contable" class="service-card-link">
+                                            <span>Ver más</span> <i class="fas fa-arrow-right"></i>
+                                        </a>
+                                        <a href="./contacto.html#formulario" class="btn-solicitar-orange" title="Solicitar información de este servicio">
+                                            <span>Solicitar</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <span class="showcase-card__arrow"><i class="fas fa-arrow-right"></i></span>
-                    </a>
-                    <!-- Card mediana izq -->
-                    <a href="./servicios.html" class="showcase-card reveal from-left">
-                        <img src="./iconos/laboral.jpg" alt="Gestión Laboral" loading="lazy">
-                        <div class="showcase-card__content">
-                            <span class="showcase-card__tag">LABORAL</span>
-                            <h3>Gestión integral de planillas</h3>
+
+                        <!-- Panel 2: Declaraciones & Cumplimiento SUNAT -->
+                        <div class="service-accordion-panel" tabindex="0" data-service="declaraciones-sunat" aria-label="Declaraciones & Cumplimiento SUNAT">
+                            <div class="accordion-collapsed-content" aria-hidden="true">
+                                <div class="accordion-panel-chip">
+                                    <i class="fas fa-file-invoice" aria-hidden="true"></i>
+                                </div>
+                                <span class="accordion-vertical-title">Declaraciones & Cumplimiento SUNAT</span>
+                            </div>
+
+                            <div class="accordion-expanded-content">
+                                <div class="accordion-showcase-box">
+                                    <svg class="accordion-showcase-icon" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#f5b72e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                        <polyline points="14 2 14 8 20 8"/>
+                                        <line x1="16" y1="13" x2="8" y2="13"/>
+                                        <line x1="16" y1="17" x2="8" y2="17"/>
+                                        <line x1="10" y1="9" x2="8" y2="9"/>
+                                    </svg>
+                                </div>
+                                <div class="accordion-expanded-body">
+                                    <h4>Declaraciones & Cumplimiento SUNAT</h4>
+                                    <p>Determinación mensual de IGV y Renta (PDT 621 / Declara Fácil), liquidación anual del Impuesto a la Renta y auditoría de comprobantes electrónicos.</p>
+                                    <div class="service-tags-list">
+                                        <span class="service-tag-pill">PDT 621 / Declara Fácil</span>
+                                        <span class="service-tag-pill">Renta Anual</span>
+                                        <span class="service-tag-pill">Auditoría Fiscal</span>
+                                    </div>
+                                    <div class="service-box-card__footer">
+                                        <a href="./servicios.html#asesoria-tributaria" class="service-card-link">
+                                            <span>Ver más</span> <i class="fas fa-arrow-right"></i>
+                                        </a>
+                                        <a href="./contacto.html#formulario" class="btn-solicitar-orange" title="Solicitar información de este servicio">
+                                            <span>Solicitar</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <span class="showcase-card__arrow"><i class="fas fa-arrow-right"></i></span>
-                    </a>
-                    <!-- Card mediana der -->
-                    <a href="./servicios.html" class="showcase-card reveal from-right">
-                        <img src="./iconos/outsourcing1.jpg" alt="Outsourcing Contable" loading="lazy">
-                        <div class="showcase-card__content">
-                            <span class="showcase-card__tag">OUTSOURCING</span>
-                            <h3>Externalización contable con reportes automatizados</h3>
+
+                        <!-- Panel 3: Gestión Laboral & Planillas (PLAME) -->
+                        <div class="service-accordion-panel" tabindex="0" data-service="gestion-laboral" aria-label="Gestión Laboral & Planillas (PLAME)">
+                            <div class="accordion-collapsed-content" aria-hidden="true">
+                                <div class="accordion-panel-chip">
+                                    <i class="fas fa-users" aria-hidden="true"></i>
+                                </div>
+                                <span class="accordion-vertical-title">Gestión Laboral & Planillas (PLAME)</span>
+                            </div>
+
+                            <div class="accordion-expanded-content">
+                                <div class="accordion-showcase-box">
+                                    <svg class="accordion-showcase-icon" width="68" height="68" viewBox="0 0 24 24" fill="none" stroke="#f5b72e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                        <circle cx="9" cy="7" r="4"/>
+                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                                    </svg>
+                                </div>
+                                <div class="accordion-expanded-body">
+                                    <h4>Gestión Laboral & Planillas (PLAME)</h4>
+                                    <p>Cálculo de nóminas quincenales y mensuales, liquidación de beneficios sociales (CTS, gratificaciones, vacaciones), T-Registro y soporte ante fiscalizaciones SUNAFIL.</p>
+                                    <div class="service-tags-list">
+                                        <span class="service-tag-pill">CTS</span>
+                                        <span class="service-tag-pill">Gratificaciones</span>
+                                        <span class="service-tag-pill">T-Registro</span>
+                                    </div>
+                                    <div class="service-box-card__footer">
+                                        <a href="./servicios.html#outsourcing-laboral" class="service-card-link">
+                                            <span>Ver más</span> <i class="fas fa-arrow-right"></i>
+                                        </a>
+                                        <a href="./contacto.html#formulario" class="btn-solicitar-orange" title="Solicitar información de este servicio">
+                                            <span>Solicitar</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <span class="showcase-card__arrow"><i class="fas fa-arrow-right"></i></span>
-                    </a>
+
+                        <!-- Panel 4: Auditoría Contable y Preventiva -->
+                        <div class="service-accordion-panel" tabindex="0" data-service="auditoria-contable" aria-label="Auditoría Contable y Preventiva">
+                            <div class="accordion-collapsed-content" aria-hidden="true">
+                                <div class="accordion-panel-chip">
+                                    <i class="fas fa-search-dollar" aria-hidden="true"></i>
+                                </div>
+                                <span class="accordion-vertical-title">Auditoría Contable y Preventiva</span>
+                            </div>
+
+                            <div class="accordion-expanded-content">
+                                <div class="accordion-showcase-box">
+                                    <svg class="accordion-showcase-icon" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#f5b72e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <circle cx="10.5" cy="10.5" r="7.5"/>
+                                        <line x1="21" y1="21" x2="15.8" y2="15.8"/>
+                                        <path d="M10.5 6.5v8"/>
+                                        <path d="M8.5 8.5h3.5a1 1 0 0 1 0 2H9a1 1 0 0 0 0 2h3.5"/>
+                                    </svg>
+                                </div>
+                                <div class="accordion-expanded-body">
+                                    <h4>Auditoría Contable y Preventiva</h4>
+                                    <p>Examen riguroso de estados financieros bajo NIIF y auditorías tributarias preventivas para blindar la empresa contra multas y reparos fiscales.</p>
+                                    <div class="service-tags-list">
+                                        <span class="service-tag-pill">Auditoría Tributaria</span>
+                                        <span class="service-tag-pill">Examen NIIF</span>
+                                        <span class="service-tag-pill">Blindaje Fiscal</span>
+                                    </div>
+                                    <div class="service-box-card__footer">
+                                        <a href="./servicios.html#auditoria" class="service-card-link">
+                                            <span>Ver más</span> <i class="fas fa-arrow-right"></i>
+                                        </a>
+                                        <a href="./contacto.html#formulario" class="btn-solicitar-orange" title="Solicitar información de este servicio">
+                                            <span>Solicitar</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- BLOQUE 2: Consultoría y Finanzas (Tarjetas con Cabecera Orgánica y Acentos Dorados) -->
+                <div class="services-block reveal from-bottom">
+                    <div class="services-block-header">
+                        <div class="services-block-header-title">
+                            <h3><i class="fas fa-briefcase" aria-hidden="true"></i> 2. Consultoría y Finanzas</h3>
+                            <p>Asesoramiento directivo, estructura corporativa y optimización del rendimiento del capital.</p>
+                        </div>
+                        <a href="./contacto.html#formulario" class="service-card-link" style="color: var(--azul-claro);">
+                            <span>Agendar diagnóstico</span> <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="services-grid-3">
+                        <!-- Tarjeta 1: Asesoría Empresarial & Societaria -->
+                        <div class="service-box-card service-organic-card" tabindex="0">
+                            <div class="service-organic-header">
+                                <svg class="service-wave-bg" viewBox="0 0 400 170" preserveAspectRatio="none" aria-hidden="true">
+                                    <path d="M0,0 L400,0 L400,90 C320,150 210,50 0,110 Z" fill="#163e68"></path>
+                                    <circle cx="340" cy="40" r="110" fill="rgba(255, 255, 255, 0.03)"></circle>
+                                </svg>
+                                <div class="service-organic-icon-wrap">
+                                    <svg width="62" height="62" viewBox="0 0 24 24" fill="none" stroke="#f5b72e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <rect x="4" y="2" width="16" height="20" rx="2" ry="2"/>
+                                        <line x1="9" y1="6" x2="9" y2="8"/>
+                                        <line x1="15" y1="6" x2="15" y2="8"/>
+                                        <line x1="9" y1="11" x2="9" y2="13"/>
+                                        <line x1="15" y1="11" x2="15" y2="13"/>
+                                        <line x1="9" y1="16" x2="9" y2="18"/>
+                                        <line x1="15" y1="16" x2="15" y2="18"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="service-organic-body">
+                                <h4>Asesoría Empresarial & Societaria</h4>
+                                <p>Constitución formal de empresas, selección de regímenes tributarios óptimos, estructuración de actas y gobierno corporativo.</p>
+                                <div class="service-tags-list">
+                                    <span class="service-tag-pill-light">MYPE Tributario</span>
+                                    <span class="service-tag-pill-light">Régimen General</span>
+                                    <span class="service-tag-pill-light">Actas</span>
+                                </div>
+                            </div>
+                            <div class="service-box-card__footer">
+                                <a href="./servicios.html#constitucion" class="service-card-link service-card-link-dark">
+                                    <span>Ver más</span> <i class="fas fa-arrow-right"></i>
+                                </a>
+                                <a href="./contacto.html#formulario" class="service-card-link service-card-link-blue" title="Solicitar información de este servicio">
+                                    <span>Solicitar información</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta 2: Análisis Financiero Estratégico -->
+                        <div class="service-box-card service-organic-card" tabindex="0">
+                            <div class="service-organic-header">
+                                <svg class="service-wave-bg" viewBox="0 0 400 170" preserveAspectRatio="none" aria-hidden="true">
+                                    <path d="M0,0 L400,0 L400,100 C300,60 200,160 0,90 Z" fill="#163e68"></path>
+                                    <circle cx="350" cy="120" r="90" fill="rgba(255, 255, 255, 0.03)"></circle>
+                                </svg>
+                                <div class="service-organic-icon-wrap">
+                                    <svg width="66" height="66" viewBox="0 0 24 24" fill="none" stroke="#f5b72e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                                        <polyline points="17 6 23 6 23 12"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="service-organic-body">
+                                <h4>Análisis Financiero Estratégico</h4>
+                                <p>Evaluación de la salud financiera mediante ratios de liquidez, solvencia, endeudamiento, rotación de inventarios y punto de equilibrio.</p>
+                                <div class="service-tags-list">
+                                    <span class="service-tag-pill-light">Liquidez</span>
+                                    <span class="service-tag-pill-light">Solvencia</span>
+                                    <span class="service-tag-pill-light">Punto de equilibrio</span>
+                                </div>
+                            </div>
+                            <div class="service-box-card__footer">
+                                <a href="./servicios.html#asesoria-contable" class="service-card-link service-card-link-dark">
+                                    <span>Ver más</span> <i class="fas fa-arrow-right"></i>
+                                </a>
+                                <a href="./contacto.html#formulario" class="service-card-link service-card-link-blue" title="Solicitar información de este servicio">
+                                    <span>Solicitar información</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta 3: Planeamiento Financiero y Presupuestos -->
+                        <div class="service-box-card service-organic-card" tabindex="0">
+                            <div class="service-organic-header">
+                                <svg class="service-wave-bg" viewBox="0 0 400 170" preserveAspectRatio="none" aria-hidden="true">
+                                    <path d="M0,0 L400,0 L400,80 C280,140 180,60 0,110 Z" fill="#163e68"></path>
+                                    <circle cx="60" cy="50" r="100" fill="rgba(255, 255, 255, 0.03)"></circle>
+                                </svg>
+                                <div class="service-organic-icon-wrap">
+                                    <svg width="66" height="66" viewBox="0 0 24 24" fill="none" stroke="#f5b72e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <line x1="12" y1="3" x2="12" y2="21"/>
+                                        <polyline points="5 7 12 5 19 7"/>
+                                        <path d="M2 13l3-6 3 6a3 3 0 0 1-6 0z"/>
+                                        <path d="M16 13l3-6 3 6a3 3 0 0 1-6 0z"/>
+                                        <line x1="9" y1="21" x2="15" y2="21"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="service-organic-body">
+                                <h4>Planeamiento Financiero y Presupuestos</h4>
+                                <p>Presupuestos operativos y de capital, control de desviaciones mensuales, políticas de crédito/cobranza y gestión de estructura de costos.</p>
+                                <div class="service-tags-list">
+                                    <span class="service-tag-pill-light">Presupuestos</span>
+                                    <span class="service-tag-pill-light">Desviaciones</span>
+                                    <span class="service-tag-pill-light">Cobranza</span>
+                                </div>
+                            </div>
+                            <div class="service-box-card__footer">
+                                <a href="./servicios.html#asesoria-contable" class="service-card-link service-card-link-dark">
+                                    <span>Ver más</span> <i class="fas fa-arrow-right"></i>
+                                </a>
+                                <a href="./contacto.html#formulario" class="service-card-link service-card-link-blue" title="Solicitar información de este servicio">
+                                    <span>Solicitar información</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BLOQUE 3: Reportes Financieros y Dashboards (DESTACADO: Inteligencia Financiera) -->
+                <div class="services-block services-block--featured reveal from-bottom">
+                    <div class="services-block-header">
+                        <div class="services-block-header-title">
+                            <span class="badge-kpi-pill"><i class="fas fa-star" aria-hidden="true"></i> BLOQUE DESTACADO</span>
+                            <h3><i class="fas fa-laptop-code" aria-hidden="true"></i> 3. Reportes Financieros y Dashboards — Inteligencia Financiera</h3>
+                            <p>Dashboards dinámicos e interactivos en tiempo real para que los directores y gerentes visualicen KPIs clave, rentabilidad, márgenes y flujo de caja.</p>
+                        </div>
+                        <a href="#dashboard-demo" class="btn-pill" style="background: var(--amarillo-acento); color: var(--azul-profundo); font-size: 0.85rem; padding: 8px 20px;">
+                            <span>Explorar Demo en Vivo</span> <i class="fas fa-chevron-down"></i>
+                        </a>
+                    </div>
+                    <div class="services-grid-3">
+                        <!-- Tarjeta Destacada 1 -->
+                        <div class="service-box-card service-box-card--featured">
+                            <div>
+                                <div class="service-box-card__icon">
+                                    <i class="fas fa-tachometer-alt" aria-hidden="true"></i>
+                                </div>
+                                <h4>Dashboards de Rentabilidad & Márgenes</h4>
+                                <p>Monitoreo continuo de Margen Bruto, EBITDA y Margen Neto con desglose por línea de negocio, centro de costo o sucursal.</p>
+                            </div>
+                            <div class="service-box-card__footer">
+                                <a href="#dashboard-demo" class="service-card-link">
+                                    <span>Ver simulación interactiva</span> <i class="fas fa-arrow-right"></i>
+                                </a>
+                                <a href="./contacto.html#formulario" class="service-card-link" style="color: var(--blanco-puro);">
+                                    <span>Cotizar dashboard</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta Destacada 2 -->
+                        <div class="service-box-card service-box-card--featured">
+                            <div>
+                                <div class="service-box-card__icon">
+                                    <i class="fas fa-money-bill-wave" aria-hidden="true"></i>
+                                </div>
+                                <h4>Control de Gastos & Costos Operativos</h4>
+                                <p>Visualización interactiva de gastos fijos y variables por categoría para detectar sobrecostos y maximizar la eficiencia operativa.</p>
+                            </div>
+                            <div class="service-box-card__footer">
+                                <a href="#dashboard-demo" class="service-card-link">
+                                    <span>Ver gráficos demo</span> <i class="fas fa-arrow-right"></i>
+                                </a>
+                                <a href="./contacto.html#formulario" class="service-card-link" style="color: var(--blanco-puro);">
+                                    <span>Cotizar dashboard</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta Destacada 3 -->
+                        <div class="service-box-card service-box-card--featured">
+                            <div>
+                                <div class="service-box-card__icon">
+                                    <i class="fas fa-project-diagram" aria-hidden="true"></i>
+                                </div>
+                                <h4>Proyecciones & Flujo de Caja en Tiempo Real</h4>
+                                <p>Simulaciones a 6 y 12 meses bajo escenarios conservador, base y optimista. Anticipación de requerimientos de liquidez y capital de trabajo.</p>
+                            </div>
+                            <div class="service-box-card__footer">
+                                <a href="#dashboard-demo" class="service-card-link">
+                                    <span>Ver proyecciones</span> <i class="fas fa-arrow-right"></i>
+                                </a>
+                                <a href="./contacto.html#formulario" class="service-card-link" style="color: var(--blanco-puro);">
+                                    <span>Cotizar dashboard</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
-        <!-- TECHNOLOGY -->
-        <!-- TECHNOLOGY & INNOVATION -->
-        <section class="services-supercluster" id="technology" style="padding-top: 60px; overflow-x: hidden;">
+        <!-- ═══════════════════════════════════════════════════════
+             TAREA 2: DASHBOARD DEMO INTERACTIVO
+             ═══════════════════════════════════════════════════════ -->
+        <section class="dashboard-section" id="dashboard-demo">
             <div class="container">
-                <div class="slider-header-flex reveal from-bottom">
-                    <div class="slider-title">
-                        <span class="section-label">INNOVACIÓN CONTINUA</span>
-                        <h2 style="margin-bottom: 10px;">Tecnología Contable<br>Seguridad para el Futuro</h2>
-                        <p style="margin-bottom: 0;">Optimizamos y estandarizamos cada operación mediante soluciones en software de vanguardia.</p>
-                    </div>
-                    <div class="slider-btn">
-                        <a href="./servicios.html" class="btn-pill" style="border: 1px solid var(--gris-borde); background: var(--blanco-puro); color: var(--azul-principal);">Ver todos <i class="fas fa-arrow-right"></i></a>
+                <div class="showcase-header reveal from-bottom" style="text-align: center; margin-bottom: 30px;">
+                    <span class="section-badge section-badge--accent">DEMO INTERACTIVO EN TIEMPO REAL</span>
+                    <h2 class="section-title">Panel Financiero Ejecutivo — Atlob Intelligence</h2>
+                    <p class="section-subtitle">
+                        Experimenta el tipo de panel de control financiero personalizado que nuestros clientes corporativos utilizan para evaluar su rendimiento y tomar decisiones informadas.
+                    </p>
+                    <div style="margin-top: 14px;">
+                        <span class="dashboard-disclaimer-note">
+                            <i class="fas fa-info-circle"></i> <strong>Datos de ejemplo</strong> — Modifica el periodo para observar la actualización en tiempo real de los gráficos con la paleta oficial.
+                        </span>
                     </div>
                 </div>
-            </div> <!-- Break out of container -->
 
-            <div class="full-bleed-scroller">
-                <div class="horizontal-scroller" id="innovation-scroller">
-                    
-                    <!-- Card 1 -->
-                    <div class="basel-image-card scroller-item reveal from-left">
-                        <img src="./img/tech_automation_1775951818804.png" alt="Automation Background" loading="lazy" class="bg-photo">
-                        <div class="basel-card-content">
-                            <span class="basel-tag">AUTOMATIZACIÓN</span>
-                            <h3>Procesos Eficientes</h3>
-                            <p>Robotizamos tareas contables repetitivas, reduciendo el margen de error a cero y acelerando contabilidades en un 40%.</p>
+                <!-- Marco visual de Reporte / Dashboard Ejecutivo (Publicidad) -->
+                <div class="dashboard-mockup-frame reveal from-bottom">
+                    <div class="dashboard-mockup-header">
+                        <div class="dashboard-mockup-dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
                         </div>
-                        <div class="basel-action-blob" role="button" tabindex="0">
-                            <i class="fas fa-robot"></i>
+                        <div class="dashboard-mockup-title">
+                            <i class="fas fa-chart-line" aria-hidden="true"></i> Atlob Analytics &mdash; Inteligencia Financiera para Clientes
                         </div>
-                    </div>
-
-                    <!-- Card 2 -->
-                    <div class="basel-image-card scroller-item reveal from-bottom" style="transition-delay: 100ms;">
-                        <img src="./img/tech_cloud_1775951834123.png" alt="Cloud Background" loading="lazy" class="bg-photo">
-                        <div class="basel-card-content">
-                            <span class="basel-tag">CLOUD</span>
-                            <h3>Integración en la Nube</h3>
-                            <p>Reportes en tiempo real. Conectamos su ecosistema financiero con plataformas ERP para control 24/7 de su flujo.</p>
-                        </div>
-                        <div class="basel-action-blob" role="button" tabindex="0">
-                            <i class="fas fa-cloud"></i>
-                        </div>
-                    </div>
-
-                    <!-- Card 3 -->
-                    <div class="basel-image-card scroller-item reveal from-bottom" style="transition-delay: 200ms;">
-                        <img src="./img/tech_intelligence_1775951847405.png" alt="Data Intelligence" loading="lazy" class="bg-photo">
-                        <div class="basel-card-content">
-                            <span class="basel-tag">INTELIGENCIA</span>
-                            <h3>Análisis de Datos</h3>
-                            <p>Convertimos registros complejos en dashboards visuales de Power BI para decisiones directivas más rápidas.</p>
-                        </div>
-                        <div class="basel-action-blob" role="button" tabindex="0">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                    </div>
-
-                    <!-- Card 4 -->
-                    <div class="basel-image-card scroller-item reveal from-right" style="transition-delay: 300ms;">
-                        <img src="./img/tech_security_1775951860932.png" alt="Cyber Security" loading="lazy" class="bg-photo">
-                        <div class="basel-card-content">
-                            <span class="basel-tag">SEGURIDAD</span>
-                            <h3>Auditoría Continua</h3>
-                            <p>Sistemas de alerta temprana para prevenir contingencias y cruzar información masiva con SUNAT.</p>
-                        </div>
-                        <div class="basel-action-blob" role="button" tabindex="0">
-                            <i class="fas fa-shield-alt"></i>
+                        <div class="dashboard-mockup-badge">
+                            <span class="status-indicator"></span> Muestra Demostrativa
                         </div>
                     </div>
                     
-                </div>
-                
-                <div class="slider-dots reveal from-bottom">
-                    <div class="dot active"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                </div>
-            </div>
-        </section>
+                    <div class="dashboard-mockup-body">
+                        <!-- Barra de herramientas con filtros de periodo -->
+                        <div class="dashboard-toolbar">
+                            <div class="dashboard-toolbar__info">
+                                <i class="fas fa-calendar-alt" style="color: var(--azul-claro); font-size: 1.2rem;"></i>
+                                <div>
+                                    <h3 id="current-period-display">Primer Trimestre 2026 (Ene - Mar)</h3>
+                                    <span style="font-size: 0.8rem; color: var(--gris-suave);">Moneda: Soles Peruanos (PEN) &bull; Datos de Demostración</span>
+                                </div>
+                            </div>
+                            <div class="dashboard-filter-group">
+                                <span style="font-size: 0.85rem; font-weight: 600; color: var(--gris-texto); margin-right: 4px;">Periodo:</span>
+                                <button type="button" class="period-filter-btn active" data-period="trimestral">Trimestral (Q1)</button>
+                                <button type="button" class="period-filter-btn" data-period="semestral">Semestral (S1)</button>
+                                <button type="button" class="period-filter-btn" data-period="anual">Anual (2025/2026)</button>
+                            </div>
+                        </div>
 
-        <!-- SECTORS — Basel stats/advantage style -->
-        <section class="sectors-advantage" id="sectors">
-            <div class="container">
-                <div class="advantage-header reveal from-bottom">
-                    <span class="section-label">SECTORES QUE ASESORAMOS</span>
-                    <h2>No solo números. Tu ventaja competitiva.</h2>
-                    <p>Acompañamos a empresas de diversos sectores económicos, brindando asesoría personalizada que se adapta a las necesidades específicas de cada industria.</p>
+                        <!-- 4 Tarjetas KPI -->
+                        <div class="kpi-cards-grid">
+                            <!-- KPI 1: Rentabilidad -->
+                            <div class="kpi-card">
+                                <div class="kpi-card__top">
+                                    <h4 class="kpi-card__title">Rentabilidad Neta</h4>
+                                    <div class="kpi-card__icon kpi-card__icon--rentabilidad">
+                                        <i class="fas fa-percentage" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <div class="kpi-card__value" id="kpi-rentabilidad-val">24.8%</div>
+                                <div class="kpi-card__bottom">
+                                    <span class="kpi-badge kpi-badge--positive" id="kpi-rentabilidad-badge">
+                                        <i class="fas fa-arrow-up"></i> +3.4%
+                                    </span>
+                                    <span id="kpi-rentabilidad-desc">vs. trimestre anterior</span>
+                                </div>
+                            </div>
+
+                            <!-- KPI 2: Gastos -->
+                            <div class="kpi-card">
+                                <div class="kpi-card__top">
+                                    <h4 class="kpi-card__title">Gastos Operativos</h4>
+                                    <div class="kpi-card__icon kpi-card__icon--gastos">
+                                        <i class="fas fa-arrow-down-wide-short" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <div class="kpi-card__value" id="kpi-gastos-val">S/ 84,200</div>
+                                <div class="kpi-card__bottom">
+                                    <span class="kpi-badge kpi-badge--positive" id="kpi-gastos-badge">
+                                        <i class="fas fa-arrow-down"></i> -2.1%
+                                    </span>
+                                    <span id="kpi-gastos-desc">ahorro operativo logrado</span>
+                                </div>
+                            </div>
+
+                            <!-- KPI 3: Ingresos -->
+                            <div class="kpi-card">
+                                <div class="kpi-card__top">
+                                    <h4 class="kpi-card__title">Ingresos Totales</h4>
+                                    <div class="kpi-card__icon kpi-card__icon--ingresos">
+                                        <i class="fas fa-hand-holding-dollar" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <div class="kpi-card__value" id="kpi-ingresos-val">S/ 342,500</div>
+                                <div class="kpi-card__bottom">
+                                    <span class="kpi-badge kpi-badge--positive" id="kpi-ingresos-badge">
+                                        <i class="fas fa-arrow-up"></i> +8.7%
+                                    </span>
+                                    <span id="kpi-ingresos-desc">crecimiento sostenido</span>
+                                </div>
+                            </div>
+
+                            <!-- KPI 4: Flujo de Caja -->
+                            <div class="kpi-card">
+                                <div class="kpi-card__top">
+                                    <h4 class="kpi-card__title">Flujo de Caja Libre</h4>
+                                    <div class="kpi-card__icon kpi-card__icon--flujo">
+                                        <i class="fas fa-wallet" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <div class="kpi-card__value" id="kpi-flujo-val">S/ 98,300</div>
+                                <div class="kpi-card__bottom">
+                                    <span class="kpi-badge kpi-badge--positive" id="kpi-flujo-badge">
+                                        <i class="fas fa-arrow-up"></i> +12.5%
+                                    </span>
+                                    <span id="kpi-flujo-desc">liquidez disponible</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Gráficos Principales -->
+                        <div class="dashboard-charts-grid">
+                            <!-- Gráfico 1: Líneas Ingresos vs. Gastos -->
+                            <div class="dashboard-chart-box">
+                                <div class="dashboard-chart-header">
+                                    <h4><i class="fas fa-chart-line" aria-hidden="true"></i> Ingresos vs. Gastos Operativos</h4>
+                                    <span style="font-size: 0.8rem; color: var(--gris-suave);">Mes a mes (PEN)</span>
+                                </div>
+                                <div class="dashboard-chart-canvas-wrap">
+                                    <canvas id="chart-ingresos-gastos" aria-label="Gráfico de líneas de ingresos versus gastos" role="img"></canvas>
+                                </div>
+                            </div>
+
+                            <!-- Gráfico 2: Barras Gastos por Categoría -->
+                            <div class="dashboard-chart-box">
+                                <div class="dashboard-chart-header">
+                                    <h4><i class="fas fa-chart-pie" aria-hidden="true"></i> Gastos por Categoría</h4>
+                                    <span style="font-size: 0.8rem; color: var(--gris-suave);">Estructura de costos</span>
+                                </div>
+                                <div class="dashboard-chart-canvas-wrap">
+                                    <canvas id="chart-gastos-categoria" aria-label="Gráfico de barras de gastos por categoría" role="img"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Proyección a 6 Meses -->
+                        <div class="dashboard-projection-box">
+                            <div class="projection-header">
+                                <h4><i class="fas fa-forward" style="color: var(--amarillo-acento);"></i> Proyección Financiera a 6 Meses</h4>
+                                <div class="scenario-buttons">
+                                    <span style="font-size: 0.82rem; font-weight: 600; color: var(--gris-texto); align-self: center;">Escenario:</span>
+                                    <button type="button" class="scenario-btn" data-scenario="conservador">Conservador (+5%)</button>
+                                    <button type="button" class="scenario-btn active" data-scenario="base">Base (+12%)</button>
+                                    <button type="button" class="scenario-btn" data-scenario="optimista">Optimista (+22%)</button>
+                                </div>
+                            </div>
+
+                            <div class="projection-cards-row">
+                                <div class="projection-mini-card">
+                                    <span>Ingresos Proyectados</span>
+                                    <strong id="proj-ingresos">S/ 525,000</strong>
+                                </div>
+                                <div class="projection-mini-card projection-mini-card--accent">
+                                    <span>Gastos Estimados</span>
+                                    <strong id="proj-gastos">S/ 380,000</strong>
+                                </div>
+                                <div class="projection-mini-card projection-mini-card--success">
+                                    <span>Margen Operativo Previsto</span>
+                                    <strong id="proj-margen" style="color: #27ae60;">27.6%</strong>
+                                </div>
+                            </div>
+
+                            <p style="font-size: 0.85rem; color: var(--gris-suave); margin: 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                                <span><i class="fas fa-shield-alt"></i> Modelado paramétrico basado en registros contables reales y estacionalidad del sector.</span>
+                                <a href="./contacto.html#formulario" class="service-card-link" style="font-size: 0.88rem; color: var(--azul-principal); font-weight: 700;">
+                                    <span>Solicitar implementación para mi empresa</span> <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="advantage-stats">
-                    <div class="stat-card reveal from-bottom">
-                        <div class="stat-number" data-count="6">0</div>
-                        <h3>sectores<br>empresariales</h3>
-                        <p>Comercio, servicios, industria y más</p>
+
+                <!-- Banner Publicitario del Dashboard -->
+                <div class="dashboard-cta-banner reveal from-bottom" style="margin-top: 35px; background: linear-gradient(135deg, var(--azul-profundo) 0%, var(--azul-oscuro) 100%); border-radius: var(--radius-md); padding: 35px 30px; border: 1px solid rgba(255, 255, 255, 0.12); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+                    <div>
+                        <span class="badge-kpi-pill"><i class="fas fa-bullhorn" aria-hidden="true"></i> INFORMACIÓN FINANCIERA ACCIONABLE</span>
+                        <h3 style="color: var(--blanco-puro); font-size: 1.35rem; font-weight: 700; margin: 8px 0;">¿Desea contar con reportes financieros y dashboards como este para su empresa?</h3>
+                        <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.95rem; margin: 0; max-width: 650px;">
+                            Integramos outsourcing contable, cumplimiento tributario SUNAT y dashboards gerenciales personalizados para que tome decisiones con datos reales y actualizados.
+                        </p>
                     </div>
-                    <div class="stat-card reveal from-bottom">
-                        <div class="stat-number" data-count="50">0+</div>
-                        <h3>empresas<br>asesoradas</h3>
-                        <p>Mypes y Pymes en crecimiento</p>
-                    </div>
-                    <div class="stat-card reveal from-bottom">
-                        <div class="stat-number" data-count="10">0+</div>
-                        <h3>años de<br>experiencia</h3>
-                        <p>Trayectoria contable profesional</p>
-                    </div>
-                    <div class="stat-card reveal from-bottom">
-                        <div class="stat-number ordinal" data-count="1">0</div>
-                        <h3>compromiso<br>con tu éxito</h3>
-                        <p>Prioridad total en resultados</p>
+                    <div>
+                        <a href="./contacto.html#formulario" class="btn-primary" style="padding: 12px 26px; font-weight: 700; font-size: 0.92rem; white-space: nowrap;">
+                            <span>Solicitar Diagnóstico Contable</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
+
             </div>
         </section>
 
@@ -238,13 +725,13 @@
                 <div class="contact-grid">
                     <div class="contact-info-panel reveal from-left">
                         <h2>Sede Principal</h2>
-                        <p>Atendemos de manera presencial y virtual, ofreciendo asesoría personalizada adaptada a cada modelo de negocio corporativo.</p>
+                        <p>Atendemos de manera presencial y virtual, ofreciendo asesoría contable y financiera personalizada adaptada a cada modelo de negocio corporativo.</p>
                         
                         <div class="info-item-clean">
                             <div class="icon-circle"><i class="fas fa-clock" aria-hidden="true"></i></div>
                             <div>
                                 <h3>Horario de Atención</h3>
-                                <span>Lunes a Viernes — 9:00 a.m. a 6:00 p.m.</span>
+                                <span>Lunes a Viernes — 8:30 a.m. a 6:30 p.m. | Sábados 9:00 a.m. a 1:00 p.m.</span>
                             </div>
                         </div>
 
@@ -252,7 +739,7 @@
                             <div class="icon-circle"><i class="fas fa-map-marker-alt" aria-hidden="true"></i></div>
                             <div>
                                 <h3>Dirección Física</h3>
-                                <span>Calle Mateo Pumacahua 355, Ovalo de Cormis - Jauja</span>
+                                <span>Jr. Mateo Pumacahua N° 355 (Frente al Óvalo de Cormis), Jauja, Junín — Perú</span>
                             </div>
                         </div>
                     </div>
@@ -265,23 +752,23 @@
                             <div class="icon-circle"><i class="fas fa-envelope" aria-hidden="true"></i></div>
                             <div>
                                 <h3>Correo Corporativo</h3>
-                                <span><a href="mailto:consultoriaatlob@gmail.com" style="color: inherit; text-decoration: none;">consultoriaatlob@gmail.com</a></span>
+                                <span><a href="mailto:contacto@atlob.pe" style="color: inherit; text-decoration: none;">contacto@atlob.pe</a></span>
                             </div>
                         </div>
 
                         <div class="info-item-clean">
                             <div class="icon-circle"><i class="fab fa-whatsapp" aria-hidden="true"></i></div>
                             <div>
-                                <h3>Línea Abierta</h3>
+                                <h3>Central Telefónica & WhatsApp</h3>
                                 <span><a href="https://wa.me/51940781298" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">+51 940 781 298</a></span>
                             </div>
                         </div>
                         
                         <!-- Social -->
                         <div class="social-icons-clean">
-                            <a href="#" aria-label="Facebook" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-                            <a href="#" aria-label="LinkedIn" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://linkedin.com" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://wa.me/51940781298" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
                         </div>
                     </div>
                 </div>
@@ -291,48 +778,5 @@
 
     <!-- Footer (loaded dynamically) -->
     <div id="footer-container"></div>
-
-    <!-- Drag to scroll Javascript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const slider = document.getElementById('innovation-scroller');
-            let isDown = false;
-            let startX;
-            let scrollLeft;
-
-            if (slider) {
-                // Infinite Loop Clone trick
-                const cardsHTML = slider.innerHTML;
-                slider.innerHTML += cardsHTML + cardsHTML; // Triple the cards
-
-                slider.addEventListener('mousedown', (e) => {
-                    isDown = true;
-                    slider.classList.add('active');
-                    startX = e.pageX - slider.offsetLeft;
-                    scrollLeft = slider.scrollLeft;
-                });
-                
-                // Ensure drag continues even if mouse leaves slightly
-                document.addEventListener('mouseup', () => {
-                    if(!isDown) return;
-                    isDown = false;
-                    slider.classList.remove('active');
-                });
-                
-                slider.addEventListener('mouseleave', () => {
-                    isDown = false;
-                    slider.classList.remove('active');
-                });
-                
-                slider.addEventListener('mousemove', (e) => {
-                    if (!isDown) return;
-                    e.preventDefault();
-                    const x = e.pageX - slider.offsetLeft;
-                    const walk = (x - startX) * 3; // Super sensitivity
-                    slider.scrollLeft = scrollLeft - walk;
-                });
-            }
-        });
-    </script>
 </body>
 </html>

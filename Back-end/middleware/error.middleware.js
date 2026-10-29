@@ -52,10 +52,18 @@ const errorHandler = (err, req, res, next) => {
   });
 };
 
+const path = require('path');
+
 /**
  * 404 handler for undefined routes
  */
 const notFoundHandler = (req, res) => {
+  // If request is asking for HTML and not an API endpoint, serve branded 404 page
+  if (req.accepts('html') && !req.originalUrl.startsWith('/api/')) {
+    const page404 = path.join(__dirname, '../../Front-end/404.html');
+    return res.status(404).sendFile(page404);
+  }
+
   res.status(404).json({
     success: false,
     message: `Ruta no encontrada: ${req.method} ${req.originalUrl}`,

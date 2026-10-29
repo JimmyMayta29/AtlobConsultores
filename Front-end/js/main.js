@@ -93,14 +93,17 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ================================================
-     ANIMATED COUNTERS — Stats section (Basel-style)
+     ANIMATED COUNTERS — Stats section (Basel-style & Corporate KPI)
      ================================================ */
-  const statNumbers = document.querySelectorAll(".stat-number");
+  const statNumbers = document.querySelectorAll(".stat-number, .stat-counter-value");
 
   if (statNumbers.length && "IntersectionObserver" in window) {
     const animateCounter = (el) => {
-      const target = parseInt(el.getAttribute("data-count"), 10);
+      const targetAttr = el.getAttribute("data-target") || el.getAttribute("data-count");
+      const target = parseFloat(targetAttr) || 0;
       const isOrdinal = el.classList.contains("ordinal");
+      const prefix = el.getAttribute("data-prefix") || "";
+      const suffix = el.getAttribute("data-suffix") || "";
       const duration = 1800;
       const start = performance.now();
 
@@ -113,10 +116,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (isOrdinal) {
           el.textContent = current + "er";
-        } else if (target >= 10) {
+        } else if (prefix || suffix) {
+          el.textContent = prefix + current.toLocaleString('es-PE') + suffix;
+        } else if (target >= 10 && !el.classList.contains("stat-counter-value")) {
           el.textContent = current + "+";
         } else {
-          el.textContent = current;
+          el.textContent = current.toLocaleString('es-PE');
         }
 
         if (progress < 1) {
@@ -135,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.3 }
     );
 
     statNumbers.forEach((el) => counterObserver.observe(el));
@@ -156,4 +161,26 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
+  /* ================================================
+     SERVICES ACCORDION INTERACTION (Bloque 1)
+     ================================================ */
+  const accordionPanels = document.querySelectorAll(".service-accordion-panel");
+  if (accordionPanels.length) {
+    const activatePanel = (panel) => {
+      accordionPanels.forEach((p) => p.classList.remove("is-active"));
+      panel.classList.add("is-active");
+    };
+
+    accordionPanels.forEach((panel) => {
+      panel.addEventListener("mouseenter", () => activatePanel(panel));
+      panel.addEventListener("focus", () => activatePanel(panel));
+      panel.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          activatePanel(panel);
+        }
+      });
+    });
+  }
 });

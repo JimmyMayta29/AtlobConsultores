@@ -3,7 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cargando artículo... - Consultoría ATLOB</title>
+    <meta name="description" content="Artículo de la Revista ATLOB — Publicaciones y análisis contable, tributario y laboral para empresas en el Perú.">
+    <title>Revista ATLOB — Consultoría Contable Estratégica</title>
+
+    <!-- Favicon (Item 14) -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" type="image/png" href="/favicon.png">
+
+    <!-- Open Graph (Item 15) -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Artículo — Revista ATLOB">
+    <meta property="og:description" content="Análisis normativo y técnico elaborado por el equipo de Consultoría ATLOB.">
+    <meta property="og:image" content="/img/og-preview.png">
+    <meta property="og:site_name" content="Consultoría ATLOB">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/img/og-preview.png">
+
+    <!-- RSS Alternate Link -->
+    <link rel="alternate" type="application/rss+xml" title="Revista ATLOB RSS Feed" href="/rss.xml">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,6 +33,14 @@
     <!-- CSS Principal -->
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/markdown.css">
+
+    <script defer src="../js/cookie-consent.js"></script>
+    <script defer src="../js/analytics.js"></script>
+    <script defer src="../js/exit-intent.js"></script>
+    <script defer src="../js/layout-loader.js"></script>
+    <script defer src="../js/api.js"></script>
+    <script defer src="../js/revista.js"></script>
+    <script defer src="../js/reading-progress.js"></script>
 </head>
 <body>
     <!-- Navbar (loaded dynamically) -->
@@ -51,6 +79,17 @@
                     <p>Equipo de analistas de <strong>Consultoría ATLOB</strong>, especializados en tributación, NIIF y auditoría preventiva empresarial.</p>
                 </div>
 
+                <!-- Widget: Artículos Relacionados -->
+                <div class="sidebar-widget widget-related">
+                    <div class="widget-related-header">
+                        <h3 class="widget-related-title"><i class="fas fa-layer-group"></i> Artículos Relacionados</h3>
+                        <span class="widget-related-tagline">Recomendados</span>
+                    </div>
+                    <div class="related-articles-list" id="related-articles-container">
+                        <!-- Cargado dinámicamente con cards visuales -->
+                    </div>
+                </div>
+
                 <div class="sidebar-widget widget-recursos">
                     <h3>Recursos Gratuitos</h3>
                     <ul class="recursos-list">
@@ -76,38 +115,5 @@
 
     <!-- Footer (loaded dynamically) -->
     <div id="footer-container"></div>
-
-    <!-- Scripts -->
-    <script src="../js/layout-loader.js"></script>
-    <script src="../js/api.js"></script>
-    <script src="../js/revista.js"></script>
-    <script>
-        // Progress bar for reading
-        const updateReadingProgress = () => {
-            const article = document.querySelector('.article-body');
-            if(!article) return;
-            const scrollTop = window.scrollY - article.offsetTop;
-            const docHeight = article.scrollHeight - window.innerHeight + 200;
-            let progress = 0;
-            if (scrollTop > 0) {
-                progress = (scrollTop / docHeight) * 100;
-            }
-            if(progress > 100) progress = 100;
-            if(progress < 0) progress = 0;
-            document.body.style.setProperty('--scroll-reading', progress + '%');
-        };
-        window.addEventListener("scroll", updateReadingProgress, { passive: true });
-
-        // Add a reading progress bar dynamically to body
-        const progressBar = document.createElement('div');
-        progressBar.style.position = 'fixed';
-        progressBar.style.top = '0';
-        progressBar.style.left = '0';
-        progressBar.style.height = '4px';
-        progressBar.style.background = 'var(--amarillo-acento)';
-        progressBar.style.zIndex = '999999';
-        progressBar.style.width = 'var(--scroll-reading, 0%)';
-        document.body.appendChild(progressBar);
-    </script>
 </body>
 </html>

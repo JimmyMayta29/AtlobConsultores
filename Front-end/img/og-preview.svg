@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#071b2d" />
+      <stop offset="50%" stop-color="#0a2a47" />
+      <stop offset="100%" stop-color="#0f3d68" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f2b705" />
+      <stop offset="100%" stop-color="#ffe17d" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.08)" />
+      <stop offset="100%" stop-color="rgba(255,255,255,0.02)" />
+    </linearGradient>
+  </defs>
+
+  <!-- Deep Blue Corporate Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)" />
+
+  <!-- Geometric Decorative Elements -->
+  <circle cx="1100" cy="100" r="320" fill="none" stroke="rgba(242,183,5,0.12)" stroke-width="2" />
+  <circle cx="1100" cy="100" r="220" fill="none" stroke="rgba(242,183,5,0.08)" stroke-width="1.5" />
+  <circle cx="100" cy="550" r="260" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="2" />
+
+  <!-- Brand Emblem on the left -->
+  <g transform="translate(100, 90)">
+    <circle cx="45" cy="45" r="42" fill="#0a2a47" stroke="#f2b705" stroke-width="4" />
+    <path d="M45 18 L62 62 L52 62 L45 42 L38 62 L28 62 Z" fill="#ffffff" />
+    <path d="M33 50 L57 50 L54 57 L36 57 Z" fill="url(#gold)" />
+    
+    <text x="110" y="42" font-family="'Outfit', 'Segoe UI', sans-serif" font-size="36" font-weight="700" fill="#ffffff" letter-spacing="2">ATLOB</text>
+    <text x="110" y="66" font-family="'Outfit', 'Segoe UI', sans-serif" font-size="16" font-weight="500" fill="#f2b705" letter-spacing="3">CONSULTORÍA CONTABLE</text>
+  </g>
+
+  <!-- Main Headline -->
+  <text x="100" y="260" font-family="'Outfit', 'Segoe UI', sans-serif" font-size="56" font-weight="800" fill="#ffffff">Soluciones Contables</text>
+  <text x="100" y="325" font-family="'Outfit', 'Segoe UI', sans-serif" font-size="56" font-weight="800" fill="url(#gold)">Estratégicas &amp; Auditoría</text>
+
+  <!-- Subtitle -->
+  <text x="100" y="380" font-family="'Outfit', 'Segoe UI', sans-serif" font-size="22" font-weight="400" fill="#b0c4de">
+    Asesoría tributaria, gestión laboral de planillas, outsourcing contable y Revista ATLOB
+  </text>
+  <text x="100" y="412" font-family="'Outfit', 'Segoe UI', sans-serif" font-size="22" font-weight="400" fill="#b0c4de">
+    para empresas, Mypes y profesionales en todo el Perú.
+  </text>
+
+  <!-- Key Badges Container -->
+  <g transform="translate(100, 470)">
+    <!-- Badge 1 -->
+    <rect x="0" y="0" width="220" height="52" rx="26" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+    <text x="110" y="32" font-family="'Outfit', 'Segoe UI', sans-serif" font-size="16" font-weight="600" fill="#ffffff" text-anchor="middle">⚖️ Normativa SUNAT</text>
+
+    <!-- Badge 2 -->
+    <rect x="240" y="0" width="220" height="52" rx="26" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+    <text x="350" y="32" font-family="'Outfit', 'Segoe UI', sans-serif" font-size="16" font-weight="600" fill="#ffffff" text-anchor="middle">📊 Auditoría &amp; NIIF</text>
+
+    <!-- Badge 3 -->
+    <rect x="480" y="0" width="220" height="52" rx="26" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+    <text x="590" y="32" font-family="'Outfit', 'Segoe UI', sans-serif" font-size="16" font-weight="600" fill="#ffffff" text-anchor="middle">💼 Gestión de Planillas</text>
+
+    <!-- Badge 4 -->
+    <rect x="720" y="0" width="240" height="52" rx="26" fill="url(#cardGrad)" stroke="rgba(242,183,5,0.4)" stroke-width="1.5"/>
+    <text x="840" y="32" font-family="'Outfit', 'Segoe UI', sans-serif" font-size="16" font-weight="700" fill="#f2b705" text-anchor="middle">📖 Revista Académica</text>
+  </g>
+
+  <!-- Location & Contact Footer Info -->
+  <text x="100" y="585" font-family="'Outfit', 'Segoe UI', sans-serif" font-size="16" font-weight="500" fill="#8da3be">
+    📍 Jr. Mateo Pumacahua 355, Jauja, Perú  •  📞 +51 940 781 298  •  🌐 consultoriaatlob.pe
+  </text>
+</svg>

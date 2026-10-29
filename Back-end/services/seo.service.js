@@ -32,33 +32,47 @@ const generateMetaTags = (data) => {
 };
 
 /**
- * Generate a sitemap XML string from published articles
+ * Generate a sitemap XML string from published articles and static pages
  * @param {Array} articles - Array of article objects
  * @param {string} baseUrl - Site base URL
  * @returns {string} XML string
  */
-const generateSitemap = (articles, baseUrl = 'https://atlob.com') => {
-  const urls = articles.map(article => `
+const generateSitemap = (articles, baseUrl = 'https://consultoriaatlob.pe') => {
+  const staticPages = [
+    { loc: `${baseUrl}/`, priority: '1.0', changefreq: 'daily' },
+    { loc: `${baseUrl}/servicios.html`, priority: '0.9', changefreq: 'weekly' },
+    { loc: `${baseUrl}/nosotros.html`, priority: '0.8', changefreq: 'monthly' },
+    { loc: `${baseUrl}/contacto.html`, priority: '0.9', changefreq: 'monthly' },
+    { loc: `${baseUrl}/revista/index.html`, priority: '0.95', changefreq: 'daily' },
+    { loc: `${baseUrl}/revista/tributario.html`, priority: '0.85', changefreq: 'weekly' },
+    { loc: `${baseUrl}/revista/contabilidad.html`, priority: '0.85', changefreq: 'weekly' },
+    { loc: `${baseUrl}/revista/auditoria.html`, priority: '0.85', changefreq: 'weekly' },
+    { loc: `${baseUrl}/revista/laboral.html`, priority: '0.85', changefreq: 'weekly' },
+    { loc: `${baseUrl}/politica-de-privacidad.html`, priority: '0.5', changefreq: 'monthly' },
+    { loc: `${baseUrl}/terminos-y-condiciones.html`, priority: '0.5', changefreq: 'monthly' },
+  ];
+
+  const staticXml = staticPages.map(page => `
     <url>
-      <loc>${baseUrl}/revista/${article.slug}</loc>
-      <lastmod>${new Date(article.updatedAt).toISOString()}</lastmod>
+      <loc>${page.loc}</loc>
+      <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+      <changefreq>${page.changefreq}</changefreq>
+      <priority>${page.priority}</priority>
+    </url>`).join('');
+
+  const articlesXml = articles.map(article => `
+    <url>
+      <loc>${baseUrl}/revista/articulo.html?slug=${article.slug}</loc>
+      <lastmod>${new Date(article.updatedAt || article.publishedAt || Date.now()).toISOString().split('T')[0]}</lastmod>
       <changefreq>weekly</changefreq>
-      <priority>0.8</priority>
+      <priority>0.85</priority>
     </url>`).join('');
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url>
-      <loc>${baseUrl}</loc>
-      <changefreq>daily</changefreq>
-      <priority>1.0</priority>
-    </url>
-    <url>
-      <loc>${baseUrl}/revista</loc>
-      <changefreq>daily</changefreq>
-      <priority>0.9</priority>
-    </url>${urls}
-</urlset>`;
+${staticXml}
+${articlesXml}
+</urlset>`.trim();
 };
 
 /**
@@ -67,29 +81,31 @@ const generateSitemap = (articles, baseUrl = 'https://atlob.com') => {
  * @param {string} baseUrl
  * @returns {string}
  */
-const generateRSSFeed = (articles, baseUrl = 'https://atlob.com') => {
+const generateRSSFeed = (articles, baseUrl = 'https://consultoriaatlob.pe') => {
   const items = articles.map(article => `
     <item>
       <title><![CDATA[${article.title}]]></title>
-      <link>${baseUrl}/revista/${article.slug}</link>
-      <description><![CDATA[${article.excerpt || ''}]]></description>
-      <pubDate>${new Date(article.publishedAt).toUTCString()}</pubDate>
-      <guid>${baseUrl}/revista/${article.slug}</guid>
+      <link>${baseUrl}/revista/articulo.html?slug=${article.slug}</link>
+      <description><![CDATA[${article.excerpt || article.title}]]></description>
+      <pubDate>${new Date(article.publishedAt || article.createdAt || Date.now()).toUTCString()}</pubDate>
+      <guid isPermaLink="true">${baseUrl}/revista/articulo.html?slug=${article.slug}</guid>
       <category>${article.category ? article.category.name : 'General'}</category>
+      <author>contacto@atlob.pe (Consultoría ATLOB)</author>
     </item>`).join('');
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Revista ATLOB — Consultoría Contable</title>
-    <link>${baseUrl}/revista</link>
-    <description>Análisis fiscal, asientos contables y novedades normativas.</description>
+    <title>Revista ATLOB — Soluciones Contables y Normativa SUNAT</title>
+    <link>${baseUrl}/revista/index.html</link>
+    <description>Publicaciones sobre análisis fiscal, asientos contables del PCGE, NIIF, cronogramas SUNAT y gestión laboral en el Perú.</description>
     <language>es-PE</language>
+    <copyright>© 2026 Consultoría ATLOB S.A.C.</copyright>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
-    <atom:link href="${baseUrl}/api/rss" rel="self" type="application/rss+xml"/>
+    <atom:link href="${baseUrl}/rss.xml" rel="self" type="application/rss+xml"/>
     ${items}
   </channel>
-</rss>`;
+</rss>`.trim();
 };
 
 module.exports = { generateMetaTags, generateSitemap, generateRSSFeed };

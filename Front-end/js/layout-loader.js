@@ -74,6 +74,11 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
+    // Auto-initialize article reading progress if on an article page
+    if (document.querySelector('.article-view') && typeof window.initArticleReadingProgress === 'function') {
+      window.initArticleReadingProgress();
+    }
+
     // Initialize Newsletter subscription form
     initNewsletterForm();
   });

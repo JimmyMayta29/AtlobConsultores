@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="atlobGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a2a47" />
+      <stop offset="100%" stop-color="#144272" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f2b705" />
+      <stop offset="100%" stop-color="#d49a04" />
+    </linearGradient>
+  </defs>
+  <!-- Background circle with subtle shadow -->
+  <circle cx="64" cy="64" r="60" fill="url(#atlobGrad)" stroke="#f2b705" stroke-width="4"/>
+  <!-- Geometric stylized 'A' with accounting balance chevron -->
+  <path d="M64 26 L88 88 L74 88 L64 58 L54 88 L40 88 Z" fill="#ffffff" />
+  <path d="M46 72 L82 72 L78 82 L50 82 Z" fill="url(#goldGrad)" />
+  <circle cx="64" cy="46" r="4" fill="url(#goldGrad)" />
+</svg>

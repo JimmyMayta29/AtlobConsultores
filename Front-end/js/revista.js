@@ -3,16 +3,35 @@ let currentCategory = 'all';
 let currentSearchQuery = '';
 
 document.addEventListener("DOMContentLoaded", async () => {
-    // 1. Determinar si estamos en index.html o articulo.html
+    // 1. Determinar si estamos en index.html o articulo.html (dinámico o estático)
     const isIndexPage = document.getElementById("articles-grid") !== null;
     const isArticlePage = document.querySelector(".article-view") !== null;
 
     if (isIndexPage) {
         await initRevistaIndex();
     } else if (isArticlePage) {
-        await renderSingleArticle();
+        const urlParams = new URLSearchParams(window.location.search);
+        const slug = urlParams.get('slug');
+        if (slug || !window.location.pathname.includes('/posts/')) {
+            await renderSingleArticle();
+        } else {
+            await initRelatedArticlesForStaticPage();
+        }
     }
 });
+
+/**
+ * Calcula el tiempo estimado de lectura en minutos basado en el conteo de palabras (200 ppm)
+ */
+function calculateReadingTime(text) {
+    if (!text) return 4;
+    const cleanText = text
+        .replace(/<[^>]*>/g, ' ')
+        .replace(/[#*_`~>\[\]()-]/g, ' ')
+        .trim();
+    const wordCount = cleanText ? cleanText.split(/\s+/).filter(Boolean).length : 0;
+    return Math.max(1, Math.ceil(wordCount / 200));
+}
 
 /**
  * Normaliza texto para búsqueda insensible a mayúsculas y acentos
@@ -140,21 +159,34 @@ function renderFeaturedArticle(featured) {
 
     const imageUrl = atlobApi.resolveImageUrl(featured.featuredImage || featured.thumbnailImage);
     const catName = featured.category ? featured.category.name : 'GENERAL';
+    const readTime = calculateReadingTime(featured.content || featured.contentHtml || featured.excerpt || '');
+    const authorName = featured.author ? featured.author.name : 'Consultoría ATLOB';
+    const authorAvatar = featured.author && featured.author.avatar ? featured.author.avatar : '/img/avatar-default.svg';
 
     featuredContainer.innerHTML = `
         <section class="featured-post-container" style="opacity:0; transform:translateY(20px); transition: all 0.5s ease;">
             <div class="featured-post-card">
                 <div class="featured-image">
-                    <img src="${imageUrl}" alt="${featured.title}" loading="lazy">
+                    <img src="${imageUrl}" alt="${escapeHtml(featured.title)}" loading="lazy">
                 </div>
                 <div class="featured-content">
-                    <span class="post-category-badge">DESTACADO: ${catName}</span>
+                    <div class="featured-badges-row">
+                        <span class="post-category-badge">DESTACADO: ${catName}</span>
+                        <span class="reading-time-badge"><i class="far fa-clock"></i> ${readTime} min de lectura</span>
+                    </div>
                     <h2>${featured.title}</h2>
                     <p>${featured.excerpt || 'Revisa este análisis normativo y técnico elaborado por el equipo de Consultoría ATLOB.'}</p>
-                    <a href="articulo.html?slug=${featured.slug}" class="btn-pill">
-                        <span>Leer artículo</span>
-                        <span class="btn-pill-arrow"><i class="fas fa-arrow-right"></i></span>
-                    </a>
+                    
+                    <div class="featured-author-cta-row">
+                        <div class="post-author-mini">
+                            <img src="${authorAvatar}" alt="Foto de ${escapeHtml(authorName)}" class="author-mini-img" loading="lazy">
+                            <span>Por <strong>${escapeHtml(authorName)}</strong></span>
+                        </div>
+                        <a href="articulo.html?slug=${featured.slug}" class="btn-pill">
+                            <span>Leer artículo</span>
+                            <span class="btn-pill-arrow"><i class="fas fa-arrow-right"></i></span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -280,11 +312,19 @@ function applyFiltersAndRender() {
         return;
     }
 
-    // Dibujar tarjetas de artículos
+    // Dibujar tarjetas de artículos con Estimated Reading Time Badge y Author Info
     grid.innerHTML = filtered.map(article => {
         const imageUrl = atlobApi.resolveImageUrl(article.thumbnailImage || article.featuredImage);
         const dateStr = atlobApi.formatDate(article.publishedAt || article.createdAt);
         const catName = article.category ? article.category.name : 'GENERAL';
+        
+        // Calculate estimated reading time based on word count
+        const calculatedMinutes = calculateReadingTime(article.content || article.contentHtml || article.excerpt || '');
+        const readTime = article.readTime || calculatedMinutes;
+
+        // Author details
+        const authorName = article.author ? article.author.name : 'Equipo ATLOB';
+        const authorAvatar = article.author && article.author.avatar ? article.author.avatar : '/img/avatar-default.svg';
 
         const displayTitle = normalizedQuery 
             ? highlightText(article.title, currentSearchQuery) 
@@ -298,22 +338,36 @@ function applyFiltersAndRender() {
             <article class="magazine-post-card reveal from-bottom" data-category="${catName}">
                 <div class="post-card-img">
                     <span class="post-category-badge">${catName}</span>
+                    <span class="post-reading-time-pill" title="Tiempo estimado de lectura">
+                        <i class="far fa-clock"></i> ${readTime} min
+                    </span>
                     <img src="${imageUrl}" alt="${escapeHtml(article.title)}" loading="lazy">
                 </div>
                 <div class="post-card-content">
                     <div class="post-meta">
                         <span><i class="far fa-calendar"></i> ${dateStr}</span>
                         <span class="meta-separator">•</span>
-                        <span><i class="far fa-clock"></i> ${article.readTime || 5} min</span>
+                        <span class="post-read-badge"><i class="far fa-clock"></i> ${readTime} min de lectura</span>
                     </div>
+
                     <h3 class="post-title">
                         <a href="articulo.html?slug=${article.slug}">${displayTitle}</a>
                     </h3>
+
                     <p class="post-excerpt">${displayExcerpt}</p>
-                    <a href="articulo.html?slug=${article.slug}" class="post-read-more">
-                        <span>Leer artículo</span>
-                        <i class="fas fa-long-arrow-alt-right"></i>
-                    </a>
+
+                    <!-- Author Row with Avatar and Bio Link -->
+                    <div class="post-card-footer">
+                        <a href="articulo.html?slug=${article.slug}#autor" class="card-author-link" title="Ver perfil del autor">
+                            <img src="${authorAvatar}" alt="Foto de ${escapeHtml(authorName)}" class="author-avatar-img" loading="lazy">
+                            <span class="author-name-text">${escapeHtml(authorName)}</span>
+                        </a>
+
+                        <a href="articulo.html?slug=${article.slug}" class="post-read-more">
+                            <span>Leer</span>
+                            <i class="fas fa-long-arrow-alt-right"></i>
+                        </a>
+                    </div>
                 </div>
             </article>
         `;
@@ -393,21 +447,389 @@ async function renderSingleArticle() {
         const catName = article.category ? article.category.name : 'GENERAL';
         document.querySelector('.article-badge').textContent = catName;
         document.querySelector('.article-header-content h1').textContent = article.title;
-        document.title = `${article.title} - Consultoría ATLOB`;
+        document.title = `${article.title} — Revista ATLOB`;
+
+        // Calculate accurate reading time based on content word count
+        const calcReadTime = calculateReadingTime(article.contentHtml || article.content || article.excerpt || '');
+        const readTime = article.readTime || calcReadTime;
+
+        // Author metadata
+        const author = article.author || {
+            name: 'Equipo Editorial ATLOB',
+            role: 'Consultores Contables & Tributarios',
+            avatar: '/img/avatar-default.svg',
+            bio: 'Contadores Públicos Colegiados con amplia experiencia en normativa SUNAT, planeamiento tributario y aplicación práctica del PCGE y NIIF.'
+        };
+        const authorName = author.name || 'Consultor ATLOB';
+        const authorRole = author.role || 'Especialista Tributario y Contable';
+        const authorAvatar = author.avatar || '/img/avatar-default.svg';
+        const authorBio = author.bio || 'Contador Público Colegiado con sólida trayectoria en asesoría contable empresarial, auditoría preventiva y liquidación de impuestos en el Perú.';
         
-        // Meta info
+        // Meta info header
         const metaSpans = document.querySelectorAll('.article-meta span:not(.divider)');
         if(metaSpans.length >= 3) {
             metaSpans[0].innerHTML = `<i class="far fa-calendar"></i> ${atlobApi.formatDate(article.publishedAt || article.createdAt)}`;
-            metaSpans[1].innerHTML = `<i class="far fa-clock"></i> ${article.readTime || 5} min de lectura`;
-            metaSpans[2].innerHTML = `<i class="far fa-user"></i> ${article.author ? article.author.name : 'Equipo ATLOB'}`;
+            metaSpans[1].innerHTML = `<i class="far fa-clock"></i> ${readTime} min de lectura`;
+            metaSpans[2].innerHTML = `<i class="far fa-user"></i> <a href="#autor" style="color:inherit; text-decoration: underline;">${escapeHtml(authorName)}</a>`;
         }
 
         // Rellenar contenido (el backend envía el markdown renderizado en 'contentHtml')
-        document.querySelector('.article-body').innerHTML = article.contentHtml || article.content;
+        const bodyContent = article.contentHtml || article.content;
+
+        // Author Biography Profile Card appended to article body
+        const authorProfileHTML = `
+            <div class="article-author-profile" id="autor">
+                <div class="author-profile-card">
+                    <div class="author-avatar-col">
+                        <img src="${authorAvatar}" alt="Foto de ${escapeHtml(authorName)}" class="author-profile-img" loading="lazy">
+                    </div>
+                    <div class="author-info-col">
+                        <span class="author-label"><i class="fas fa-feather-alt"></i> ESCRITO POR</span>
+                        <h3 class="author-name">${escapeHtml(authorName)}</h3>
+                        <span class="author-role">${escapeHtml(authorRole)}</span>
+                        <p class="author-bio">${escapeHtml(authorBio)}</p>
+                        <div class="author-actions">
+                            <a href="https://wa.me/51940781298?text=Hola,%20le%C3%AD%20el%20art%C3%ADculo%20'${encodeURIComponent(article.title)}'%20en%20Revista%20ATLOB%20y%20quisiera%20una%20consulta" target="_blank" rel="noopener noreferrer" class="btn-author-contact">
+                                <i class="fab fa-whatsapp"></i> Consultar directamente con este especialista
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        document.querySelector('.article-body').innerHTML = bodyContent + authorProfileHTML;
+
+        // Actualizar sidebar author widget si existe
+        const sidebarAuthor = document.querySelector('.widget-author');
+        if (sidebarAuthor) {
+            sidebarAuthor.innerHTML = `
+                <h3>Sobre el Autor</h3>
+                <div class="sidebar-author-box">
+                    <img src="${authorAvatar}" alt="${escapeHtml(authorName)}" class="sidebar-author-img" loading="lazy">
+                    <div>
+                        <strong>${escapeHtml(authorName)}</strong>
+                        <span class="sidebar-author-role">${escapeHtml(authorRole)}</span>
+                    </div>
+                </div>
+                <p>${escapeHtml(authorBio)}</p>
+            `;
+        }
+
+        // Renderizar widget de artículos relacionados en el sidebar
+        await renderRelatedArticlesSidebar(article);
+
+        // Notify reading progress indicator to recalculate dimensions and metadata
+        if (typeof window.refreshReadingProgress === 'function') {
+            window.refreshReadingProgress();
+        } else {
+            window.dispatchEvent(new CustomEvent('atlob_article_rendered', { detail: { article } }));
+        }
 
     } catch (error) {
         console.error("Error renderizando artículo:", error);
         document.querySelector('.article-body').innerHTML = '<h2>Error al cargar</h2><p>Inténtalo nuevamente más tarde.</p>';
     }
+}
+
+/**
+ * Retorna lista de respaldo con publicaciones oficiales de la Revista ATLOB
+ */
+function getFallbackArticlesList() {
+    return [
+        {
+            id: 1,
+            title: 'Nuevo Cronograma de Vencimientos SUNAT 2026',
+            slug: 'cronograma-vencimientos-sunat-2026',
+            excerpt: 'Revisa las fechas críticas para la declaración del IGV y Renta mensual según el último dígito de tu RUC. Evita multas innecesarias.',
+            featuredImage: '/img/tech_cloud_1775951834123.png',
+            thumbnailImage: '/img/tech_cloud_1775951834123.png',
+            readTime: 8,
+            categoryId: 1,
+            category: { id: 1, name: 'Tributario', slug: 'tributario', color: '#2563eb' },
+            tags: [{ slug: 'sunat', name: 'SUNAT' }, { slug: 'igv', name: 'IGV' }, { slug: 'multas', name: 'Multas' }],
+            publishedAt: '2026-04-20T00:00:00.000Z'
+        },
+        {
+            id: 2,
+            title: 'Asiento Contable por Compra de Computadora (Laptop)',
+            slug: 'asiento-contable-compra-computadora',
+            excerpt: 'Guía paso a paso para el registro contable de adquisición de equipos informáticos, análisis de activo fijo vs gasto según el PCGE.',
+            featuredImage: '/img/tech_automation_1775951818804.png',
+            thumbnailImage: '/img/tech_automation_1775951818804.png',
+            readTime: 6,
+            categoryId: 2,
+            category: { id: 2, name: 'Contabilidad', slug: 'contabilidad', color: '#059669' },
+            tags: [{ slug: 'pcge', name: 'PCGE' }, { slug: 'casos-practicos', name: 'Casos Prácticos' }, { slug: 'renta', name: 'Renta' }],
+            publishedAt: '2026-04-14T00:00:00.000Z'
+        },
+        {
+            id: 3,
+            title: 'Reforma Tributaria 2026: Cambios Clave en IGV y Bancarización',
+            slug: 'reforma-tributaria-igv-bancarizacion-2026',
+            excerpt: 'Conoce los nuevos criterios de la SUNAT sobre bancarización obligatoria y los requisitos para no perder el crédito fiscal del IGV.',
+            featuredImage: '/img/tech_intelligence_1775951847405.png',
+            thumbnailImage: '/img/tech_intelligence_1775951847405.png',
+            readTime: 5,
+            categoryId: 1,
+            category: { id: 1, name: 'Tributario', slug: 'tributario', color: '#2563eb' },
+            tags: [{ slug: 'sunat', name: 'SUNAT' }, { slug: 'igv', name: 'IGV' }, { slug: 'multas', name: 'Multas' }],
+            publishedAt: '2026-04-18T00:00:00.000Z'
+        },
+        {
+            id: 4,
+            title: 'Cierre Contable Anual y Conciliación con el Balance de Comprobación',
+            slug: 'cierre-contable-balance-comprobacion',
+            excerpt: 'Guía metodológica para elaborar el balance de comprobación y formular los asientos de cierre contable conforme al PCGE.',
+            featuredImage: '/img/tech_security_1775951860932.png',
+            thumbnailImage: '/img/tech_security_1775951860932.png',
+            readTime: 7,
+            categoryId: 2,
+            category: { id: 2, name: 'Contabilidad', slug: 'contabilidad', color: '#059669' },
+            tags: [{ slug: 'pcge', name: 'PCGE' }, { slug: 'niif', name: 'NIIF' }, { slug: 'casos-practicos', name: 'Casos Prácticos' }],
+            publishedAt: '2026-04-10T00:00:00.000Z'
+        },
+        {
+            id: 5,
+            title: 'Cálculo de Beneficios Sociales: CTS y Gratificaciones en MYPE y Régimen General',
+            slug: 'calculo-beneficios-sociales-cts-gratificaciones',
+            excerpt: 'Aprende a liquidar la CTS y gratificaciones con fórmulas prácticas y diferencias clave entre Micro, Pequeña y Gran Empresa.',
+            featuredImage: '/img/hero_services_1775954528898.png',
+            thumbnailImage: '/img/hero_services_1775954528898.png',
+            readTime: 6,
+            categoryId: 4,
+            category: { id: 4, name: 'Laboral', slug: 'laboral', color: '#dc2626' },
+            tags: [{ slug: 'planillas', name: 'Planillas' }, { slug: 'plame', name: 'PLAME' }, { slug: 'casos-practicos', name: 'Casos Prácticos' }],
+            publishedAt: '2026-04-05T00:00:00.000Z'
+        },
+        {
+            id: 6,
+            title: 'Auditoría Tributaria Preventiva: Inconsistencias Frecuentes en el SIRE SUNAT',
+            slug: 'auditoria-tributaria-preventiva-sire-sunat',
+            excerpt: 'Detecta y corrige discrepancias entre el RVIE/RCE del SIRE y tu contabilidad antes de que la SUNAT emita cartas inductivas.',
+            featuredImage: '/img/hero_about_us_1775954475087.png',
+            thumbnailImage: '/img/hero_about_us_1775954475087.png',
+            readTime: 5,
+            categoryId: 3,
+            category: { id: 3, name: 'Auditoría', slug: 'auditoria', color: '#d97706' },
+            tags: [{ slug: 'sunat', name: 'SUNAT' }, { slug: 'multas', name: 'Multas' }, { slug: 'casos-practicos', name: 'Casos Prácticos' }],
+            publishedAt: '2026-04-02T00:00:00.000Z'
+        }
+    ];
+}
+
+/**
+ * Renderiza el widget de artículos relacionados en el sidebar de artículos individuales
+ * Algoritmo:
+ * 1. Excluye el artículo actual
+ * 2. Asigna puntuación: Coincidencia de Categoría (+3 pts), Etiquetas compartidas (+2 pts c/u)
+ * 3. Fallback / desempate por fecha más reciente (publishedAt)
+ * 4. Genera tarjetas visuales con miniatura, tiempo de lectura y badge de categoría
+ */
+async function renderRelatedArticlesSidebar(currentArticle) {
+    const container = document.getElementById("related-articles-container");
+    if (!container) return;
+
+    // Render skeleton placeholders
+    container.innerHTML = `
+        <div class="related-skeleton-card">
+            <div class="related-skeleton-thumb"></div>
+            <div class="related-skeleton-line"></div>
+            <div class="related-skeleton-line short"></div>
+        </div>
+        <div class="related-skeleton-card">
+            <div class="related-skeleton-thumb"></div>
+            <div class="related-skeleton-line"></div>
+            <div class="related-skeleton-line short"></div>
+        </div>
+    `;
+
+    try {
+        let articles = [];
+        if (allArticlesCache && allArticlesCache.length > 0) {
+            articles = allArticlesCache;
+        } else {
+            const res = await atlobApi.getArticles({ limit: 20 });
+            if (res && res.success && res.data) {
+                articles = res.data.articles || res.data || [];
+                allArticlesCache = articles;
+            }
+        }
+
+        // Fallback default list if API returned empty
+        if (!articles || articles.length === 0) {
+            articles = getFallbackArticlesList();
+        }
+
+        // 1. Filtrar excluyendo el artículo actual
+        const currentSlug = (currentArticle.slug || '').toLowerCase().trim();
+        const currentTitle = normalizeStr(currentArticle.title || '');
+        const currentId = currentArticle.id;
+
+        const candidates = articles.filter(item => {
+            if (currentId && item.id === currentId) return false;
+            if (currentSlug && (item.slug || '').toLowerCase().trim() === currentSlug) return false;
+            if (currentTitle && normalizeStr(item.title || '') === currentTitle) return false;
+            return true;
+        });
+
+        if (candidates.length === 0) {
+            container.innerHTML = `
+                <div class="related-empty-state">
+                    <i class="fas fa-newspaper fa-2x"></i>
+                    <p>No hay otros artículos disponibles por ahora.</p>
+                </div>
+            `;
+            return;
+        }
+
+        // 2. Extraer categoría y tags del artículo actual
+        const currentCat = currentArticle.category;
+        const currentCatSlug = currentCat ? normalizeStr(currentCat.slug || currentCat.name || '') : '';
+        const currentTags = Array.isArray(currentArticle.tags)
+            ? currentArticle.tags.map(t => normalizeStr(typeof t === 'string' ? t : (t.slug || t.name || '')))
+            : [];
+
+        // 3. Puntuación de afinidad
+        const scoredCandidates = candidates.map(candidate => {
+            let score = 0;
+            let matchReason = '';
+
+            const candCat = candidate.category;
+            const candCatSlug = candCat ? normalizeStr(candCat.slug || candCat.name || '') : '';
+
+            // Match de categoría (+3 puntos)
+            const isCategoryMatch = Boolean(currentCatSlug && candCatSlug && currentCatSlug === candCatSlug);
+            if (isCategoryMatch) {
+                score += 3;
+                matchReason = 'Misma categoría';
+            }
+
+            // Match de etiquetas compartidas (+2 puntos cada una)
+            const candTags = Array.isArray(candidate.tags)
+                ? candidate.tags.map(t => normalizeStr(typeof t === 'string' ? t : (t.slug || t.name || '')))
+                : [];
+
+            let sharedTagCount = 0;
+            candTags.forEach(t => {
+                if (currentTags.includes(t)) {
+                    score += 2;
+                    sharedTagCount++;
+                }
+            });
+
+            if (sharedTagCount > 0) {
+                if (isCategoryMatch) {
+                    matchReason = `Categoría & ${sharedTagCount} tema${sharedTagCount > 1 ? 's' : ''}`;
+                } else {
+                    matchReason = `${sharedTagCount} tema${sharedTagCount > 1 ? 's' : ''} en común`;
+                }
+            }
+
+            const pubDate = new Date(candidate.publishedAt || candidate.createdAt || Date.now()).getTime();
+
+            return {
+                article: candidate,
+                score,
+                matchReason,
+                timestamp: isNaN(pubDate) ? 0 : pubDate
+            };
+        });
+
+        // 4. Ordenar: mayor afinidad primero; si empatan o son 0, más recientes primero (recent fallback)
+        scoredCandidates.sort((a, b) => {
+            if (b.score !== a.score) {
+                return b.score - a.score;
+            }
+            return b.timestamp - a.timestamp;
+        });
+
+        // Tomar los 3 artículos más relevantes
+        const selected = scoredCandidates.slice(0, 3);
+
+        // Determinar ruta base a articulo.html
+        const isInsidePosts = window.location.pathname.includes('/posts/');
+        const articlePageBase = isInsidePosts ? '../articulo.html' : 'articulo.html';
+
+        // 5. Renderizar tarjetas visuales
+        container.innerHTML = selected.map(item => {
+            const art = item.article;
+            const imgUrl = atlobApi.resolveImageUrl(art.thumbnailImage || art.featuredImage || '/img/tech_cloud_1775951834123.png');
+            const catObj = art.category || {};
+            const catName = catObj.name || (art.categoryId === 1 ? 'Tributario' : art.categoryId === 2 ? 'Contabilidad' : art.categoryId === 3 ? 'Auditoría' : art.categoryId === 4 ? 'Laboral' : 'REVISTA');
+            const catColor = catObj.color || '#0f3d66';
+            const readTime = art.readTime || calculateReadingTime(art.contentHtml || art.content || art.excerpt || '');
+            const dateStr = atlobApi.formatDate(art.publishedAt || art.createdAt || new Date());
+            const articleUrl = `${articlePageBase}?slug=${encodeURIComponent(art.slug)}`;
+
+            const matchBadge = item.score > 0
+                ? `<span class="related-card-match" title="Afinidad temática"><i class="fas fa-check-circle"></i> ${escapeHtml(item.matchReason)}</span>`
+                : '';
+
+            return `
+                <a href="${articleUrl}" class="related-article-card" title="Leer: ${escapeHtml(art.title)}">
+                    <div class="related-card-thumb-wrap">
+                        <img src="${imgUrl}" alt="${escapeHtml(art.title)}" class="related-card-thumb-img" loading="lazy">
+                        <span class="related-card-badge" style="background: ${catColor};">${escapeHtml(catName)}</span>
+                        ${matchBadge}
+                        <span class="related-card-readtime" title="Tiempo de lectura">
+                            <i class="far fa-clock"></i> ${readTime} min
+                        </span>
+                    </div>
+                    <div class="related-card-body">
+                        <h4 class="related-card-title">${escapeHtml(art.title)}</h4>
+                        <div class="related-card-meta">
+                            <div class="related-card-meta-left">
+                                <span class="related-card-date"><i class="far fa-calendar-alt"></i> ${dateStr}</span>
+                            </div>
+                            <span class="related-card-arrow"><i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </a>
+            `;
+        }).join('');
+
+    } catch (err) {
+        console.error("Error al cargar artículos relacionados:", err);
+        container.innerHTML = `
+            <div class="related-empty-state">
+                <i class="fas fa-exclamation-circle fa-2x"></i>
+                <p>No fue posible cargar los artículos relacionados.</p>
+            </div>
+        `;
+    }
+}
+
+/**
+ * Inicializa el widget de artículos relacionados para páginas estáticas en /revista/posts/
+ */
+async function initRelatedArticlesForStaticPage() {
+    const container = document.getElementById("related-articles-container");
+    if (!container) return;
+
+    const badgeEl = document.querySelector('.article-badge');
+    const titleEl = document.querySelector('.article-header h1');
+    const path = window.location.pathname;
+    const slugMatch = path.match(/\/posts\/([^\/.]+)/);
+    const slug = slugMatch ? slugMatch[1] : '';
+
+    const currentArticle = {
+        slug: slug,
+        title: titleEl ? titleEl.textContent.trim() : '',
+        category: {
+            name: badgeEl ? badgeEl.textContent.trim() : 'Contabilidad',
+            slug: badgeEl ? normalizeStr(badgeEl.textContent.trim()) : 'contabilidad'
+        },
+        tags: []
+    };
+
+    if (slug.includes('asiento-contable')) {
+        currentArticle.category = { name: 'Contabilidad', slug: 'contabilidad' };
+        currentArticle.tags = ['pcge', 'casos-practicos', 'renta'];
+    } else if (slug.includes('cronograma-vencimientos')) {
+        currentArticle.category = { name: 'Tributario', slug: 'tributario' };
+        currentArticle.tags = ['sunat', 'igv', 'multas'];
+    }
+
+    await renderRelatedArticlesSidebar(currentArticle);
 }

@@ -48,6 +48,17 @@
                     <p>Equipo de analistas de <strong>Consultoría ATLOB</strong>, especializados en tributación, NIIF y auditoría preventiva empresarial.</p>
                 </div>
 
+                <!-- Widget: Artículos Relacionados -->
+                <div class="sidebar-widget widget-related">
+                    <div class="widget-related-header">
+                        <h3 class="widget-related-title"><i class="fas fa-layer-group"></i> Artículos Relacionados</h3>
+                        <span class="widget-related-tagline">Recomendados</span>
+                    </div>
+                    <div class="related-articles-list" id="related-articles-container">
+                        <!-- Cargado dinámicamente -->
+                    </div>
+                </div>
+
                 <div class="sidebar-widget widget-recursos">
                     <h3>Recursos Gratuitos</h3>
                     <ul class="recursos-list">
@@ -74,35 +85,10 @@
     <!-- Footer (loaded dynamically) -->
     <div id="footer-container"></div>
 
-    <!-- Script carga de layout -->
+    <!-- Script carga de layout, api, revista y progreso de lectura -->
     <script src="/js/layout-loader.js"></script>
-    <script>
-        // Progress bar for reading
-        const updateReadingProgress = () => {
-            const article = document.querySelector('.article-body');
-            if(!article) return;
-            const scrollTop = window.scrollY - article.offsetTop;
-            const docHeight = article.scrollHeight - window.innerHeight + 200;
-            let progress = 0;
-            if (scrollTop > 0) {
-                progress = (scrollTop / docHeight) * 100;
-            }
-            if(progress > 100) progress = 100;
-            if(progress < 0) progress = 0;
-            document.body.style.setProperty('--scroll-reading', progress + '%');
-        };
-        window.addEventListener("scroll", updateReadingProgress, { passive: true });
-
-        // Add a reading progress bar dynamically to body
-        const progressBar = document.createElement('div');
-        progressBar.style.position = 'fixed';
-        progressBar.style.top = '0';
-        progressBar.style.left = '0';
-        progressBar.style.height = '4px';
-        progressBar.style.background = 'var(--amarillo-acento)';
-        progressBar.style.zIndex = '999999';
-        progressBar.style.width = 'var(--scroll-reading, 0%)';
-        document.body.appendChild(progressBar);
-    </script>
+    <script src="/js/api.js"></script>
+    <script src="/js/revista.js"></script>
+    <script src="/js/reading-progress.js"></script>
 </body>
 </html>
