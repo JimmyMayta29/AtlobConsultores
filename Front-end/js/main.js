@@ -43,40 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ================================================
-     HAMBURGER MENU
-     ================================================ */
-  document.addEventListener("click", (event) => {
-    const toggle = event.target.closest(".menu-toggle");
-    if (!toggle) return;
-
-    const isActive = toggle.classList.toggle("active");
-    toggle.setAttribute("aria-expanded", isActive);
-
-    const navMenu = document.querySelector(".nav-center");
-    const navRight = document.querySelector(".nav-right");
-
-    if (navMenu) navMenu.classList.toggle("active");
-    if (navRight) navRight.classList.toggle("active");
-  });
-
-  // Close menu when clicking a nav link
-  document.addEventListener("click", (event) => {
-    const link = event.target.closest(".nav-center a");
-    if (!link) return;
-
-    const toggle = document.querySelector(".menu-toggle");
-    const navMenu = document.querySelector(".nav-center");
-    const navRight = document.querySelector(".nav-right");
-
-    if (toggle && toggle.classList.contains("active")) {
-      toggle.classList.remove("active");
-      toggle.setAttribute("aria-expanded", "false");
-      if (navMenu) navMenu.classList.remove("active");
-      if (navRight) navRight.classList.remove("active");
-    }
-  });
-
-  /* ================================================
      SCROLL PROGRESS BAR
      ================================================ */
   const scrollProgress = document.getElementById("scrollProgress");
@@ -95,21 +61,22 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ================================================
      ANIMATED COUNTERS — Stats section (Basel-style & Corporate KPI)
      ================================================ */
-  const statNumbers = document.querySelectorAll(".stat-number, .stat-counter-value");
+  const statNumbers = document.querySelectorAll(".stat-number[data-target], .stat-number[data-count], .stat-counter-value[data-target], .stat-counter-value[data-count]");
 
   if (statNumbers.length && "IntersectionObserver" in window) {
     const animateCounter = (el) => {
       const targetAttr = el.getAttribute("data-target") || el.getAttribute("data-count");
-      const target = parseFloat(targetAttr) || 0;
+      const target = Number(targetAttr);
+      if (!Number.isFinite(target)) return;
       const isOrdinal = el.classList.contains("ordinal");
       const prefix = el.getAttribute("data-prefix") || "";
       const suffix = el.getAttribute("data-suffix") || "";
-      const duration = 1800;
+      const duration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 1800;
       const start = performance.now();
 
       const step = (now) => {
         const elapsed = now - start;
-        const progress = Math.min(elapsed / duration, 1);
+        const progress = duration ? Math.min(elapsed / duration, 1) : 1;
         // Ease out cubic
         const eased = 1 - Math.pow(1 - progress, 3);
         const current = Math.round(eased * target);
@@ -147,22 +114,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ================================================
-     SMOOTH SCROLL for anchor links
-     ================================================ */
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener("click", (e) => {
-      const targetId = anchor.getAttribute("href");
-      if (targetId === "#") return;
-      
-      const target = document.querySelector(targetId);
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    });
-  });
-
-  /* ================================================
      SERVICES ACCORDION INTERACTION (Bloque 1)
      ================================================ */
   const accordionPanels = document.querySelectorAll(".service-accordion-panel");
@@ -173,12 +124,25 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     accordionPanels.forEach((panel) => {
-      panel.addEventListener("mouseenter", () => activatePanel(panel));
-      panel.addEventListener("focus", () => activatePanel(panel));
+      panel.addEventListener("mouseenter", () => {
+        if (window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
+            !panel.parentElement.contains(document.activeElement)) activatePanel(panel);
+      });
+      panel.addEventListener("focusin", () => activatePanel(panel));
+      panel.addEventListener("click", () => activatePanel(panel));
       panel.addEventListener("keydown", (e) => {
+        if (e.target !== panel) return;
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
           activatePanel(panel);
+        }
+        const index = Array.from(accordionPanels).indexOf(panel);
+        const next = { ArrowRight: (index + 1) % accordionPanels.length,
+          ArrowLeft: (index + accordionPanels.length - 1) % accordionPanels.length,
+          Home: 0, End: accordionPanels.length - 1 }[e.key];
+        if (next !== undefined) {
+          e.preventDefault();
+          accordionPanels[next].focus();
         }
       });
     });

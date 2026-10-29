@@ -23,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
     azulSuave: '#5dade2',
     amarilloAcento: '#f2b705',
     amarilloHover: '#e6a800',
-    naranjaCta: '#e67e22',
     verdeExito: '#27ae60',
     rojoAlerta: '#e74c3c',
     grisBorde: '#e2e8f0',
@@ -243,7 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
       BRAND.azulClaro,
       BRAND.amarilloAcento,
       BRAND.azulSuave,
-      BRAND.naranjaCta
+      BRAND.azulOscuro
     ];
 
     barChartInstance = new Chart(ctx, {

@@ -1,3 +1,5 @@
+const layoutBaseUrl = new URL("../", document.currentScript.src);
+
 document.addEventListener("DOMContentLoaded", () => {
 
   /* ================================================
@@ -16,38 +18,21 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await response.text();
       element.innerHTML = data;
 
-      // Fix links if in a subfolder
-      const isInSubfolder = window.location.pathname.toLowerCase().includes('/revista/') || 
-                            window.location.pathname.toLowerCase().includes('/servicios/') || 
-                            window.location.pathname.toLowerCase().includes('/gestor_revista/');
-      if (isInSubfolder) {
-        element.querySelectorAll('a').forEach(link => {
-          const href = link.getAttribute('href');
-          if (href && (href.startsWith('./') || href.startsWith('/'))) {
-            const newHref = '../' + href.replace(/^[\.\/]+/, '');
-            link.setAttribute('href', newHref);
-          } else if (href && !href.startsWith('http') && !href.startsWith('#') && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
-            if (!href.startsWith('../')) {
-              link.setAttribute('href', '../' + href);
-            }
-          }
-        });
-      }
+      // Component links are relative to the site, regardless of article depth.
+      element.querySelectorAll("a[href]").forEach(link => {
+        const href = link.getAttribute("href");
+        if (!href || /^(?:[a-z][a-z\d+.-]*:|\/\/|#)/i.test(href)) return;
+        link.href = new URL(href.replace(/^\/+/, ""), layoutBaseUrl).href;
+      });
     } catch (error) {
       console.error(`Failed to load ${file}:`, error);
     }
   };
 
-  // Calculate base path for components
-  const isInSubfolder = window.location.pathname.toLowerCase().includes('/revista/') || 
-                        window.location.pathname.toLowerCase().includes('/servicios/') || 
-                        window.location.pathname.toLowerCase().includes('/gestor_revista/');
-  const basePath = isInSubfolder ? "../" : "./";
-
   // Load header and footer, then inject WhatsApp button
   Promise.all([
-    loadComponent("header-container", `${basePath}components/header.html`),
-    loadComponent("footer-container", `${basePath}components/footer.html`)
+    loadComponent("header-container", new URL("Components/header.html", layoutBaseUrl)),
+    loadComponent("footer-container", new URL("Components/footer.html", layoutBaseUrl))
   ]).then(() => {
     // Inject global WhatsApp floating button if not already present
     if (!document.querySelector(".whatsapp-float")) {
@@ -63,16 +48,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-    // Highlight current page in navigation
-    const currentPath = window.location.pathname;
-    document.querySelectorAll(".nav-center a").forEach(link => {
-      const linkPath = new URL(link.href, window.location.origin).pathname;
-      if (currentPath === linkPath || 
-          (currentPath.endsWith("/") && linkPath.includes("index.html"))) {
-        link.style.color = "var(--amarillo-acento)";
-        link.style.fontWeight = "600";
-      }
-    });
+    updateCurrentNavigation();
+    initNavigationMenu();
 
     // Auto-initialize article reading progress if on an article page
     if (document.querySelector('.article-view') && typeof window.initArticleReadingProgress === 'function') {
@@ -82,6 +59,54 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initialize Newsletter subscription form
     initNewsletterForm();
   });
+
+  function updateCurrentNavigation() {
+    const normalizePath = path => path.replace(/index\.html$/, "").replace(/\/$/, "");
+    const currentPath = normalizePath(window.location.pathname);
+    const magazinePath = normalizePath(new URL("revista/", layoutBaseUrl).pathname);
+    document.querySelectorAll(".nav-center a").forEach(link => {
+      const url = new URL(link.href);
+      const linkPath = normalizePath(url.pathname);
+      const samePage = currentPath === linkPath;
+      const isMagazine = linkPath === magazinePath && currentPath.startsWith(magazinePath + "/");
+      const isActive = url.hash ? samePage && url.hash === window.location.hash : samePage || isMagazine;
+      link.classList.toggle("is-active", isActive);
+      if (isActive) link.setAttribute("aria-current", url.hash || isMagazine ? "location" : "page");
+      else link.removeAttribute("aria-current");
+    });
+  }
+
+  window.addEventListener("hashchange", updateCurrentNavigation);
+
+  function initNavigationMenu() {
+    const toggle = document.querySelector(".menu-toggle");
+    const menu = document.querySelector(".nav-center");
+    const actions = document.querySelector(".nav-right");
+    if (!toggle || !menu) return;
+
+    const setOpen = (open) => {
+      toggle.classList.toggle("active", open);
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? "Cerrar menú de navegación" : "Abrir menú de navegación");
+      menu.classList.toggle("active", open);
+      actions?.classList.toggle("active", open);
+    };
+
+    toggle.addEventListener("click", () => setOpen(toggle.getAttribute("aria-expanded") !== "true"));
+    document.addEventListener("click", (event) => {
+      if (event.target.closest(".nav-center a, .nav-right a") || !event.target.closest(".header")) setOpen(false);
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+        event.preventDefault();
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+    window.matchMedia("(max-width: 1080px)").addEventListener("change", (event) => {
+      if (!event.matches) setOpen(false);
+    });
+  }
 
   function initNewsletterForm() {
     const form = document.getElementById("newsletter-form");
