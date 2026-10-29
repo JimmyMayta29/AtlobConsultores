@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400" viewBox="0 0 640 400" role="img" aria-labelledby="title desc">
+  <title id="title">Vista demostrativa de flujo de caja a seis meses</title>
+  <desc id="desc">Línea con área ilustrativa para planificar el flujo de caja a seis meses. No contiene importes ni proyecciones reales.</desc>
+  <rect width="640" height="400" fill="#eef2f8"/>
+  <rect x="18" y="18" width="604" height="364" rx="22" fill="#ffffff" stroke="#dce5ef"/>
+  <g font-family="Outfit, Arial, sans-serif">
+    <text x="44" y="68" fill="#0f3d66" font-size="27" font-weight="700">Flujo de caja</text>
+    <text x="44" y="98" fill="#5c6f89" font-size="17">Una visión de liquidez a seis meses</text>
+    <rect x="431" y="42" width="165" height="30" rx="15" fill="#fff4ce"/>
+    <text x="513.5" y="62" text-anchor="middle" fill="#0f3d66" font-size="15" font-weight="600">Vista demostrativa</text>
+    <g fill="none" stroke="#e6edf4" stroke-width="1.5">
+      <path d="M48 144H592M48 196H592M48 248H592M48 300H592"/>
+    </g>
+    <path d="M52 271C90 271 121 228 158 237S229 255 266 218S336 170 374 182S446 157 482 163S554 127 588 135L588 300H52Z" fill="#eef2f8"/>
+    <path d="M52 271C90 271 121 228 158 237S229 255 266 218S336 170 374 182S446 157 482 163S554 127 588 135" fill="none" stroke="#0f3d66" stroke-width="4.5" stroke-linecap="round"/>
+    <g fill="#ffffff" stroke="#0f3d66" stroke-width="3">
+      <circle cx="52" cy="271" r="5"/><circle cx="158" cy="237" r="5"/><circle cx="266" cy="218" r="5"/><circle cx="374" cy="182" r="5"/><circle cx="482" cy="163" r="5"/>
+    </g>
+    <circle cx="588" cy="135" r="11" fill="#fff4ce"/>
+    <circle cx="588" cy="135" r="6" fill="#f2b705" stroke="#ffffff" stroke-width="2"/>
+    <g fill="#5c6f89" font-size="17" text-anchor="middle">
+      <text x="52" y="326">Mes 1</text><text x="158" y="326">Mes 2</text><text x="266" y="326">Mes 3</text><text x="374" y="326">Mes 4</text><text x="482" y="326">Mes 5</text><text x="588" y="326">Mes 6</text>
+    </g>
+    <text x="320" y="362" text-anchor="middle" fill="#5c6f89" font-size="16">Escenario ilustrativo · sin importes reales</text>
+  </g>
+</svg>
