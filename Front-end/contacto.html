@@ -104,7 +104,7 @@
                     </div>
 
                     <!-- FORM PANEL (Item 6 - Estado de error en los formularios) -->
-                    <div class="contact-form-panel reveal from-right">
+                    <div class="contact-form-panel reveal from-right" id="formulario">
                         <h2>Solicitud de Asesoría o Cotización</h2>
                         <p class="form-instructions">Complete los campos a continuación. Los campos marcados con (*) son obligatorios.</p>
 
@@ -445,11 +445,8 @@
                 }
             } catch (error) {
                 console.error("Form error:", error);
-                feedback.className = 'form-feedback success'; // User fallback friendly
-                feedback.innerHTML = '¡Información registrada! También puedes <a href="https://wa.me/51940781298?text=Hola,%20acabo%20de%20escribir%20por%20la%20web" target="_blank" style="color: inherit; text-decoration: underline; font-weight: bold;">chatear directamente por WhatsApp aquí</a>.';
-                setTimeout(() => {
-                    window.location.href = '/gracias.html';
-                }, 2000);
+                feedback.className = 'form-feedback error';
+                feedback.innerHTML = 'No se pudo enviar su solicitud. Sus datos se conservan para que pueda reintentar. También puede <a href="https://wa.me/51940781298?text=Hola,%20deseo%20solicitar%20asesor%C3%ADa" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline; font-weight: bold;">contactarnos por WhatsApp</a>.';
             } finally {
                 btn.disabled = false;
                 btn.innerHTML = '<span>Enviar Solicitud</span> <span class="btn-pill-arrow"><i class="fas fa-paper-plane" aria-hidden="true"></i></span>';

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400" viewBox="0 0 640 400" role="img" aria-labelledby="title desc">
+  <title id="title">Vista demostrativa de rentabilidad</title>
+  <desc id="desc">Comparativa ilustrativa de ingresos y gastos durante seis meses, sin importes ni resultados reales.</desc>
+  <rect width="640" height="400" fill="#eef2f8"/>
+  <rect x="18" y="18" width="604" height="364" rx="22" fill="#ffffff" stroke="#dce5ef"/>
+  <g font-family="Outfit, Arial, sans-serif">
+    <text x="44" y="68" fill="#0f3d66" font-size="27" font-weight="700">Rentabilidad</text>
+    <text x="44" y="98" fill="#5c6f89" font-size="17">Comparativa de ingresos y gastos</text>
+    <rect x="431" y="42" width="165" height="30" rx="15" fill="#fff4ce"/>
+    <text x="513.5" y="62" text-anchor="middle" fill="#0f3d66" font-size="15" font-weight="600">Vista demostrativa</text>
+    <g fill="none" stroke="#e6edf4" stroke-width="1.5">
+      <path d="M48 144H592M48 196H592M48 248H592M48 300H592"/>
+    </g>
+    <path d="M52 247C91 247 117 218 158 224S222 242 266 208S330 176 374 183S442 155 482 158S551 125 588 130L588 300H52Z" fill="#eef2f8"/>
+    <path d="M52 247C91 247 117 218 158 224S222 242 266 208S330 176 374 183S442 155 482 158S551 125 588 130" fill="none" stroke="#0f3d66" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M52 278C91 278 117 261 158 265S222 283 266 263S330 249 374 253S442 231 482 235S551 212 588 218" fill="none" stroke="#f2b705" stroke-width="4.5" stroke-linecap="round"/>
+    <g fill="#ffffff" stroke="#0f3d66" stroke-width="3">
+      <circle cx="52" cy="247" r="5"/><circle cx="158" cy="224" r="5"/><circle cx="266" cy="208" r="5"/><circle cx="374" cy="183" r="5"/><circle cx="482" cy="158" r="5"/><circle cx="588" cy="130" r="5"/>
+    </g>
+    <g fill="#5c6f89" font-size="17" text-anchor="middle">
+      <text x="52" y="326">Ene</text><text x="158" y="326">Feb</text><text x="266" y="326">Mar</text><text x="374" y="326">Abr</text><text x="482" y="326">May</text><text x="588" y="326">Jun</text>
+    </g>
+    <circle cx="204" cy="355" r="5" fill="#0f3d66"/>
+    <text x="218" y="361" fill="#0f3d66" font-size="17">Ingresos</text>
+    <circle cx="349" cy="355" r="5" fill="#f2b705"/>
+    <text x="363" y="361" fill="#0f3d66" font-size="17">Gastos</text>
+  </g>
+</svg>

@@ -159,6 +159,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalList = document.getElementById("modalList");
   const modalBtn = document.querySelector(".modal-btn");
   const closeBtn = document.querySelector(".close-modal");
+  let returnFocus = null;
+  let previousOverflow = "";
 
   if (!modal || !modalTitle || !modalDescription || !modalList) return;
 
@@ -182,16 +184,15 @@ document.addEventListener("DOMContentLoaded", () => {
         modalBtn.target = "_blank";
         modalBtn.textContent = "Solicitar en WhatsApp";
         modalBtn.innerHTML = '<i class="fab fa-whatsapp"></i> ' + modalBtn.textContent;
-        // Optionally restyle it
-        modalBtn.style.background = "#25D366";
-        modalBtn.style.color = "white";
-        // To make it look like our normal button
+        modalBtn.rel = "noopener noreferrer";
       }
 
+      returnFocus = targetCard.querySelector(".btn-pill--service") || e.currentTarget;
+      previousOverflow = document.body.style.overflow;
       modal.classList.add("active");
+      modal.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
       
-      // Focus trap
       closeBtn?.focus();
     });
   });
@@ -199,7 +200,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Close modal
   const closeModal = () => {
     modal.classList.remove("active");
-    document.body.style.overflow = "";
+    document.body.style.overflow = previousOverflow;
+    returnFocus?.focus();
+    modal.setAttribute("aria-hidden", "true");
   };
 
   closeBtn?.addEventListener("click", closeModal);
@@ -210,8 +213,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Close on Escape key
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal.classList.contains("active")) {
+    if (!modal.classList.contains("active")) return;
+    if (e.key === "Escape") {
+      e.preventDefault();
       closeModal();
+    } else if (e.key === "Tab") {
+      const focusable = Array.from(modal.querySelectorAll('button:not([disabled]), a[href], [tabindex="0"]'));
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last?.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first?.focus();
+      }
     }
   });
 });

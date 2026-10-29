@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "node Back-end/server.js",
     "start": "node Back-end/server.js",
+    "test:frontend": "node tests/frontend-flow.test.js",
     "build": "node -e \"console.log('Build complete')\""
   },
   "keywords": [

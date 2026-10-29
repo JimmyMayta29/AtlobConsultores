@@ -5,6 +5,8 @@
 
 (function () {
   const STORAGE_KEY = 'atlob_cookie_consent_v1';
+  let returnFocus = null;
+  let previousOverflow = '';
 
   function getConsent() {
     try {
@@ -33,13 +35,11 @@
   }
 
   function injectBannerUI() {
-    // If already consented, don't show
-    if (getConsent()) return;
-
     // Check if already injected
-    if (document.getElementById('atlob-cookie-banner')) return;
+    if (document.getElementById('atlob-cookie-modal')) return;
 
     const bannerHTML = `
+      ${getConsent() ? '' : `
       <div id="atlob-cookie-banner" class="atlob-cookie-banner" role="region" aria-label="Aviso de privacidad y cookies">
         <div class="cookie-banner-container">
           <div class="cookie-banner-content">
@@ -67,9 +67,10 @@
           </div>
         </div>
       </div>
+      `}
 
       <!-- Cookie Settings Modal -->
-      <div id="atlob-cookie-modal" class="atlob-cookie-modal" aria-hidden="true" role="dialog" aria-labelledby="cookie-modal-title">
+      <div id="atlob-cookie-modal" class="atlob-cookie-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="cookie-modal-title">
         <div class="cookie-modal-backdrop" id="cookie-modal-backdrop"></div>
         <div class="cookie-modal-card">
           <div class="cookie-modal-header">
@@ -88,7 +89,7 @@
                 <p>Imprescindibles para la navegación básica, seguridad SSL y carga eficiente de componentes.</p>
               </div>
               <div class="cookie-toggle">
-                <input type="checkbox" id="cookie-opt-necessary" checked disabled>
+                <input type="checkbox" id="cookie-opt-necessary" aria-label="Cookies técnicas y esenciales" checked disabled>
                 <label for="cookie-opt-necessary" class="toggle-slider"></label>
               </div>
             </div>
@@ -102,7 +103,7 @@
                 <p>Nos permiten medir de forma anónima las visitas a la Revista ATLOB y optimizar nuestros servicios.</p>
               </div>
               <div class="cookie-toggle">
-                <input type="checkbox" id="cookie-opt-analytics" checked>
+                <input type="checkbox" id="cookie-opt-analytics" aria-label="Permitir cookies de análisis y rendimiento" checked>
                 <label for="cookie-opt-analytics" class="toggle-slider"></label>
               </div>
             </div>
@@ -116,7 +117,7 @@
                 <p>Guardan tu sesión de lectura, filtros de artículos preferidos y configuraciones de búsqueda.</p>
               </div>
               <div class="cookie-toggle">
-                <input type="checkbox" id="cookie-opt-preferences" checked>
+                <input type="checkbox" id="cookie-opt-preferences" aria-label="Permitir cookies de preferencias" checked>
                 <label for="cookie-opt-preferences" class="toggle-slider"></label>
               </div>
             </div>
@@ -143,23 +144,11 @@
 
     function hideBanner() {
       if (banner) {
+        if (banner.contains(document.activeElement)) document.querySelector('.logo, main a, main button')?.focus();
+        banner.inert = true;
         banner.style.transform = 'translateY(150%)';
         banner.style.opacity = '0';
         setTimeout(() => banner.remove(), 400);
-      }
-    }
-
-    function openModal() {
-      if (modal) {
-        modal.classList.add('active');
-        modal.setAttribute('aria-hidden', 'false');
-      }
-    }
-
-    function closeModal() {
-      if (modal) {
-        modal.classList.remove('active');
-        modal.setAttribute('aria-hidden', 'true');
       }
     }
 
@@ -199,6 +188,25 @@
       });
     }
 
+    document.addEventListener('keydown', (event) => {
+      if (!modal?.classList.contains('active')) return;
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeModal();
+      } else if (event.key === 'Tab') {
+        const controls = modal.querySelectorAll('button:not([disabled]), input:not([disabled]), a[href]');
+        const first = controls[0];
+        const last = controls[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last?.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first?.focus();
+        }
+      }
+    });
+
     // Gentle entrance
     setTimeout(() => {
       if (banner) {
@@ -207,30 +215,40 @@
     }, 1200);
   }
 
+  function openModal() {
+    injectBannerUI();
+    const modal = document.getElementById('atlob-cookie-modal');
+    if (!modal || modal.classList.contains('active')) return;
+    const consent = getConsent() || { analytics: true, preferences: true };
+    document.getElementById('cookie-opt-analytics').checked = Boolean(consent.analytics);
+    document.getElementById('cookie-opt-preferences').checked = Boolean(consent.preferences);
+    returnFocus = document.activeElement;
+    previousOverflow = document.body.style.overflow;
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('btn-cookie-modal-close').focus();
+  }
+
+  function closeModal() {
+    const modal = document.getElementById('atlob-cookie-modal');
+    if (!modal?.classList.contains('active')) return;
+    modal.classList.remove('active');
+    document.body.style.overflow = previousOverflow;
+    if (returnFocus?.isConnected) returnFocus.focus();
+    modal.setAttribute('aria-hidden', 'true');
+  }
+
   // Expose global manager to re-open settings from footer
   window.atlobCookieConsent = {
     getConsent,
-    openSettings: function () {
-      let modal = document.getElementById('atlob-cookie-modal');
-      if (!modal) {
-        injectBannerUI();
-        modal = document.getElementById('atlob-cookie-modal');
-      }
-      if (modal) {
-        const consent = getConsent() || { analytics: true, preferences: true };
-        const optA = document.getElementById('cookie-opt-analytics');
-        const optP = document.getElementById('cookie-opt-preferences');
-        if (optA) optA.checked = Boolean(consent.analytics);
-        if (optP) optP.checked = Boolean(consent.preferences);
-        modal.classList.add('active');
-        modal.setAttribute('aria-hidden', 'false');
-      }
-    }
+    openSettings: openModal
   };
 
+  const showInitialBanner = () => { if (!getConsent()) injectBannerUI(); };
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', injectBannerUI);
+    document.addEventListener('DOMContentLoaded', showInitialBanner);
   } else {
-    injectBannerUI();
+    showInitialBanner();
   }
 })();
